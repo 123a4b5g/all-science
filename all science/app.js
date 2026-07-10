@@ -7,8 +7,8 @@ const DEFAULT_TEMPLATES = [
     imageStyle: 'model',
     views: 12500,
     likes: 430,
-    url: './physics.html',
-    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./physics.html -->'
+    url: './physics/index.html',
+    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./physics/index.html -->'
   },
   {
     name: '파동의 간섭 시뮬레이션',
@@ -18,8 +18,8 @@ const DEFAULT_TEMPLATES = [
     imageStyle: 'model',
     views: 9420,
     likes: 380,
-    url: './wave.html',
-    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./wave.html -->'
+    url: './wave/index.html',
+    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./wave/index.html -->'
   }
 ];
 
@@ -31,7 +31,7 @@ const app = {
   studioActiveTab: 'run',
   searchQuery: '',
   sandboxKey: 0,
-
+ 
   init() {
     this.loadData();
     this.bindEvents();
@@ -39,13 +39,13 @@ const app = {
     lucide.createIcons();
     window.addEventListener('resize', () => this.updateIframeScale());
   },
-
+ 
   loadData() {
     try {
       const saved = localStorage.getItem('sci-lab-custom-programs-v5');
       let loadedPrograms = [];
       if (saved) {
-        loadedPrograms = JSON.parse(saved);
+        loadedPrograms = JSON.parse(saved).filter(p => p.url !== './physics.html' && p.url !== './wave.html');
       }
       
       const defaultWithIds = DEFAULT_TEMPLATES.map((t, idx) => ({
