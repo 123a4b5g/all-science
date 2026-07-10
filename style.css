@@ -42,3 +42,67 @@ h1, h2, h3, h4, .font-display {
 .hidden {
   display: none !important;
 }
+
+/* Enhance borders globally for better visibility */
+.border-slate-100 {
+  border-color: #cbd5e1 !important; /* slate-300 */
+}
+.border-slate-150,
+.border-slate-200,
+.border-slate-200\/70,
+.border-slate-200\/60 {
+  border-color: #cbd5e1 !important; /* slate-300 */
+}
+.border-slate-300 {
+  border-color: #94a3b8 !important; /* slate-400 */
+}
+.border-slate-800,
+.border-slate-900 {
+  border-color: #475569 !important; /* slate-600 */
+}
+.border-teal-100 {
+  border-color: #5dd8c8 !important; /* clear teal border */
+}
+.border-red-200 {
+  border-color: #f87171 !important; /* red-400 */
+}
+
+/* Make headers and footer borders crisp */
+#miricle-header {
+  border-bottom: 2px solid #cbd5e1 !important; /* slate-300 */
+}
+#miricle-footer {
+  border-top: 2px solid #cbd5e1 !important; /* slate-300 */
+}
+
+/* Make cards stand out with visible boundaries */
+.group.flex.flex-col.gap-3.bg-white {
+  border: 2px solid #cbd5e1 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Make tabs stand out */
+#studio-tabs {
+  border: 2px solid #cbd5e1 !important;
+}
+
+/* Make input fields borders more defined, excluding search inputs */
+#tab-meta input[type="text"],
+#tab-meta select,
+#tab-meta textarea {
+  border: 1.5px solid #94a3b8 !important;
+}
+
+/* Revert search bar inputs and containers to original layout styling */
+#header-search-input,
+#hero-search-input {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.max-w-xl .border-slate-200,
+.max-w-md .border-slate-200 {
+  border-color: #e2e8f0 !important; /* Original soft slate-200 border */
+}
+

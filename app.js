@@ -15,7 +15,7 @@ const DEFAULT_TEMPLATES = [
     author: 'All Science 물리 랩',
     description: '서로 다른 방향으로 진행하는 두 파동의 중첩과 간섭 현상을 관찰할 수 있는 인터랙티브 시뮬레이션입니다. 진폭, 너비, 형태 등을 조절하여 보강 간섭과 상쇄 간섭을 탐구해 보세요.',
     category: 'physics',
-    imageStyle: 'model',
+    imageStyle: 'wave_thumbnail.jpg',
     views: 9420,
     likes: 380,
     url: './wave/index.html',
@@ -273,7 +273,7 @@ const app = {
     if (style.match(/\.(png|jpg|jpeg|gif|svg|webp)$/i) || style.startsWith('http')) {
       return `
         <div class="w-full h-full relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
-          <img src="${style}" alt="${prog.name}" class="w-full h-full object-cover" />
+          <img src="${style}" alt="${prog.name}" class="w-full h-full object-fill" />
         </div>
       `;
     }
@@ -506,8 +506,6 @@ const app = {
                   <h4 class="font-extrabold text-slate-900 text-xs group-hover:text-teal-700 transition-colors truncate leading-tight">${prog.name}</h4>
                   <p class="text-[11px] text-slate-500 font-semibold truncate flex items-center gap-1"><span>${prog.author}</span></p>
                   <p class="text-[10px] text-slate-400 font-semibold flex items-center gap-1.5">
-                    <span>사용 ${(prog.views / 10000).toFixed(1)}만회</span>
-                    <span>•</span>
                     <span>2일 전 업데이트</span>
                   </p>
                 </div>
@@ -541,7 +539,6 @@ const app = {
     // Run tab values
     document.getElementById('run-desc-container').style.display = p.description ? 'flex' : 'none';
     document.getElementById('run-desc-text').innerText = p.description || '';
-    document.getElementById('run-meta-views').innerText = `${p.views}회`;
     document.getElementById('run-meta-likes').innerText = `${p.likes}회`;
     document.getElementById('run-meta-category').innerText = p.category.toUpperCase();
     document.getElementById('run-meta-author').innerText = p.author;
