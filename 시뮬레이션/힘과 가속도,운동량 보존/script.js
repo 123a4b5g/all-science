@@ -182,42 +182,63 @@ document.addEventListener('DOMContentLoaded', () => {
         const graphW = w - padding.left - padding.right;
         const graphH = h - padding.top - padding.bottom;
         
-        // Draw background grid lines
+        // Fetch data
+        let times = [...fmaState.historyTime];
+        let velocities = [...fmaState.historyV];
+        let accelerations = [...fmaState.historyA];
+
+        // If there's an active simulation time and it is greater than the last recorded time,
+        // temporarily append the current real-time state for smooth rendering.
+        if (fmaState.time > 0 && (times.length === 0 || fmaState.time > times[times.length - 1])) {
+            times.push(fmaState.time);
+            velocities.push(fmaState.v);
+            accelerations.push(fmaState.a);
+        }
+
+        if (times.length < 2) {
+            // Draw default background grid lines
+            chartCtx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+            chartCtx.lineWidth = 1;
+            const rows = 4;
+            const cols = 5;
+            for (let i = 0; i <= rows; i++) {
+                const y = padding.top + (graphH * i / rows);
+                chartCtx.beginPath();
+                chartCtx.moveTo(padding.left, y);
+                chartCtx.lineTo(w - padding.right, y);
+                chartCtx.stroke();
+            }
+            for (let i = 0; i <= cols; i++) {
+                const x = padding.left + (graphW * i / cols);
+                chartCtx.beginPath();
+                chartCtx.moveTo(x, padding.top);
+                chartCtx.lineTo(x, h - padding.bottom);
+                chartCtx.stroke();
+            }
+
+            // Draw outer borders
+            chartCtx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            chartCtx.strokeRect(padding.left, padding.top, graphW, graphH);
+
+            // Draw empty axis placeholders
+            chartCtx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+            chartCtx.font = '500 10px Inter';
+            chartCtx.textAlign = 'center';
+            chartCtx.textBaseline = 'middle';
+            chartCtx.fillText('속도 및 가속도 실시간 추이 그래프 (F=ma)', w/2, h/2);
+            return;
+        }
+
+        // Draw horizontal grid lines (rows)
         chartCtx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
         chartCtx.lineWidth = 1;
         const rows = 4;
-        const cols = 5;
         for (let i = 0; i <= rows; i++) {
             const y = padding.top + (graphH * i / rows);
             chartCtx.beginPath();
             chartCtx.moveTo(padding.left, y);
             chartCtx.lineTo(w - padding.right, y);
             chartCtx.stroke();
-        }
-        for (let i = 0; i <= cols; i++) {
-            const x = padding.left + (graphW * i / cols);
-            chartCtx.beginPath();
-            chartCtx.moveTo(x, padding.top);
-            chartCtx.lineTo(x, h - padding.bottom);
-            chartCtx.stroke();
-        }
-
-        // Draw outer borders
-        chartCtx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
-        chartCtx.strokeRect(padding.left, padding.top, graphW, graphH);
-
-        // Fetch data
-        const times = fmaState.historyTime;
-        const velocities = fmaState.historyV;
-        const accelerations = fmaState.historyA;
-
-        if (times.length < 2) {
-            // Draw empty axis placeholders
-            chartCtx.fillStyle = 'rgba(255, 255, 255, 0.2)';
-            chartCtx.font = '500 10px Inter';
-            chartCtx.textAlign = 'center';
-            chartCtx.fillText('속도 및 가속도 실시간 추이 그래프 (F=ma)', w/2, h/2);
-            return;
         }
 
         // Scaling values dynamically
@@ -244,6 +265,29 @@ document.addEventListener('DOMContentLoaded', () => {
         const getY_V = (v) => padding.top + graphH - ((v - minV) / (maxV - minV)) * graphH;
         const getY_A = (a) => padding.top + graphH - ((a - minA) / (maxA - minA)) * graphH;
 
+        // Draw vertical grid lines at 1-second intervals (or clean multiples)
+        let xStep = 1;
+        if (timeDiff > 40) {
+            xStep = 10;
+        } else if (timeDiff > 20) {
+            xStep = 5;
+        } else if (timeDiff > 10) {
+            xStep = 2;
+        }
+
+        const startTick = Math.ceil(minTime / xStep) * xStep;
+        for (let t = startTick; t <= maxTime; t += xStep) {
+            const x = getX(t);
+            chartCtx.beginPath();
+            chartCtx.moveTo(x, padding.top);
+            chartCtx.lineTo(x, h - padding.bottom);
+            chartCtx.stroke();
+        }
+
+        // Draw outer borders
+        chartCtx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+        chartCtx.strokeRect(padding.left, padding.top, graphW, graphH);
+
         // Draw Left Y-Axis labels (Velocity - Blue)
         chartCtx.fillStyle = '#60a5fa';
         chartCtx.font = '700 10px Outfit';
@@ -264,15 +308,14 @@ document.addEventListener('DOMContentLoaded', () => {
             chartCtx.fillText(val.toFixed(2) + ' m/s²', w - padding.right + 8, y);
         }
 
-        // Draw X-Axis labels (Time - White/Gray)
+        // Draw X-Axis labels (Time - White/Gray, integer seconds)
         chartCtx.fillStyle = varColorTextMuted();
         chartCtx.font = '600 10px Inter';
         chartCtx.textAlign = 'center';
         chartCtx.textBaseline = 'top';
-        for (let i = 0; i <= cols; i++) {
-            const t = minTime + (i / cols) * timeDiff;
-            const x = padding.left + (graphW * i / cols);
-            chartCtx.fillText(t.toFixed(1) + 's', x, h - padding.bottom + 6);
+        for (let t = startTick; t <= maxTime; t += xStep) {
+            const x = getX(t);
+            chartCtx.fillText(t.toFixed(0) + 's', x, h - padding.bottom + 6);
         }
 
         // Draw Velocity line (Left Y axis)
@@ -369,8 +412,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
             updateFmaStats(fmaState.a, fmaState.v, Math.abs(F_f));
             
-            // Store variables history on a 0.08s scale for custom chart plotting
-            if (fmaState.historyTime.length === 0 || fmaState.time - fmaState.historyTime[fmaState.historyTime.length - 1] >= 0.08) {
+            // Store variables history on a 1.0s scale for custom chart plotting
+            if (fmaState.historyTime.length === 0 || fmaState.time - fmaState.historyTime[fmaState.historyTime.length - 1] >= 1.0) {
                 fmaState.historyTime.push(fmaState.time);
                 fmaState.historyV.push(fmaState.v);
                 fmaState.historyA.push(fmaState.a);
@@ -381,9 +424,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     fmaState.historyV.shift();
                     fmaState.historyA.shift();
                 }
-                
-                drawCustomChart();
             }
+            
+            drawCustomChart();
             
         } else if (currentMode === 'collision' && colState.playing) {
             colState.x1 += colState.v1 * colState.pixelsPerMeter * dt;
