@@ -4,7 +4,7 @@ const DEFAULT_TEMPLATES = [
     author: 'All Science 물리 랩',
     description: '힘과 가속도(F=ma) 및 운동량 보존과 충돌을 다루는 인터랙티브 물리 시뮬레이션입니다. 질량, 힘, 마찰계수를 조절하며 물체의 운동을 관찰하거나 충돌 실험을 할 수 있습니다.',
     category: 'physics',
-    imageStyle: 'model',
+    imageStyle: 'physics_thumbnail.png',
     views: 12500,
     likes: 430,
     url: './physics/index.html',
@@ -56,6 +56,24 @@ const app = {
       if (loadedPrograms.length === 0) {
         this.programs = defaultWithIds;
       } else {
+        // Sync default templates metadata (like name, description, author, imageStyle)
+        loadedPrograms = loadedPrograms.map(p => {
+          const def = defaultWithIds.find(d => d.url === p.url);
+          if (def) {
+            return {
+              ...p,
+              name: def.name,
+              author: def.author,
+              description: def.description,
+              category: def.category,
+              imageStyle: def.imageStyle,
+              url: def.url,
+              code: def.code
+            };
+          }
+          return p;
+        });
+
         // Merge missing default templates
         const existingUrls = new Set(loadedPrograms.map(p => p.url));
         const missingDefaults = defaultWithIds.filter(d => d.url && !existingUrls.has(d.url));
@@ -250,6 +268,15 @@ const app = {
 
   renderTemplateMockup(prog) {
     const style = prog.imageStyle || 'coding';
+
+    // Render as an image if the style is a file name or a URL
+    if (style.match(/\.(png|jpg|jpeg|gif|svg|webp)$/i) || style.startsWith('http')) {
+      return `
+        <div class="w-full h-full relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+          <img src="${style}" alt="${prog.name}" class="w-full h-full object-cover" />
+        </div>
+      `;
+    }
     
     if (style === 'model') {
       return `
