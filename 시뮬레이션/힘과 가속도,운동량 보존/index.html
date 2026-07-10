@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>역학 및 운동 법칙 시뮬레이션</title>
+    <!-- Outfit & Inter Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-left">
+                <div class="logo">
+                    <div class="logo-icon"></div>
+                    <h1>역학 및 운동 법칙</h1>
+                </div>
+            </div>
+            
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="fma">힘과 가속도 (F=ma)</button>
+                <button class="tab-btn" data-tab="collision">운동량 보존과 충돌</button>
+            </div>
+            
+            <button id="btn-info" class="nav-btn info">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                원리 설명
+            </button>
+        </header>
+
+        <!-- INFO MODAL -->
+        <div id="info-modal" class="modal-backdrop hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>물리 시뮬레이션 학습 가이드</h2>
+                    <button id="btn-close-modal" class="close-btn">✕</button>
+                </div>
+                <div class="modal-body">
+                    <h3>1. 힘과 가속도 (F = ma)</h3>
+                    <p>뉴턴의 운동 제2법칙을 시각적으로 관측합니다. 질량(m), 가해지는 힘(F), 마찰계수(μ)를 직접 제어하며 물체의 실시간 가속도(a)와 속도(v) 변화 그래프를 비교해 보세요. 외력이 최대 정지 마찰력보다 작으면 물체가 움직이지 않는 물리 법칙이 적용되어 있습니다.</p>
+                    <hr>
+                    <h3>2. 운동량 보존과 충돌 (Momentum)</h3>
+                    <p>마찰이 없는 평면에서 두 물체의 탄성 충돌(e = 1.0)을 재현합니다. 질량과 초기 속도에 따라 충돌 전후의 개별 운동량(p)과 운동에너지(K)는 변화하지만, 계 전체의 총합은 보존되는 역학적 보존 법칙을 직접 수치와 실시간 바 게이지로 확인할 수 있습니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN LAYOUT -->
+        <main class="sim-wrapper">
+            <!-- Left Side: Interactive Physics Sandbox -->
+            <div class="sim-container">
+                <canvas id="simCanvas"></canvas>
+                <div class="sim-overlay" id="sim-message">시뮬레이션을 재생하여 측정을 시작하세요</div>
+            </div>
+            
+            <!-- Right Side Top: Control Panels -->
+            <!-- Controls: F=ma Mode -->
+            <div class="controls-panel" id="controls-fma">
+                <div class="panel-header">
+                    <h2>제어 패널</h2>
+                    <span class="badge">F=ma</span>
+                </div>
+                <div class="control-group">
+                    <label>질량 (m):</label>
+                    <input type="range" id="m-slider" min="1" max="20" value="5" step="0.5">
+                    <span class="val-display"><span id="m-val">5.0</span><span class="unit">kg</span></span>
+                </div>
+                <div class="control-group">
+                    <label>가하는 힘 (F):</label>
+                    <input type="range" id="f-slider" min="-100" max="100" value="20" step="1">
+                    <span class="val-display"><span id="f-val">20</span><span class="unit">N</span></span>
+                </div>
+                <div class="control-group">
+                    <label>마찰 계수 (μ):</label>
+                    <input type="range" id="mu-slider" min="0" max="1" value="0.2" step="0.01">
+                    <span class="val-display"><span id="mu-val">0.20</span></span>
+                </div>
+                <div class="actions">
+                    <button id="fma-play" class="action-btn play">▶ 재생</button>
+                    <button id="fma-reset" class="action-btn reset">↺ 초기화</button>
+                </div>
+                <div class="stats-box">
+                    <div class="stat">
+                        <span class="stat-label">가속도 (A)</span>
+                        <div class="stat-value"><span id="stat-a">0.00</span><span class="unit"> m/s²</span></div>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">속도 (V)</span>
+                        <div class="stat-value"><span id="stat-v">0.00</span><span class="unit"> m/s</span></div>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">마찰력 (F)</span>
+                        <div class="stat-value"><span id="stat-ff">0.00</span><span class="unit"> N</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls: Collision Mode -->
+            <div class="controls-panel hidden" id="controls-collision">
+                <div class="panel-header">
+                    <h2>제어 패널</h2>
+                    <span class="badge">충돌</span>
+                </div>
+                <div class="two-col">
+                    <div class="obj-controls obj1">
+                        <h3>🔴 물체 1 (빨강)</h3>
+                        <div class="control-group">
+                            <label>질량 (m₁):<span class="val-display" id="m1-val">5.0</span><span class="unit">kg</span></label>
+                            <input type="range" id="m1-slider" min="1" max="20" value="5" step="0.5">
+                        </div>
+                        <div class="control-group">
+                            <label>초기 속도 (v₁):<span class="val-display" id="v1-val">10.0</span><span class="unit">m/s</span></label>
+                            <input type="range" id="v1-slider" min="-20" max="20" value="10" step="1">
+                        </div>
+                    </div>
+                    <div class="obj-controls obj2">
+                        <h3>🔵 물체 2 (파랑)</h3>
+                        <div class="control-group">
+                            <label>질량 (m₂):<span class="val-display" id="m2-val">5.0</span><span class="unit">kg</span></label>
+                            <input type="range" id="m2-slider" min="1" max="20" value="5" step="0.5">
+                        </div>
+                        <div class="control-group">
+                            <label>초기 속도 (v₂):<span class="val-display" id="v2-val">-5.0</span><span class="unit">m/s</span></label>
+                            <input type="range" id="v2-slider" min="-20" max="20" value="-5" step="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="actions">
+                    <button id="col-play" class="action-btn play">▶ 재생</button>
+                    <button id="col-reset" class="action-btn reset">↺ 초기화</button>
+                </div>
+            </div>
+            
+            <!-- Right Side Bottom: Visualization Charts -->
+            <!-- Line Graph for F=ma -->
+            <div class="chart-container" id="chart-fma">
+                <canvas id="fmaChart"></canvas>
+            </div>
+            
+            <!-- Bar gauges for Collision -->
+            <div class="bar-chart-container hidden" id="chart-collision">
+                <div class="bar-group">
+                    <h4>운동량 (p = mv) [kg·m/s]</h4>
+                    <div class="bar-wrapper">
+                        <div class="bar-label">물체 1</div>
+                        <div class="bar-track"><div class="bar obj1-bar" id="p1-bar"></div></div>
+                        <span id="p1-text">0.0</span>
+                    </div>
+                    <div class="bar-wrapper">
+                        <div class="bar-label">물체 2</div>
+                        <div class="bar-track"><div class="bar obj2-bar" id="p2-bar"></div></div>
+                        <span id="p2-text">0.0</span>
+                    </div>
+                    <div class="bar-wrapper">
+                        <div class="bar-label">총합</div>
+                        <div class="bar-track"><div class="bar total-bar" id="ptot-bar"></div></div>
+                        <span id="ptot-text">0.0</span>
+                    </div>
+                </div>
+                <div class="bar-group">
+                    <h4>운동에너지 (K = ½mv²) [J]</h4>
+                    <div class="bar-wrapper">
+                        <div class="bar-label">물체 1</div>
+                        <div class="bar-track"><div class="bar obj1-bar" id="k1-bar"></div></div>
+                        <span id="k1-text">0.0</span>
+                    </div>
+                    <div class="bar-wrapper">
+                        <div class="bar-label">물체 2</div>
+                        <div class="bar-track"><div class="bar obj2-bar" id="k2-bar"></div></div>
+                        <span id="k2-text">0.0</span>
+                    </div>
+                    <div class="bar-wrapper">
+                        <div class="bar-label">총합</div>
+                        <div class="bar-track"><div class="bar total-bar" id="ktot-bar"></div></div>
+                        <span id="ktot-text">0.0</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

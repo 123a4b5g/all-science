@@ -9,6 +9,17 @@ const DEFAULT_TEMPLATES = [
     likes: 430,
     url: './physics.html',
     code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./physics.html -->'
+  },
+  {
+    name: '파동의 간섭 시뮬레이션',
+    author: 'All Science 물리 랩',
+    description: '서로 다른 방향으로 진행하는 두 파동의 중첩과 간섭 현상을 관찰할 수 있는 인터랙티브 시뮬레이션입니다. 진폭, 너비, 형태 등을 조절하여 보강 간섭과 상쇄 간섭을 탐구해 보세요.',
+    category: 'physics',
+    imageStyle: 'model',
+    views: 9420,
+    likes: 380,
+    url: './wave.html',
+    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./wave.html -->'
   }
 ];
 
@@ -32,15 +43,25 @@ const app = {
   loadData() {
     try {
       const saved = localStorage.getItem('sci-lab-custom-programs-v5');
+      let loadedPrograms = [];
       if (saved) {
-        this.programs = JSON.parse(saved);
-      } else {
-        this.programs = DEFAULT_TEMPLATES.map((t, idx) => ({
-          id: `default-${idx + 1}`,
-          ...t
-        }));
-        this.savePrograms();
+        loadedPrograms = JSON.parse(saved);
       }
+      
+      const defaultWithIds = DEFAULT_TEMPLATES.map((t, idx) => ({
+        id: `default-${idx + 1}`,
+        ...t
+      }));
+
+      if (loadedPrograms.length === 0) {
+        this.programs = defaultWithIds;
+      } else {
+        // Merge missing default templates
+        const existingUrls = new Set(loadedPrograms.map(p => p.url));
+        const missingDefaults = defaultWithIds.filter(d => d.url && !existingUrls.has(d.url));
+        this.programs = [...loadedPrograms, ...missingDefaults];
+      }
+      this.savePrograms();
 
       const savedLikes = localStorage.getItem('sci-lab-liked-videos-v5');
       if (savedLikes) {
