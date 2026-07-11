@@ -298,13 +298,8 @@ canvas#simCanvas {
         padding-bottom: 12px;
     }
     
-    .controls-panel.collapsed > *:not(.panel-header) {
+    .controls-panel.collapsed > *:not(.panel-header):not(.actions) {
         display: none !important;
-    }
-    
-    .controls-panel.collapsed .panel-header {
-        border-bottom: none;
-        padding-bottom: 0;
     }
 }
 
