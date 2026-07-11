@@ -768,3 +768,62 @@ canvas#fmaChart {
         height: 250px;
     }
 }
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 12px 16px;
+    }
+    .header-left {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .tabs {
+        width: 100%;
+        display: flex;
+    }
+    .tab-btn {
+        flex: 1;
+        text-align: center;
+        padding: 8px 6px;
+        font-size: 0.8rem;
+    }
+    .modal-content {
+        max-height: 85vh;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
+    .modal-body {
+        overflow-y: auto;
+        padding-right: 4px;
+    }
+}
+
+@media (max-width: 640px) {
+    .two-col {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    #controls-fma .control-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+    }
+    #controls-fma .control-group label {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #controls-fma .control-group .val-display {
+        width: auto;
+        text-align: right;
+    }
+}
+
