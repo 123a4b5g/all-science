@@ -386,6 +386,7 @@ input[type=range] {
     width: 100%;
     background: transparent;
     margin: 4px 0;
+    touch-action: none;
 }
 
 input[type=range]:focus {

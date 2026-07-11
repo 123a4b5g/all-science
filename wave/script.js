@@ -317,30 +317,40 @@ function setupEventListeners() {
     });
     
     // Sliders
-    ampASlider.addEventListener('input', () => {
+    const onAmpA = () => {
         ampA = parseInt(ampASlider.value);
         ampAVal.textContent = ampA;
-    });
+    };
+    ampASlider.addEventListener('input', onAmpA);
+    ampASlider.addEventListener('change', onAmpA);
     
-    widthASlider.addEventListener('input', () => {
+    const onWidthA = () => {
         widthA = parseInt(widthASlider.value);
         widthAVal.textContent = widthA;
-    });
+    };
+    widthASlider.addEventListener('input', onWidthA);
+    widthASlider.addEventListener('change', onWidthA);
     
-    ampBSlider.addEventListener('input', () => {
+    const onAmpB = () => {
         ampB = parseInt(ampBSlider.value);
         ampBVal.textContent = ampB;
-    });
+    };
+    ampBSlider.addEventListener('input', onAmpB);
+    ampBSlider.addEventListener('change', onAmpB);
     
-    widthBSlider.addEventListener('input', () => {
+    const onWidthB = () => {
         widthB = parseInt(widthBSlider.value);
         widthBVal.textContent = widthB;
-    });
+    };
+    widthBSlider.addEventListener('input', onWidthB);
+    widthBSlider.addEventListener('change', onWidthB);
     
-    speedSlider.addEventListener('input', () => {
+    const onSpeed = () => {
         speed = parseFloat(speedSlider.value);
         speedVal.textContent = speed.toFixed(1);
-    });
+    };
+    speedSlider.addEventListener('input', onSpeed);
+    speedSlider.addEventListener('change', onSpeed);
     
     // Controls
     playBtn.addEventListener('click', () => {

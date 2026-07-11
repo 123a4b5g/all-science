@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('mu-val').innerText = fmaState.mu.toFixed(2);
         
         if(!fmaState.playing) {
-            const F_f_max = fmaState.mu * fmaState.m * fmaState.g;
+            const F_f_max = Math.min(fmaState.mu * fmaState.m * fmaState.g, 50);
             let F_net = fmaState.F;
             let F_f = 0;
             
@@ -157,6 +157,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     F_f = fmaState.F > 0 ? -F_f_max : F_f_max;
                     F_net = fmaState.F + F_f;
                 }
+            } else {
+                const dir = Math.sign(fmaState.v);
+                F_f = -dir * F_f_max;
+                F_net = fmaState.F + F_f;
             }
             fmaState.a = F_net / fmaState.m;
             updateFmaStats(fmaState.a, fmaState.v, Math.abs(F_f));
@@ -165,8 +169,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     mSlider.addEventListener('input', updateFmaParams);
+    mSlider.addEventListener('change', updateFmaParams);
     fSlider.addEventListener('input', updateFmaParams);
+    fSlider.addEventListener('change', updateFmaParams);
     muSlider.addEventListener('input', updateFmaParams);
+    muSlider.addEventListener('change', updateFmaParams);
     
     // Collisions
     const m1Slider = document.getElementById('m1-slider');
@@ -195,9 +202,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     m1Slider.addEventListener('input', updateColParams);
+    m1Slider.addEventListener('change', updateColParams);
     v1Slider.addEventListener('input', updateColParams);
+    v1Slider.addEventListener('change', updateColParams);
     m2Slider.addEventListener('input', updateColParams);
+    m2Slider.addEventListener('change', updateColParams);
     v2Slider.addEventListener('input', updateColParams);
+    v2Slider.addEventListener('change', updateColParams);
 
     // --- Custom Canvas Plotting Library (Dual Y-Axis) ---
     function drawCustomChart() {
@@ -411,7 +422,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentMode === 'fma' && fmaState.playing) {
             fmaState.time += dt;
             
-            const F_f_max = fmaState.mu * fmaState.m * fmaState.g;
+            const F_f_max = Math.min(fmaState.mu * fmaState.m * fmaState.g, 50);
             let F_net = fmaState.F;
             let F_f = 0;
             
@@ -564,7 +575,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 drawVectorArrow(cx, cy, fmaState.F * 1.5, 0, '#f43f5e', `외력 F (${fmaState.F} N)`);
             }
             
-            let F_f_max = fmaState.mu * fmaState.m * fmaState.g;
+            let F_f_max = Math.min(fmaState.mu * fmaState.m * fmaState.g, 50);
             let F_f = 0;
             if (fmaState.v !== 0) {
                 F_f = -Math.sign(fmaState.v) * F_f_max;
