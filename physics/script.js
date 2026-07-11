@@ -58,9 +58,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const chartCanvas = document.getElementById('fmaChart');
     const chartCtx = chartCanvas.getContext('2d');
     
+    let hasInitializedPositions = false;
+
     function resizeCanvases() {
+        const oldWidth = canvas.width;
+        
         // Main Sandbox Canvas
         const rect = canvas.parentElement.getBoundingClientRect();
+        if (rect.width === 0 || rect.height === 0) return; // Wait until visible
+        
         canvas.width = rect.width;
         canvas.height = rect.height;
         
@@ -69,11 +75,26 @@ document.addEventListener('DOMContentLoaded', () => {
         chartCanvas.width = chartRect.width;
         chartCanvas.height = chartRect.height;
         
+        // Adjust block positions on resize or initial load
+        if (!hasInitializedPositions || oldWidth <= 300) { // default browser width is 300
+            fmaState.x = canvas.width / 2;
+            colState.x1 = canvas.width * 0.25;
+            colState.x2 = canvas.width * 0.75;
+            hasInitializedPositions = true;
+        } else if (oldWidth !== canvas.width) {
+            fmaState.x = (fmaState.x / oldWidth) * canvas.width;
+            colState.x1 = (colState.x1 / oldWidth) * canvas.width;
+            colState.x2 = (colState.x2 / oldWidth) * canvas.width;
+        }
+        
         draw();
         drawCustomChart();
     }
     
-    window.addEventListener('resize', resizeCanvases);
+    const resizeObserver = new ResizeObserver(() => {
+        resizeCanvases();
+    });
+    resizeObserver.observe(canvas.parentElement);
 
     // --- State Declarations ---
     let fmaState = {

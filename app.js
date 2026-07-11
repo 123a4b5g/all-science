@@ -233,6 +233,16 @@ const app = {
     
     if (!container || !scaler || !iframe) return;
 
+    if (window.innerWidth <= 1024) {
+      scaler.style.width = '100%';
+      scaler.style.height = '100%';
+      scaler.style.transform = 'none';
+      scaler.style.position = 'relative';
+      scaler.style.left = '0';
+      scaler.style.top = '0';
+      return;
+    }
+
     if (p && p.url) {
       // 외부 URL 템플릿(역학 시뮬레이션 등)은 데스크탑 해상도(1440x900)를 기준으로 렌더링 후 스케일 다운
       const targetWidth = 1440;

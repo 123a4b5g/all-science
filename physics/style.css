@@ -800,6 +800,9 @@ canvas#fmaChart {
         overflow-y: auto;
         padding-right: 4px;
     }
+    .sim-overlay {
+        display: none !important;
+    }
 }
 
 @media (max-width: 640px) {

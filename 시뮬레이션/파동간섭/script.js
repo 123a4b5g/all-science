@@ -165,6 +165,8 @@ function render() {
     const xA = -currentDist; // Center of pulse A
     const xB = currentDist;  // Center of pulse B
     
+    const scaleY = Math.min(1.0, (yCenter - 15) / 200);
+
     const curveA = [];
     const curveB = [];
     const curveTotal = [];
@@ -176,9 +178,9 @@ function render() {
         const yValB = getPulseDisplacement(lx - xB, shapeB, widthB, ampB);
         const yValTotal = yValA + yValB;
         
-        curveA.push({ x: px, y: yCenter - yValA });
-        curveB.push({ x: px, y: yCenter - yValB });
-        curveTotal.push({ x: px, y: yCenter - yValTotal });
+        curveA.push({ x: px, y: yCenter - yValA * scaleY });
+        curveB.push({ x: px, y: yCenter - yValB * scaleY });
+        curveTotal.push({ x: px, y: yCenter - yValTotal * scaleY });
     }
     
     // 1. Draw Pulse A (Red Dashed Line)
@@ -225,14 +227,14 @@ function render() {
     // Arrow A (Right)
     if (xA > -170 && xA < 170) {
         const pxA = w / 2 + xA * scaleFactor;
-        const pyA = yCenter - ampA - (ampA >= 0 ? arrowOffset : -arrowOffset - 8);
+        const pyA = yCenter - ampA * scaleY - (ampA >= 0 ? arrowOffset : -arrowOffset - 8);
         drawArrow(pxA - 14, pyA, pxA + 14, pyA, '#f43f5e', 'A');
     }
     
     // Arrow B (Left)
     if (xB > -170 && xB < 170) {
         const pxB = w / 2 + xB * scaleFactor;
-        const pyB = yCenter - ampB - (ampB >= 0 ? arrowOffset : -arrowOffset - 8);
+        const pyB = yCenter - ampB * scaleY - (ampB >= 0 ? arrowOffset : -arrowOffset - 8);
         drawArrow(pxB + 14, pyB, pxB - 14, pyB, '#3b82f6', 'B');
     }
     
@@ -244,9 +246,9 @@ function render() {
         const ybCenter = getPulseDisplacement(0 - xB, shapeB, widthB, ampB);
         const ytotCenter = yaCenter + ybCenter;
         
-        const pyA = yCenter - yaCenter;
-        const pyB = yCenter - ybCenter;
-        const pyTot = yCenter - ytotCenter;
+        const pyA = yCenter - yaCenter * scaleY;
+        const pyB = yCenter - ybCenter * scaleY;
+        const pyTot = yCenter - ytotCenter * scaleY;
         
         // Vertical dashed reference line
         ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
