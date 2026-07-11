@@ -397,10 +397,13 @@ function setupEventListeners() {
         infoModal.classList.add('hidden');
     });
     
-    infoModal.addEventListener('click', (e) => {
-        if (e.target === infoModal) {
-            infoModal.classList.add('hidden');
-        }
+    // Collapsible control panels logic for mobile
+    document.querySelectorAll('.btn-toggle-panel').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const panel = btn.closest('.controls-panel');
+            const isCollapsed = panel.classList.toggle('collapsed');
+            btn.innerText = isCollapsed ? '열기 ☰' : '접기 ✕';
+        });
     });
 }
 

@@ -804,6 +804,15 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(animLoop);
     }
 
+    // Collapsible control panels logic for mobile
+    document.querySelectorAll('.btn-toggle-panel').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const panel = btn.closest('.controls-panel');
+            const isCollapsed = panel.classList.toggle('collapsed');
+            btn.innerText = isCollapsed ? '열기 ☰' : '접기 ✕';
+        });
+    });
+
     // --- Initialise App ---
     function init() {
         resizeCanvases();
