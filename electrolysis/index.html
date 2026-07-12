@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XBTYBSNF04"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XBTYBSNF04');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>물의 전기분해 실험 시뮬레이션</title>
+    <!-- Outfit & Inter Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-left">
+                <button id="btn-back" class="nav-btn" style="margin-right: 15px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    뒤로
+                </button>
+                <div class="logo">
+                    <div class="logo-icon"></div>
+                    <h1>물의 전기분해 실험</h1>
+                </div>
+            </div>
+            
+            <button id="btn-info" class="nav-btn info">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                실험 원리
+            </button>
+        </header>
+
+        <!-- INFO MODAL -->
+        <div id="info-modal" class="modal-backdrop hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>물의 전기분해 원리 가이드</h2>
+                    <button id="btn-close-modal" class="close-btn">✕</button>
+                </div>
+                <div class="modal-body">
+                    <h3>1. 물의 전기분해란?</h3>
+                    <p>순수한 물은 전류가 잘 흐르지 않기 때문에, 전해질인 수산화나트륨($NaOH$)을 녹여 전류가 흐를 수 있도록 한 뒤 전기에너지를 가해 물을 수소 기체와 산소 기체로 분해하는 반응입니다.</p>
+                    <hr>
+                    <h3>2. 각 전극에서의 화학 반응</h3>
+                    <p><strong>(-)극 (음극, Cathode): 환원 반응</strong><br>
+                    물 분자가 전자를 얻어 수소 기체($H_2$)와 수산화 이온($OH^-$)을 생성합니다.<br>
+                    <code>2H₂O(l) + 2e⁻ ➔ H₂(g) + 2OH⁻(aq)</code></p>
+                    <p><strong>(+)극 (양극, Anode): 산화 반응</strong><br>
+                    물 분자가 전자를 잃어 산소 기체($O_2$)와 수소 이온($H^+$)을 생성합니다.<br>
+                    <code>2H₂O(l) ➔ O₂(g) + 4H⁺(aq) + 4e⁻</code></p>
+                    <hr>
+                    <h3>3. 발생 물질의 부피 및 질량비</h3>
+                    <p>전체 전하량 보존 법칙에 의해 이동하는 전자의 몰수가 동일하므로:<br>
+                    - <strong>물의 전기분해 (NaOH)</strong>: 수소와 산소가 <strong>2 : 1</strong> 부피비로 생성됩니다.<br>
+                    - <strong>염화나트륨(NaCl) 분해</strong>: 수소와 염소가 <strong>1 : 1</strong> 당량비로 생성됩니다.</p>
+                    <hr>
+                    <h3>4. 전해질 종류별 양극(+) 생성물 및 검출법</h3>
+                    <p>
+                    - <strong>수산화나트륨 ($NaOH$)</strong>: (+)극에서 산소 기체($O_2$)가 발생하며 향불을 대면 다시 활활 탑니다.<br>
+                    - <strong>염화나트륨 ($NaCl$)</strong>: (+)극에서 황록색 염소 기체($Cl_2$)가 발생하며 푸른 리트머스 종이를 빨갛게 물들였다가 탈색시킵니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN LAYOUT -->
+        <main class="sim-wrapper">
+            <!-- Left Side: Simulation Screen -->
+            <div class="sim-container">
+                <canvas id="simCanvas"></canvas>
+                <div class="sim-overlay" id="sim-message">물의 전기분해 (수소: (-)극 파랑도선, 산소/염소/요오드: (+)극 빨강도선)</div>
+                
+                <!-- Match/Flame Test Overlay Icon / Effect indicators (handled in script, but style class binds them) -->
+                <div id="test-overlay" class="test-overlay hidden">
+                    <span id="test-balloon-text">POP!</span>
+                </div>
+            </div>
+            
+            <!-- Right Side: Controls and Analysis -->
+            <div class="right-column">
+                <!-- Controls Panel -->
+                <div class="controls-panel">
+                    <div class="panel-header">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <h2>제어 패널</h2>
+                            <span class="badge">Electrolysis</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Basic Parameters Settings -->
+                    <div class="parameter-grid">
+                        <!-- Voltage -->
+                        <div class="control-group">
+                            <div class="slider-label-row">
+                                <label>전원 장치 전압</label>
+                                <span class="val-display"><span id="voltage-val">6.0</span><span class="unit">V</span></span>
+                            </div>
+                            <input type="range" id="voltage-slider" min="0" max="15" value="6.0" step="0.5">
+                        </div>
+
+                        <!-- Concentration -->
+                        <div class="control-group">
+                            <div class="slider-label-row">
+                                <label>전해질 농도 (<span id="electrolyte-label">NaOH</span>)</label>
+                                <span class="val-display"><span id="concentration-val">5.0</span><span class="unit">%</span></span>
+                            </div>
+                            <input type="range" id="concentration-slider" min="0" max="10.0" value="5.0" step="0.5">
+                        </div>
+
+                        <!-- Electrolyte Type -->
+                        <div class="control-group">
+                            <label class="slider-label-row" style="font-size: 0.78rem; color: var(--text-muted); font-weight: 500;">전해질 종류</label>
+                            <div class="radio-group" id="electrolyte-group">
+                                <button class="radio-btn active" data-value="NaOH">NaOH</button>
+                                <button class="radio-btn" data-value="NaCl">NaCl</button>
+                            </div>
+                        </div>
+                    </div>
+ 
+                    <!-- Option Toggles -->
+                    <div class="action-grid-row">
+                        <button id="btn-toggle-micro" class="action-btn toggle-micro">🔍 미시적(분자) 관찰</button>
+                        <button id="btn-toggle-ions" class="action-btn toggle-ions active">🔋 이온(Na+, OH-) 표시</button>
+                    </div>
+                    <div class="action-grid-row" style="margin-top: 6px;">
+                        <div class="actions" style="margin-top: 0; flex: 1;">
+                            <button id="sim-play" class="action-btn play">⏸ 일시정지</button>
+                            <button id="sim-reset" class="action-btn reset">↺ 초기화</button>
+                        </div>
+                    </div>
+ 
+                    <!-- Gas test section -->
+                    <div class="gas-test-panel">
+                        <h3>🧪 기체 확인 가상 실험 (기체 수집 완료 후 가능)</h3>
+                        <div class="gas-test-buttons">
+                            <button id="btn-test-h2" class="action-btn test-btn h2-test" disabled>
+                                <span>🔥 (-)극 기체 확인 (성냥불)</span>
+                            </button>
+                            <button id="btn-test-o2" class="action-btn test-btn o2-test" disabled>
+                                <span>🕯️ (+)극 기체 확인 (<span id="test-right-name">향불</span>)</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Analysis Panel -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>실시간 전류 및 기체 포집량 분석</h3>
+                    </div>
+                    
+                    <!-- Electrical stats -->
+                    <div class="stats-row">
+                        <div class="stat-card">
+                            <span class="card-label">회로 총 저항</span>
+                            <div class="card-val"><span id="val-resistance">120</span><span class="unit"> Ω</span></div>
+                        </div>
+                        <div class="stat-card highlighted">
+                            <span class="card-label">흐르는 전류</span>
+                            <div class="card-val-accent"><span id="val-current">50.0</span><span class="unit"> mA</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <span class="card-label" id="label-ratio-title">기체 부피 비 (H₂ : O₂)</span>
+                            <div class="card-val"><span id="val-ratio">2.00 : 1.00</span></div>
+                        </div>
+                    </div>
+ 
+                    <!-- Gas volume cards -->
+                    <div class="analysis-grid">
+                        <div class="val-card card-h2">
+                            <span class="card-label">(-)극 수소 기체 (H₂)</span>
+                            <div class="card-val"><span id="val-h2-vol">0.00</span><span class="unit"> mL</span></div>
+                            <div class="progress-bar-container"><div id="bar-h2" class="progress-bar h2-color" style="width: 0%"></div></div>
+                        </div>
+                        <div class="val-card card-o2">
+                            <span class="card-label" id="label-right-gas-title">(+)극 산소 기체 (O₂)</span>
+                            <div class="card-val"><span id="val-o2-vol">0.00</span><span class="unit" id="unit-right-gas"> mL</span></div>
+                            <div class="progress-bar-container"><div id="bar-o2" class="progress-bar o2-color" style="width: 0%"></div></div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-box single-col">
+                        <div class="stat-banner">
+                            <span class="stat-label">분해 상태</span>
+                            <div class="stat-value" id="status-txt">반응 전</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

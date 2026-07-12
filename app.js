@@ -20,6 +20,17 @@ const DEFAULT_TEMPLATES = [
     likes: 380,
     url: './wave/index.html',
     code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./wave/index.html -->'
+  },
+  {
+    name: '물의 전기분해 실험 시뮬레이션',
+    author: 'All Science 화학 랩',
+    description: '수산화나트륨(NaOH) 또는 염화나트륨(NaCl) 전해질을 녹인 물에 전류를 흘려주어 수소, 산소, 염소 기체로 분해하는 전기분해 실험 시뮬레이션입니다.',
+    category: 'chemistry',
+    imageStyle: 'water_thumbnail.png',
+    views: 8500,
+    likes: 310,
+    url: './electrolysis/index.html',
+    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./electrolysis/index.html -->'
   }
 ];
 
