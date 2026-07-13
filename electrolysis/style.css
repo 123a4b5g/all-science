@@ -305,6 +305,23 @@ canvas#simCanvas {
     margin-bottom: 2px;
 }
 
+.btn-toggle-panel {
+    display: none;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-toggle-panel:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
 .panel-header h2 {
     font-family: 'Outfit', sans-serif;
     font-size: 1.05rem;
@@ -906,6 +923,20 @@ input[type=range]::-webkit-slider-thumb:hover {
         max-height: none;
     }
     
+    .btn-toggle-panel {
+        display: block;
+    }
+    
+    .controls-panel.collapsed {
+        height: auto !important;
+        max-height: none !important;
+        padding-bottom: 12px;
+    }
+    
+    .controls-panel.collapsed > *:not(.panel-header):not(.play-reset-row):not(.gas-test-panel) {
+        display: none !important;
+    }
+    
     .sim-overlay {
         display: none !important;
     }
@@ -927,8 +958,8 @@ input[type=range]::-webkit-slider-thumb:hover {
         margin-top: 4px;
     }
     .stats-row {
-        grid-template-columns: 1fr;
-        gap: 4px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
     }
     .analysis-grid {
         grid-template-columns: 1fr;

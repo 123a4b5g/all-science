@@ -25,6 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnReset = document.getElementById("sim-reset");
     const btnToggleMicro = document.getElementById("btn-toggle-micro");
     const btnToggleIons = document.getElementById("btn-toggle-ions");
+    const btnTogglePanel = document.getElementById("btn-toggle-panel");
+    const controlsPanel = document.querySelector(".controls-panel");
     
     const electrolyteLabel = document.getElementById("electrolyte-label");
     const electrolyteGroup = document.getElementById("electrolyte-group");
@@ -90,17 +92,35 @@ document.addEventListener("DOMContentLoaded", () => {
     let height = 600; // Logical canvas height
 
     function getBeakerDimensions() {
-        const beakerX = width / 2.6;
-        const beakerY = height * 0.45;
-        const beakerW = 280;
-        const beakerH = 260;
-        const waterH = 200;
-        const leftElectrodeX = beakerX - state.distance * 14;
-        const rightElectrodeX = beakerX + state.distance * 14;
-        const electrodeTopY = beakerY + beakerH - 120;
-        const tubeY = beakerY + beakerH - 240;
-        const tubeH = 220;
+        const isMobile = width <= 600;
+        const s = isMobile ? Math.min(width / 420, height / 370) : 1.0;
+        
+        const beakerX = isMobile ? width / 2 : width / 2.6;
+        const beakerY = isMobile ? height * 0.28 : height * 0.45;
+        const beakerW = 280 * s;
+        const beakerH = 260 * s;
+        const waterH = 200 * s;
+        const leftElectrodeX = beakerX - state.distance * 14 * s;
+        const rightElectrodeX = beakerX + state.distance * 14 * s;
+        const electrodeTopY = beakerY + beakerH - 120 * s;
+        const tubeY = beakerY + beakerH - 240 * s;
+        const tubeH = 220 * s;
         return { beakerX, beakerY, beakerW, beakerH, waterH, leftElectrodeX, rightElectrodeX, electrodeTopY, tubeY, tubeH };
+    }
+
+    function getMagnifierCenter(mvR) {
+        const isMobile = width <= 600;
+        if (isMobile) {
+            return {
+                mvX: width / 2,
+                mvY: height / 2
+            };
+        } else {
+            return {
+                mvX: width - mvR - 60,
+                mvY: height - mvR - 60
+            };
+        }
     }
 
     // Synthesized Audio Controller using Web Audio API
@@ -596,30 +616,33 @@ document.addEventListener("DOMContentLoaded", () => {
     // 5. Canvas Drawing & Rendering
 
     function drawBeaker(w, h, beakerX, beakerY, beakerW, beakerH, waterH) {
+        const isMobile = width <= 600;
+        const s = isMobile ? Math.min(width / 420, height / 370) : 1.0;
+
         // Draw beaker shadow and glow
         ctx.save();
         ctx.shadowColor = "rgba(0, 242, 254, 0.1)";
-        ctx.shadowBlur = 20;
+        ctx.shadowBlur = 20 * s;
 
         // Beaker outer outline
         ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
-        ctx.lineWidth = 4.5;
+        ctx.lineWidth = 4.5 * s;
         ctx.lineJoin = "round";
         ctx.beginPath();
         ctx.moveTo(beakerX - beakerW / 2, beakerY);
-        ctx.lineTo(beakerX - beakerW / 2, beakerY + beakerH - 12);
+        ctx.lineTo(beakerX - beakerW / 2, beakerY + beakerH - 12 * s);
         
         // Rounded bottom corners
-        ctx.quadraticCurveTo(beakerX - beakerW / 2, beakerY + beakerH, beakerX - beakerW / 2 + 12, beakerY + beakerH);
-        ctx.lineTo(beakerX + beakerW / 2 - 12, beakerY + beakerH);
-        ctx.quadraticCurveTo(beakerX + beakerW / 2, beakerY + beakerH, beakerX + beakerW / 2, beakerY + beakerH - 12);
+        ctx.quadraticCurveTo(beakerX - beakerW / 2, beakerY + beakerH, beakerX - beakerW / 2 + 12 * s, beakerY + beakerH);
+        ctx.lineTo(beakerX + beakerW / 2 - 12 * s, beakerY + beakerH);
+        ctx.quadraticCurveTo(beakerX + beakerW / 2, beakerY + beakerH, beakerX + beakerW / 2, beakerY + beakerH - 12 * s);
         ctx.lineTo(beakerX + beakerW / 2, beakerY);
         ctx.stroke();
 
         // Lip outline (top curve)
-        ctx.lineWidth = 3.5;
+        ctx.lineWidth = 3.5 * s;
         ctx.beginPath();
-        ctx.ellipse(beakerX, beakerY, beakerW / 2 + 5, 6, 0, 0, Math.PI * 2);
+        ctx.ellipse(beakerX, beakerY, beakerW / 2 + 5 * s, 6 * s, 0, 0, Math.PI * 2);
         ctx.stroke();
         ctx.restore();
 
@@ -627,12 +650,12 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.save();
         // Set clipping path inside beaker
         ctx.beginPath();
-        ctx.moveTo(beakerX - beakerW / 2 + 2, beakerY + 6);
-        ctx.lineTo(beakerX - beakerW / 2 + 2, beakerY + beakerH - 10);
-        ctx.quadraticCurveTo(beakerX - beakerW / 2 + 2, beakerY + beakerH - 2, beakerX - beakerW / 2 + 12, beakerY + beakerH - 2);
-        ctx.lineTo(beakerX + beakerW / 2 - 12, beakerY + beakerH - 2);
-        ctx.quadraticCurveTo(beakerX + beakerW / 2 - 2, beakerY + beakerH - 2, beakerX + beakerW / 2 - 2, beakerY + beakerH - 10);
-        ctx.lineTo(beakerX + beakerW / 2 - 2, beakerY + 6);
+        ctx.moveTo(beakerX - beakerW / 2 + 2 * s, beakerY + 6 * s);
+        ctx.lineTo(beakerX - beakerW / 2 + 2 * s, beakerY + beakerH - 10 * s);
+        ctx.quadraticCurveTo(beakerX - beakerW / 2 + 2 * s, beakerY + beakerH - 2 * s, beakerX - beakerW / 2 + 12 * s, beakerY + beakerH - 2 * s);
+        ctx.lineTo(beakerX + beakerW / 2 - 12 * s, beakerY + beakerH - 2 * s);
+        ctx.quadraticCurveTo(beakerX + beakerW / 2 - 2 * s, beakerY + beakerH - 2 * s, beakerX + beakerW / 2 - 2 * s, beakerY + beakerH - 10 * s);
+        ctx.lineTo(beakerX + beakerW / 2 - 2 * s, beakerY + 6 * s);
         ctx.clip();
 
         // Simple clean water color
@@ -641,7 +664,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Draw Water ripples/surface
         ctx.beginPath();
-        ctx.ellipse(beakerX, beakerY + beakerH - waterH, beakerW / 2 - 2, 5, 0, 0, Math.PI * 2);
+        ctx.ellipse(beakerX, beakerY + beakerH - waterH, beakerW / 2 - 2 * s, 5 * s, 0, 0, Math.PI * 2);
         ctx.fillStyle = "rgba(255, 255, 255, 0.15)";
         ctx.fill();
 
@@ -649,35 +672,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function drawElectrodesAndTubes(beakerX, beakerY, beakerW, beakerH, waterH) {
-        const leftElectrodeX = beakerX - state.distance * 14;
-        const rightElectrodeX = beakerX + state.distance * 14;
+        const isMobile = width <= 600;
+        const s = isMobile ? Math.min(width / 420, height / 370) : 1.0;
+
+        const leftElectrodeX = beakerX - state.distance * 14 * s;
+        const rightElectrodeX = beakerX + state.distance * 14 * s;
         
-        const tubeW = 40;
-        const tubeH = 220;
-        const tubeY = beakerY + beakerH - 240; // floating inverted
+        const tubeW = 40 * s;
+        const tubeH = 220 * s;
+        const tubeY = beakerY + beakerH - 240 * s; // floating inverted
 
         // 1. Draw Wires entering beaker bottom and electrodes
         // (-) Cathode: Blue/Cyan Wire and Electrode (Left)
         ctx.save();
-        ctx.lineWidth = 4;
+        ctx.lineWidth = 4 * s;
         ctx.strokeStyle = "#3b82f6";
         ctx.shadowColor = "rgba(59, 130, 246, 0.5)";
-        ctx.shadowBlur = 10;
+        ctx.shadowBlur = 10 * s;
         ctx.beginPath();
-        ctx.moveTo(leftElectrodeX, beakerY + beakerH + 30);
-        ctx.lineTo(leftElectrodeX, beakerY + beakerH - 40);
+        ctx.moveTo(leftElectrodeX, beakerY + beakerH + 30 * s);
+        ctx.lineTo(leftElectrodeX, beakerY + beakerH - 40 * s);
         ctx.stroke();
         ctx.restore();
 
         // (+) Anode: Red Wire and Electrode (Right)
         ctx.save();
-        ctx.lineWidth = 4;
+        ctx.lineWidth = 4 * s;
         ctx.strokeStyle = "#ef4444";
         ctx.shadowColor = "rgba(239, 68, 68, 0.5)";
-        ctx.shadowBlur = 10;
+        ctx.shadowBlur = 10 * s;
         ctx.beginPath();
-        ctx.moveTo(rightElectrodeX, beakerY + beakerH + 30);
-        ctx.lineTo(rightElectrodeX, beakerY + beakerH - 40);
+        ctx.moveTo(rightElectrodeX, beakerY + beakerH + 30 * s);
+        ctx.lineTo(rightElectrodeX, beakerY + beakerH - 40 * s);
         ctx.stroke();
         ctx.restore();
 
@@ -685,14 +711,14 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.save();
         ctx.fillStyle = "#1e293b";
         ctx.strokeStyle = "#475569";
-        ctx.lineWidth = 1.5;
+        ctx.lineWidth = 1.5 * s;
         // Left Electrode Rod
-        ctx.fillRect(leftElectrodeX - 5, beakerY + beakerH - 120, 10, 90);
-        ctx.strokeRect(leftElectrodeX - 5, beakerY + beakerH - 120, 10, 90);
+        ctx.fillRect(leftElectrodeX - 5 * s, beakerY + beakerH - 120 * s, 10 * s, 90 * s);
+        ctx.strokeRect(leftElectrodeX - 5 * s, beakerY + beakerH - 120 * s, 10 * s, 90 * s);
         
         // Right Electrode Rod
-        ctx.fillRect(rightElectrodeX - 5, beakerY + beakerH - 120, 10, 90);
-        ctx.strokeRect(rightElectrodeX - 5, beakerY + beakerH - 120, 10, 90);
+        ctx.fillRect(rightElectrodeX - 5 * s, beakerY + beakerH - 120 * s, 10 * s, 90 * s);
+        ctx.strokeRect(rightElectrodeX - 5 * s, beakerY + beakerH - 120 * s, 10 * s, 90 * s);
         ctx.restore();
 
         // 2. Draw Inverted Test Tubes & Gas Levels
@@ -709,6 +735,9 @@ document.addEventListener("DOMContentLoaded", () => {
     function drawInvertedTube(x, y, w, h, gasVolume, maxCapacity, isH2) {
         ctx.save();
         
+        const isMobile = width <= 600;
+        const s = isMobile ? Math.min(width / 420, height / 370) : 1.0;
+
         // Calculated water height inside the test tube
         // Gas fills the top. When gas volume is 0, tube is full of water.
         // When gas volume = maxCapacity, tube is full of gas, water level is at bottom.
@@ -719,10 +748,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (waterHeightInTube < h) {
             ctx.beginPath();
             ctx.moveTo(x - w / 2, y + h - waterHeightInTube);
-            ctx.lineTo(x - w / 2, y + 20); // curve start
+            ctx.lineTo(x - w / 2, y + w / 2); // curve start
             // Top dome of inverted tube
             ctx.quadraticCurveTo(x - w / 2, y, x, y);
-            ctx.quadraticCurveTo(x + w / 2, y, x + w / 2, y + 20);
+            ctx.quadraticCurveTo(x + w / 2, y, x + w / 2, y + w / 2);
             ctx.lineTo(x + w / 2, y + h - waterHeightInTube);
             ctx.closePath();
             
@@ -748,10 +777,10 @@ document.addEventListener("DOMContentLoaded", () => {
         // 2. Draw Water inside the tube (bottom portion of tube)
         if (waterHeightInTube > 0) {
             ctx.beginPath();
-            ctx.moveTo(x - w / 2 + 1.5, y + h);
-            ctx.lineTo(x - w / 2 + 1.5, y + h - waterHeightInTube);
-            ctx.lineTo(x + w / 2 - 1.5, y + h - waterHeightInTube);
-            ctx.lineTo(x + w / 2 - 1.5, y + h);
+            ctx.moveTo(x - w / 2 + 1.5 * s, y + h);
+            ctx.lineTo(x - w / 2 + 1.5 * s, y + h - waterHeightInTube);
+            ctx.lineTo(x + w / 2 - 1.5 * s, y + h - waterHeightInTube);
+            ctx.lineTo(x + w / 2 - 1.5 * s, y + h);
             ctx.closePath();
             ctx.fillStyle = "rgba(56, 189, 248, 0.25)";
             ctx.fill();
@@ -760,92 +789,95 @@ document.addEventListener("DOMContentLoaded", () => {
         // 3. Draw Water surface curve inside the tube
         if (waterHeightInTube > 0 && waterHeightInTube < h) {
             ctx.beginPath();
-            ctx.ellipse(x, y + h - waterHeightInTube, w / 2 - 1.5, 4, 0, 0, Math.PI * 2);
+            ctx.ellipse(x, y + h - waterHeightInTube, w / 2 - 1.5 * s, 4 * s, 0, 0, Math.PI * 2);
             ctx.fillStyle = "rgba(255, 255, 255, 0.25)";
             ctx.fill();
         }
 
         // 4. Glass Tube outline
         ctx.strokeStyle = "rgba(255, 255, 255, 0.22)";
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 3 * s;
         ctx.beginPath();
         ctx.moveTo(x - w / 2, y + h);
-        ctx.lineTo(x - w / 2, y + 20);
+        ctx.lineTo(x - w / 2, y + w / 2);
         ctx.quadraticCurveTo(x - w / 2, y, x, y);
-        ctx.quadraticCurveTo(x + w / 2, y, x + w / 2, y + 20);
+        ctx.quadraticCurveTo(x + w / 2, y, x + w / 2, y + w / 2);
         ctx.lineTo(x + w / 2, y + h);
         ctx.stroke();
 
         // Lip border at bottom of inverted test tube
         ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
-        ctx.lineWidth = 2.5;
+        ctx.lineWidth = 2.5 * s;
         ctx.beginPath();
-        ctx.ellipse(x, y + h, w / 2 + 2, 3, 0, 0, Math.PI * 2);
+        ctx.ellipse(x, y + h, w / 2 + 2 * s, 3 * s, 0, 0, Math.PI * 2);
         ctx.stroke();
 
         // 5. Draw Graduation scale (눈금)
         ctx.fillStyle = "rgba(255, 255, 255, 0.45)";
-        ctx.font = "7px monospace";
+        ctx.font = `${7 * s}px monospace`;
         ctx.textAlign = isH2 ? "right" : "left";
         ctx.textBaseline = "middle";
         
         const tickStep = 2.0; // every 2 mL
         for (let vol = 0; vol <= maxCapacity; vol += tickStep) {
             const frac = vol / maxCapacity;
-            const tickY = y + 24 + (h - 32) * frac;
+            const tickY = y + 24 * s + (h - 32 * s) * frac;
             
             ctx.beginPath();
             if (isH2) {
                 ctx.moveTo(x - w / 2, tickY);
-                ctx.lineTo(x - w / 2 + 5, tickY);
+                ctx.lineTo(x - w / 2 + 5 * s, tickY);
                 if (vol % 4 === 0) {
-                    ctx.fillText(vol, x - w / 2 - 4, tickY);
-                    ctx.lineTo(x - w / 2 + 8, tickY);
+                    ctx.fillText(vol, x - w / 2 - 4 * s, tickY);
+                    ctx.lineTo(x - w / 2 + 8 * s, tickY);
                 }
             } else {
                 ctx.moveTo(x + w / 2, tickY);
-                ctx.lineTo(x + w / 2 - 5, tickY);
+                ctx.lineTo(x + w / 2 - 5 * s, tickY);
                 if (vol % 4 === 0) {
-                    ctx.fillText(vol, x + w / 2 + 4, tickY);
-                    ctx.lineTo(x + w / 2 - 8, tickY);
+                    ctx.fillText(vol, x + w / 2 + 4 * s, tickY);
+                    ctx.lineTo(x + w / 2 - 8 * s, tickY);
                 }
             }
             ctx.strokeStyle = "rgba(255, 255, 255, 0.35)";
-            ctx.lineWidth = 1;
+            ctx.lineWidth = 1 * s;
             ctx.stroke();
         }
 
         // Label on top of tube
         ctx.fillStyle = isH2 ? "#93c5fd" : (state.electrolyte === 'NaCl' ? "#bef264" : "#fca5a5");
-        ctx.font = "bold 9px 'Outfit', sans-serif";
+        ctx.font = `bold ${Math.round(9 * s)}px 'Outfit', sans-serif`;
         ctx.textAlign = "center";
-        ctx.fillText(isH2 ? "H₂ (수소)" : (state.electrolyte === 'NaCl' ? "Cl₂ (염소)" : "O₂ (산소)"), x, y - 10);
+        ctx.fillText(isH2 ? "H₂ (수소)" : (state.electrolyte === 'NaCl' ? "Cl₂ (염소)" : "O₂ (산소)"), x, y - 10 * s);
 
         ctx.restore();
     }
 
     function drawCircuitAndElectronics(beakerX, beakerY, beakerW, beakerH) {
+        const isMobile = width <= 600;
+        const s = isMobile ? Math.min(width / 420, height / 370) : 1.0;
+
         // Battery/Power Source Box
-        const pboxX = beakerX - 10;
-        const pboxY = beakerY - 110;
-        const pboxW = 120;
-        const pboxH = 65;
+        const pboxX = beakerX - 10 * s;
+        const pboxY = beakerY - 110 * s;
+        const pboxW = 120 * s;
+        const pboxH = 65 * s;
 
         // Draw Power Supply Box
         ctx.save();
         ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
         ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
-        ctx.lineWidth = 2.5;
-        ctx.shadowBlur = 15;
+        ctx.lineWidth = 2.5 * s;
+        ctx.shadowBlur = 15 * s;
         ctx.shadowColor = "rgba(0, 0, 0, 0.6)";
         ctx.beginPath();
-        ctx.roundRect(pboxX - pboxW / 2, pboxY, pboxW, pboxH, 12);
+        ctx.roundRect(pboxX - pboxW / 2, pboxY, pboxW, pboxH, 12 * s);
         ctx.fill();
         ctx.stroke();
 
         // Screen Glow depending on status
         ctx.beginPath();
-        ctx.roundRect(pboxX - pboxW / 2 + 10, pboxY + 10, pboxW - 20, 25, 6);
+        ctx.roundRect(pboxX - pboxW / 2 + 10 * s, pboxY + 10 * s, pboxW - 20 * s, 25 * s, 6 * s);
         ctx.fillStyle = "rgba(10, 15, 30, 0.95)";
         ctx.fill();
         ctx.strokeStyle = state.current > 0 ? "rgba(0, 242, 254, 0.3)" : "rgba(255, 255, 255, 0.05)";
@@ -853,10 +885,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Screen text
         ctx.fillStyle = state.current > 0 ? "#00f2fe" : "#64748b";
-        ctx.font = "bold 11px monospace";
+        ctx.font = `bold ${Math.round(11 * s)}px monospace`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.fillText(`DC Power: ${state.voltage.toFixed(1)}V`, pboxX, pboxY + 225 / 10);
+        ctx.fillText(`DC Power: ${state.voltage.toFixed(1)}V`, pboxX, pboxY + 22.5 * s);
 
         // Terminals
         const termLeftX = pboxX - pboxW / 3;
@@ -865,36 +897,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Left (-) Terminal
         ctx.beginPath();
-        ctx.arc(termLeftX, termY, 6, 0, Math.PI * 2);
+        ctx.arc(termLeftX, termY, 6 * s, 0, Math.PI * 2);
         ctx.fillStyle = "#3b82f6";
         ctx.fill();
         ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 8px monospace";
+        ctx.font = `bold ${Math.round(8 * s)}px monospace`;
         ctx.fillText("-", termLeftX, termY);
 
         // Right (+) Terminal
         ctx.beginPath();
-        ctx.arc(termRightX, termY, 6, 0, Math.PI * 2);
+        ctx.arc(termRightX, termY, 6 * s, 0, Math.PI * 2);
         ctx.fillStyle = "#ef4444";
         ctx.fill();
         ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 8px monospace";
+        ctx.font = `bold ${Math.round(8 * s)}px monospace`;
         ctx.fillText("+", termRightX, termY);
 
         // 2. Draw connections (Wires) from Power supply down and around the beaker
-        const leftElectrodeX = beakerX - state.distance * 14;
-        const rightElectrodeX = beakerX + state.distance * 14;
-        const wireEndY = beakerY + beakerH + 30;
+        const leftElectrodeX = beakerX - state.distance * 14 * s;
+        const rightElectrodeX = beakerX + state.distance * 14 * s;
+        const wireEndY = beakerY + beakerH + 30 * s;
 
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 3 * s;
         
         // (-) Cathode Wire (Blue)
         ctx.strokeStyle = "#3b82f6";
         ctx.beginPath();
         ctx.moveTo(termLeftX, termY);
         // routing wire around
-        ctx.lineTo(termLeftX, beakerY + beakerH + 50);
-        ctx.lineTo(leftElectrodeX, beakerY + beakerH + 50);
+        ctx.lineTo(termLeftX, beakerY + beakerH + 50 * s);
+        ctx.lineTo(leftElectrodeX, beakerY + beakerH + 50 * s);
         ctx.lineTo(leftElectrodeX, wireEndY);
         ctx.stroke();
 
@@ -902,8 +934,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.strokeStyle = "#ef4444";
         ctx.beginPath();
         ctx.moveTo(termRightX, termY);
-        ctx.lineTo(termRightX, beakerY + beakerH + 60);
-        ctx.lineTo(rightElectrodeX, beakerY + beakerH + 60);
+        ctx.lineTo(termRightX, beakerY + beakerH + 60 * s);
+        ctx.lineTo(rightElectrodeX, beakerY + beakerH + 60 * s);
         ctx.lineTo(rightElectrodeX, wireEndY);
         ctx.stroke();
 
@@ -916,23 +948,23 @@ document.addEventListener("DOMContentLoaded", () => {
             
             ctx.save();
             ctx.fillStyle = "#eab308"; // Glowing yellow electrons
-            ctx.shadowBlur = 8;
+            ctx.shadowBlur = 8 * s;
             ctx.shadowColor = "#eab308";
 
             // Cathode wire electron positions (battery -> cathode)
             const path1 = [
                 {x: termLeftX, y: termY},
-                {x: termLeftX, y: beakerY + beakerH + 50},
-                {x: leftElectrodeX, y: beakerY + beakerH + 50},
-                {x: leftElectrodeX, y: beakerY + beakerH - 40}
+                {x: termLeftX, y: beakerY + beakerH + 50 * s},
+                {x: leftElectrodeX, y: beakerY + beakerH + 50 * s},
+                {x: leftElectrodeX, y: beakerY + beakerH - 40 * s}
             ];
             animateDotsOnPath(path1, state.timeAccumulator, true);
 
             // Anode wire electron positions (anode -> battery)
             const path2 = [
-                {x: rightElectrodeX, y: beakerY + beakerH - 40},
-                {x: rightElectrodeX, y: beakerY + beakerH + 60},
-                {x: termRightX, y: beakerY + beakerH + 60},
+                {x: rightElectrodeX, y: beakerY + beakerH - 40 * s},
+                {x: rightElectrodeX, y: beakerY + beakerH + 60 * s},
+                {x: termRightX, y: beakerY + beakerH + 60 * s},
                 {x: termRightX, y: termY}
             ];
             animateDotsOnPath(path2, state.timeAccumulator, false);
@@ -987,8 +1019,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Draw the zoomed-in Microscopic Molecular View Circular Frame
     function drawMicroscopicView(beakerX, beakerY) {
         const mvR = state.microSize === 'large' ? 180 : 90; // radius of magnifier
-        const mvX = width - mvR - 60;
-        const mvY = height - mvR - 60;
+        const center = getMagnifierCenter(mvR);
+        const mvX = center.mvX;
+        const mvY = center.mvY;
 
         ctx.save();
 
@@ -1561,11 +1594,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // A. Generate bubbles at electrode surface if simulation is playing
         if (state.isPlay && state.current > 0) {
+            const isMobile = width <= 600;
+            const s = isMobile ? Math.min(width / 420, height / 370) : 1.0;
+
             // Hydrogen (-) Cathode bubbles (Frequent, small) - Capped to prevent lag at high current
             const h2Count = Math.min(4, Math.round(state.current * 0.04));
             for (let i = 0; i < h2Count; i++) {
                 if (Math.random() < 0.6 && state.h2Volume < state.maxVolume) {
-                    bubbles.push(new Bubble(leftElectrodeX, electrodeTopY, 1.2, true));
+                    bubbles.push(new Bubble(leftElectrodeX, electrodeTopY, 1.2 * s, true));
                 }
             }
 
@@ -1573,7 +1609,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const o2Count = Math.min(2, Math.round(state.current * 0.02));
             for (let i = 0; i < o2Count; i++) {
                 if (Math.random() < 0.5 && state.h2Volume < state.maxVolume) {
-                    bubbles.push(new Bubble(rightElectrodeX, electrodeTopY, 2.5, false));
+                    bubbles.push(new Bubble(rightElectrodeX, electrodeTopY, 2.5 * s, false));
                 }
             }
 
@@ -1657,27 +1693,37 @@ document.addEventListener("DOMContentLoaded", () => {
         width = rect.width;
         height = rect.height;
         ctx.scale(dpr, dpr);
+        
+        if (state.showMicro) {
+            const mvR = state.microSize === 'large' ? 180 : 90;
+            const center = getMagnifierCenter(mvR);
+            initMicroParticles(center.mvX, center.mvY, mvR);
+        }
     }
 
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas(); // initial call
 
     // Inputs updates
-    voltageSlider.addEventListener("input", (e) => {
+    const onVoltageChange = (e) => {
         state.voltage = parseFloat(e.target.value);
         voltageVal.textContent = state.voltage.toFixed(1);
         calculatePhysics();
-    });
+    };
+    voltageSlider.addEventListener("input", onVoltageChange);
+    voltageSlider.addEventListener("change", onVoltageChange);
 
-    concentrationSlider.addEventListener("input", (e) => {
+    const onConcentrationChange = (e) => {
         state.concentration = parseFloat(e.target.value);
         concentrationVal.textContent = state.concentration.toFixed(1);
         calculatePhysics();
         if (state.concentration === 0) {
-            statusTxt.textContent = "반류 차단됨 (순수한 물)";
+            statusTxt.textContent = "전류 차단됨 (순수한 물)";
             statusTxt.style.color = "#94a3b8";
         }
-    });
+    };
+    concentrationSlider.addEventListener("input", onConcentrationChange);
+    concentrationSlider.addEventListener("change", onConcentrationChange);
 
     // (Electrode distance and indicators removed)
 
@@ -1705,6 +1751,13 @@ document.addEventListener("DOMContentLoaded", () => {
             btnPlay.classList.add("paused");
         }
     });
+
+    if (btnTogglePanel && controlsPanel) {
+        btnTogglePanel.addEventListener("click", () => {
+            const isCollapsed = controlsPanel.classList.toggle("collapsed");
+            btnTogglePanel.textContent = isCollapsed ? "열기 ☰" : "접기 ✕";
+        });
+    }
 
     function updateIonToggleButtonText() {
         const cationSymbol = 'Na+';
@@ -1747,7 +1800,9 @@ document.addEventListener("DOMContentLoaded", () => {
         statusTxt.style.color = "#cbd5e1";
         
         initIons();
-        initMicroParticles(width - 150, height - 150, 90);
+        const mvR = state.microSize === 'large' ? 180 : 90;
+        const center = getMagnifierCenter(mvR);
+        initMicroParticles(center.mvX, center.mvY, mvR);
     });
 
     btnToggleMicro.addEventListener("click", () => {
@@ -1756,7 +1811,8 @@ document.addEventListener("DOMContentLoaded", () => {
             btnToggleMicro.textContent = "🔍 미시적(분자) 관찰";
             btnToggleMicro.classList.add("active");
             const tempMvR = state.microSize === 'large' ? 180 : 90;
-            initMicroParticles(width - tempMvR - 60, height - tempMvR - 60, tempMvR);
+            const center = getMagnifierCenter(tempMvR);
+            initMicroParticles(center.mvX, center.mvY, tempMvR);
         } else {
             btnToggleMicro.textContent = "🔍 미시적(분자) 관찰";
             btnToggleMicro.classList.remove("active");
@@ -1834,8 +1890,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const clickY = (e.clientY - rect.top) * (height / rect.height);
         
         const mvR = state.microSize === 'large' ? 180 : 90;
-        const mvX = width - mvR - 60;
-        const mvY = height - mvR - 60;
+        const center = getMagnifierCenter(mvR);
+        const mvX = center.mvX;
+        const mvY = center.mvY;
         
         const btnX = mvX + mvR * 0.65;
         const btnY = mvY - mvR * 0.65;
@@ -1847,9 +1904,8 @@ document.addEventListener("DOMContentLoaded", () => {
             
             // Recalculate coordinates and reinitialize particles to fill the new size area
             const newMvR = state.microSize === 'large' ? 180 : 90;
-            const newMvX = width - newMvR - 60;
-            const newMvY = height - newMvR - 60;
-            initMicroParticles(newMvX, newMvY, newMvR);
+            const newCenter = getMagnifierCenter(newMvR);
+            initMicroParticles(newCenter.mvX, newCenter.mvY, newMvR);
             playWhooshSound();
         }
     });
@@ -1863,8 +1919,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const mouseY = (e.clientY - rect.top) * (height / rect.height);
         
         const mvR = state.microSize === 'large' ? 180 : 90;
-        const mvX = width - mvR - 60;
-        const mvY = height - mvR - 60;
+        const center = getMagnifierCenter(mvR);
+        const mvX = center.mvX;
+        const mvY = center.mvY;
         
         const btnX = mvX + mvR * 0.65;
         const btnY = mvY - mvR * 0.65;
