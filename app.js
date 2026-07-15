@@ -37,7 +37,7 @@ const DEFAULT_TEMPLATES = [
     author: 'All Science 지구과학 랩',
     description: '태양, 지구, 달의 상대적인 위치와 궤도를 조절하여 일식(개기일식, 금환일식, 부분일식)과 월식(개기월식, 부분월식, 반영월식)의 원리를 탐구하는 시뮬레이션입니다.',
     category: 'earth_science',
-    imageStyle: 'eclipse_thumbnail.png',
+    imageStyle: 'eclipse_thumbnail.jpg',
     views: 11000,
     likes: 420,
     url: './eclipse/index.html',
