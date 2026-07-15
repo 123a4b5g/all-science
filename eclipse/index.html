@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>태양계 식 현상 시뮬레이션</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="header-left">
+        <button class="icon-btn back-btn">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+          뒤로
+        </button>
+        <div class="title-container">
+          <div class="pulse-dot"></div>
+          <h1>식 현상 시뮬레이션</h1>
+        </div>
+      </div>
+      <div class="header-center">
+        <div class="tab-group">
+          <button class="tab-btn active" data-tab="solar">일식 시뮬레이션</button>
+          <button class="tab-btn" data-tab="lunar">월식 시뮬레이션</button>
+        </div>
+      </div>
+      <div class="header-right">
+        <button class="icon-btn principle-btn">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          원리 설명
+        </button>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="simulation-panel">
+        <div class="canvas-wrapper">
+          <div class="canvas-overlay hint-overlay">
+            <span class="hint-dot"></span> <span id="hintText">시뮬레이션을 재생하여 측정을 시작하세요</span>
+          </div>
+          
+          <!-- 3D 우주 뷰 -->
+          <canvas id="spaceCanvas"></canvas>
+          
+          <!-- 지구 관찰자 시점 뷰 (화면 하단 또는 구석에 오버레이로 배치) -->
+          <div class="observer-view" id="observerView">
+            <div class="observer-header">
+              <span>지구 관찰자 시점</span>
+              <button class="observer-expand-btn" id="observerExpandBtn" title="확대/축소">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <polyline points="9 21 3 21 3 15"></polyline>
+                  <line x1="21" y1="3" x2="14" y2="10"></line>
+                  <line x1="3" y1="21" x2="10" y2="14"></line>
+                </svg>
+              </button>
+            </div>
+            <canvas id="skyCanvas"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="control-panel">
+        <div class="control-card">
+          <div class="card-header">
+            <h2>제어 패널 <span class="badge" id="modeBadge">일식</span></h2>
+            <button class="btn-toggle-panel" id="btn-toggle-panel">접기 ✕</button>
+          </div>
+          <div class="card-body">
+            
+            <div class="control-group">
+              <div class="label-row">
+                <span>달 궤도 위치 (황경):</span>
+                <span id="orbitVal" class="val-text">0.0°</span>
+              </div>
+              <input type="range" id="orbitSlider" min="0" max="360" step="0.1" value="0">
+            </div>
+
+            <div class="control-group">
+              <div class="label-row">
+                <span>지구 공전 위치 (황경):</span>
+                <span id="earthVal" class="val-text">0.0°</span>
+              </div>
+              <input type="range" id="earthSlider" min="0" max="360" step="0.1" value="0">
+            </div>
+
+            <div class="control-group">
+              <div class="label-row">
+                <span>지구-달 거리 조절:</span>
+                <span id="distVal" class="val-text">1.00x</span>
+              </div>
+              <input type="range" id="distSlider" min="0.9" max="1.1" step="0.01" value="1.0">
+            </div>
+
+            <div class="action-buttons" id="actionButtons">
+              <!-- 버튼은 JS에서 탭에 따라 동적으로 생성됨 -->
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-row">
+            <span>현상 종류</span>
+            <span id="eclipseTypeStr" class="highlight">없음</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- 원리 설명 모달 -->
+  <div id="principleModal" class="modal-backdrop hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>일식과 월식의 원리</h2>
+        <button id="closeModal" class="close-btn">✕</button>
+      </div>
+      <div class="modal-body">
+        <h3>1. 일식</h3>
+        <p>일식은 달이 태양과 지구 사이에 정확히 위치하여 태양 빛을 가리는 현상입니다. 달의 궤도는 타원형이기 때문에 지구와의 거리가 변하며, 이에 따라 일식의 종류가 달라집니다.</p>
+        <p><strong>개기 일식:</strong> 달이 지구에 가까울 때(근지점) 발생하며, 달의 겉보기 크기가 태양보다 커서 태양을 완전히 가립니다. 이때 태양의 코로나(대기)가 관측됩니다.</p>
+        <p><strong>금환 일식:</strong> 달이 지구에서 멀 때(원지점) 발생하며, 달의 겉보기 크기가 태양보다 작아 태양의 가장자리가 고리 모양으로 보입니다.</p>
+        <p><strong>부분 일식:</strong> 달이 태양의 일부만 가리는 현상으로, 관측자가 본그림자 밖 반그림자 영역에 있을 때 관측됩니다.</p>
+        <hr>
+        <h3>2. 월식</h3>
+        <p>월식은 지구가 태양과 달 사이에 위치하여 지구의 그림자가 달 표면에 드리워지는 현상입니다. 월식은 항상 보름달일 때 발생합니다.</p>
+        <p><strong>개기 월식:</strong> 달이 지구의 본그림자 안에 완전히 들어가는 현상입니다. 지구 대기가 붉은빛을 굴절시켜 달이 붉은색으로 보이며, 이를 '블러드 문'이라 부릅니다.</p>
+        <p><strong>부분 월식:</strong> 달의 일부만 본그림자에 걸치는 현상입니다.</p>
+        <p><strong>반영 월식:</strong> 달이 지구의 반그림자 영역만 통과하는 현상으로, 달의 밝기가 미세하게 어두워지며 육안으로 구분하기 어렵습니다.</p>
+        <hr>
+        <h3>3. 시뮬레이션 조작법</h3>
+        <p><strong>궤도 위치:</strong> 태양-지구-달의 상대적 각도를 조절합니다. 일식은 달이 태양 방향에 있을 때, 월식은 반대편에 있을 때 발생합니다.</p>
+        <p><strong>궤도 기울기:</strong> 달 궤도면과 지구 궤도면의 교차 각도를 조절합니다. 실제 달 궤도는 약 5° 기울어져 있어 매 보름달/초승달마다 식 현상이 일어나지 않습니다.</p>
+        <p><strong>달 거리 비율:</strong> 달의 근지점/원지점 거리를 조절하여 개기 일식과 금환 일식의 차이를 관찰할 수 있습니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
