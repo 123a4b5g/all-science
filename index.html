@@ -60,10 +60,17 @@
           <input
             type="text"
             id="header-search-input"
+            data-i18n-placeholder="headerSearchPlaceholder"
             placeholder="검색하여 과학 템플릿 즉시 매칭..."
             class="w-full bg-transparent text-slate-800 text-xs py-2 px-3 focus:outline-none placeholder-slate-400 font-medium"
           />
         </div>
+      </div>
+
+      <!-- Language Selector -->
+      <div class="flex items-center gap-1.5 shrink-0">
+        <button id="lang-ko" onclick="app.setLanguage('ko')" class="px-2.5 py-1 text-xs font-bold rounded-lg border border-teal-600 bg-teal-600 text-white cursor-pointer transition-colors">KO</button>
+        <button id="lang-en" onclick="app.setLanguage('en')" class="px-2.5 py-1 text-xs font-bold rounded-lg border border-slate-200 text-slate-600 bg-white hover:bg-slate-50 cursor-pointer transition-colors">EN</button>
       </div>
     </div>
   </header>
@@ -80,10 +87,13 @@
           <span class="bg-white text-teal-600 text-[10px] font-extrabold tracking-widest px-4 py-1.5 rounded-full border border-teal-300 self-center uppercase">
             ⭐ INTERACTIVE SCIENCE LABORATORY PORTAL
           </span>
-          <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-950 tracking-tight leading-tight mt-1 max-w-2xl font-sans">
+          <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-950 tracking-tight leading-tight mt-1 max-w-2xl font-sans" data-i18n="heroTitle">
             실험, 화학, 물리, 시뮬레이션까지<br />
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-indigo-600">쉬운 과학의 시작!</span>
           </h1>
+          <p class="text-xs sm:text-sm text-slate-500 font-medium max-w-xl self-center mt-2 leading-relaxed" data-i18n="heroSubtitle">
+            직접 해보고 과학의 흥미를 느껴보세요!
+          </p>
         </div>
 
         <div class="w-full max-w-md z-10 mt-2 flex flex-col items-center gap-3">
@@ -92,6 +102,7 @@
             <input
               type="text"
               id="hero-search-input"
+              data-i18n-placeholder="heroSearchPlaceholder"
               placeholder="원하는 과학 시뮬레이션 명칭이나 키워드를 검색해 보세요..."
               class="w-full bg-transparent text-slate-800 text-xs py-2.5 px-3 focus:outline-none placeholder-slate-400 font-medium"
             />
@@ -103,9 +114,9 @@
         <div>
           <h3 class="font-black text-slate-900 text-base flex items-center gap-2">
             <i data-lucide="layers" class="w-5 h-5 text-teal-600"></i>
-            과학 실험 시뮬레이션 탐색
+            <span data-i18n="exploreTitle">과학 실험 시뮬레이션 탐색</span>
           </h3>
-          <p class="text-xs text-slate-400 mt-0.5 font-bold">마우스 클릭 시 즉시 실시간 런타임 실험실에 진입합니다.</p>
+          <p class="text-xs text-slate-400 mt-0.5 font-bold" data-i18n="exploreSubtitle">마우스 클릭 시 즉시 실시간 런타임 실험실에 진입합니다.</p>
         </div>
       </div>
 
@@ -120,7 +131,7 @@
         <div class="flex items-center gap-3">
           <button onclick="app.setViewMode('hub')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-extrabold flex items-center gap-1.5 border border-slate-700 cursor-pointer transition-colors">
             <i data-lucide="arrow-left" class="w-4 h-4"></i>
-            <span>메인 홈으로</span>
+            <span data-i18n="backToHome">메인 홈으로</span>
           </button>
           <div class="h-5 w-[1px] bg-slate-800 hidden md:block"></div>
           <div class="flex flex-col">
@@ -146,13 +157,13 @@
         <div class="lg:col-span-4 flex flex-col gap-3.5 animate-fade-in">
           <div class="flex bg-slate-100 p-1 rounded-xl border border-slate-200 gap-1 shrink-0" id="studio-tabs">
             <button onclick="app.setStudioTab('run')" data-tab="run" class="studio-tab-btn flex-1 py-2 text-[11px] font-bold rounded-lg transition-all cursor-pointer">
-              🚀 실행 가이드
+              <span data-i18n="tabRun">🚀 실행 가이드</span>
             </button>
             <button onclick="app.setStudioTab('code')" data-tab="code" class="studio-tab-btn flex-1 py-2 text-[11px] font-bold rounded-lg transition-all cursor-pointer">
-              💻 코드 편집
+              <span data-i18n="tabCode">💻 코드 편집</span>
             </button>
             <button onclick="app.setStudioTab('meta')" data-tab="meta" class="studio-tab-btn flex-1 py-2 text-[11px] font-bold rounded-lg transition-all cursor-pointer">
-              ⚙️ 설정 & 제거
+              <span data-i18n="tabMeta">⚙️ 설정 & 제거</span>
             </button>
           </div>
 
@@ -160,34 +171,34 @@
           <div id="tab-run" class="studio-tab-content bg-white border border-slate-200 rounded-xl p-4 shadow-xs flex flex-col gap-3 hidden">
             <div class="flex items-center gap-2 pb-3 border-b border-slate-100">
               <span class="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></span>
-              <span class="text-xs font-black text-slate-800 uppercase tracking-wider">실시간 과학실 관측 정보</span>
+              <span class="text-xs font-black text-slate-800 uppercase tracking-wider" data-i18n="runTitle">실시간 과학실 관측 정보</span>
             </div>
             <div class="p-3 bg-teal-50/50 border border-teal-100 rounded-xl flex flex-col gap-1">
               <span class="font-bold text-teal-800 flex items-center gap-1 text-xs">
-                <i data-lucide="info" class="w-4 h-4"></i> 실시간 시뮬레이션 가이드
+                <i data-lucide="info" class="w-4 h-4"></i> <span data-i18n="runGuideTitle">실시간 시뮬레이션 가이드</span>
               </span>
-              <p class="text-slate-600 leading-relaxed text-[10.5px]">
+              <p class="text-slate-600 leading-relaxed text-[10.5px]" data-i18n="runGuideDesc">
                 현재 이 과학 시뮬레이션은 격리된 가상 샌드박스 내부에서 안전하게 실행되고 있습니다. 우측 화면을 조작하여 가상 과학 반응과 움직임을 관찰하고, 상단의 '코드 편집' 탭을 통해 언제든지 코드를 수정해 보세요.
               </p>
             </div>
             <div id="run-desc-container" class="flex flex-col gap-1 border border-slate-150 rounded-xl p-3 bg-slate-50/50">
-              <span class="font-extrabold text-xs text-slate-800">이론적 원리 & 공식 가이드</span>
+              <span class="font-extrabold text-xs text-slate-800" data-i18n="runTheoryTitle">이론적 원리 & 공식 가이드</span>
               <p id="run-desc-text" class="text-[10.5px] text-slate-600 leading-relaxed whitespace-pre-wrap"></p>
             </div>
             <div class="flex flex-col gap-1.5 border border-slate-200/60 rounded-xl p-3 bg-slate-50">
-              <span class="font-bold text-slate-700 text-xs">학술 데이터 및 세부 정보</span>
+              <span class="font-bold text-slate-700 text-xs" data-i18n="runTheoryTitle">학술 데이터 및 세부 정보</span>
               <div class="flex flex-col gap-1.5 font-mono text-[11px] text-slate-500">
 
                 <div class="flex justify-between">
-                  <span>즐겨찾기 횟수 (Stars)</span>
+                  <span data-i18n="runLikes">즐겨찾기 횟수 (Stars)</span>
                   <span id="run-meta-likes" class="font-bold text-slate-700">0회</span>
                 </div>
                 <div class="flex justify-between">
-                  <span>학술 카테고리</span>
+                  <span data-i18n="runCategory">학술 카테고리</span>
                   <span id="run-meta-category" class="font-bold text-teal-700 uppercase"></span>
                 </div>
                 <div class="flex justify-between">
-                  <span>프로그램 개발자</span>
+                  <span data-i18n="runAuthor">프로그램 개발자</span>
                   <span id="run-meta-author" class="font-bold text-slate-700"></span>
                 </div>
               </div>
@@ -195,7 +206,7 @@
             <div class="flex gap-2.5">
               <button onclick="app.refreshSandbox()" class="flex-1 py-3 bg-slate-900 hover:bg-slate-950 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow transition-transform hover:scale-[1.01] active:scale-[0.99] cursor-pointer">
                 <i data-lucide="refresh-cw" class="w-4 h-4"></i>
-                실험 기기 및 런타임 재부팅 (Reboot Instance)
+                <span data-i18n="runRebootBtn">실험 기기 및 런타임 재부팅 (Reboot Instance)</span>
               </button>
             </div>
           </div>
@@ -203,10 +214,10 @@
           <!-- TAB CONTENT: CODE -->
           <div id="tab-code" class="studio-tab-content bg-white border border-slate-200 rounded-xl p-4 shadow-xs flex flex-col gap-3 min-h-[380px] hidden">
             <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-              <span class="text-xs font-black text-slate-800 uppercase tracking-wider">HTML5 소스 코드 에디터</span>
+              <span class="text-xs font-black text-slate-800 uppercase tracking-wider" data-i18n="codeTitle">HTML5 소스 코드 에디터</span>
               <span class="text-[10px] font-bold text-slate-400 font-mono">HTML/CSS/JS</span>
             </div>
-            <p class="text-[11px] text-slate-500 font-medium leading-relaxed">
+            <p class="text-[11px] text-slate-500 font-medium leading-relaxed" data-i18n="codeDesc">
               오른쪽 가상 샌드박스 화면에 즉시 로드되는 소스코드를 수정하세요. <br />
               <span class="text-emerald-600 font-bold">● 실시간 자동 저장(Auto-save)이 적용됩니다.</span>
             </p>
@@ -217,10 +228,10 @@
               placeholder="<!DOCTYPE html><html>...</html>"
             ></textarea>
             <div class="flex items-center justify-between mt-1 pt-1 border-t border-slate-100">
-              <span class="text-[10px] text-emerald-600 font-bold">✓ 실시간 자동 저장됨</span>
+              <span class="text-[10px] text-emerald-600 font-bold" data-i18n="codeSaved">✓ 실시간 자동 저장됨</span>
               <button onclick="app.refreshSandbox(); app.triggerAlert('⚡ 변경된 코드를 컴파일하고 샌드박스를 새로고침했습니다!');" class="px-3.5 py-1.5 bg-teal-600 hover:bg-teal-700 text-white text-[11px] font-extrabold rounded-lg flex items-center gap-1 cursor-pointer transition-colors">
                 <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
-                <span>컴파일 & 즉시 실행</span>
+                <span data-i18n="codeRunBtn">컴파일 & 즉시 실행</span>
               </button>
             </div>
           </div>
@@ -228,22 +239,22 @@
           <!-- TAB CONTENT: META -->
           <div id="tab-meta" class="studio-tab-content bg-white border border-slate-200 rounded-xl p-4 shadow-xs flex flex-col gap-3 hidden">
             <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
-              <span class="text-xs font-black text-slate-800 uppercase tracking-wider">연구 설정 및 카드 메타데이터 변경</span>
+              <span class="text-xs font-black text-slate-800 uppercase tracking-wider" data-i18n="metaTitle">연구 설정 및 카드 메타데이터 변경</span>
             </div>
             <div class="flex flex-col gap-1">
-              <label class="text-[10px] font-bold text-slate-500 uppercase">시뮬레이션 연구 과제명</label>
-              <input id="meta-input-name" oninput="app.handleUpdateMeta('name', event.target.value)" type="text" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:border-teal-500" placeholder="시뮬레이션 연구명 입력" />
+              <label class="text-[10px] font-bold text-slate-500 uppercase" data-i18n="metaNameLabel">시뮬레이션 연구 과제명</label>
+              <input id="meta-input-name" oninput="app.handleUpdateMeta('name', event.target.value)" type="text" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:border-teal-500" data-i18n-placeholder="metaNamePlaceholder" placeholder="시뮬레이션 연구명 입력" />
             </div>
             <div class="flex flex-col gap-1">
-              <label class="text-[10px] font-bold text-slate-500 uppercase">연구 개발자 / 채널명</label>
-              <input id="meta-input-author" oninput="app.handleUpdateMeta('author', event.target.value)" type="text" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:border-teal-500" placeholder="개발자 이름 입력" />
+              <label class="text-[10px] font-bold text-slate-500 uppercase" data-i18n="metaAuthorLabel">연구 개발자 / 채널명</label>
+              <input id="meta-input-author" oninput="app.handleUpdateMeta('author', event.target.value)" type="text" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:border-teal-500" data-i18n-placeholder="metaAuthorPlaceholder" placeholder="개발자 이름 입력" />
             </div>
             <div class="flex flex-col gap-1">
-              <label class="text-[10px] font-bold text-slate-500 uppercase">이론적 설명 및 가이드</label>
-              <textarea id="meta-input-desc" oninput="app.handleUpdateMeta('description', event.target.value)" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:border-teal-500 h-24 resize-none" placeholder="시뮬레이션 과학 원리 및 조작법 설명"></textarea>
+              <label class="text-[10px] font-bold text-slate-500 uppercase" data-i18n="metaDescLabel">이론적 설명 및 가이드</label>
+              <textarea id="meta-input-desc" oninput="app.handleUpdateMeta('description', event.target.value)" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:border-teal-500 h-24 resize-none" data-i18n-placeholder="metaDescPlaceholder" placeholder="시뮬레이션 과학 원리 및 조작법 설명"></textarea>
             </div>
             <div class="flex flex-col gap-1">
-              <label class="text-[10px] font-bold text-slate-500 uppercase">카드 썸네일 스타일</label>
+              <label class="text-[10px] font-bold text-slate-500 uppercase" data-i18n="metaStyleLabel">카드 썸네일 스타일</label>
               <select id="meta-input-style" onchange="app.handleUpdateMeta('imageStyle', event.target.value)" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold focus:outline-none focus:border-teal-500">
                 <option value="physics_thumbnail.png">🖼️ 물리학 썸네일 이미지</option>
                 <option value="wave_thumbnail.jpg">🌊 파동학 썸네일 이미지</option>
@@ -259,7 +270,7 @@
             <div class="border-t border-slate-150 pt-3.5 mt-1 flex flex-col gap-2">
               <button onclick="app.handleDeleteProgram()" class="w-full py-2.5 bg-red-50 hover:bg-red-100 border border-red-200 text-red-600 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-colors">
                 <i data-lucide="trash-2" class="w-4 h-4"></i>
-                <span>이 시뮬레이션 연구 영구 삭제하기</span>
+                <span data-i18n="metaDeleteBtn">이 시뮬레이션 연구 영구 삭제하기</span>
               </button>
             </div>
           </div>
@@ -275,7 +286,7 @@
               </div>
               <button onclick="app.refreshSandbox()" class="text-[10px] text-teal-400 hover:text-teal-300 font-bold flex items-center gap-1 cursor-pointer font-sans bg-teal-500/10 px-2 py-0.5 rounded">
                 <i data-lucide="refresh-cw" class="w-3 h-3"></i>
-                <span>재생 재부팅</span>
+                <span data-i18n="rebootBtn">재생 재부팅</span>
               </button>
             </div>
             <div class="relative flex-1 bg-black rounded-xl overflow-hidden border border-slate-900 flex flex-col min-h-[290px]" id="iframe-container">
@@ -291,12 +302,12 @@
               <div class="flex items-center gap-2">
                 <button id="btn-like" onclick="app.toggleLike()" class="px-3 py-1.5 rounded-full text-[11px] font-bold flex items-center gap-1.5 cursor-pointer bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800">
                   <i data-lucide="heart" id="icon-like" class="w-3.5 h-3.5"></i>
-                  <span id="text-like">즐겨찾기 추가</span>
+                  <span id="text-like" data-i18n="likeAdd">즐겨찾기 추가</span>
                 </button>
               </div>
             </div>
             <div class="mt-3 bg-slate-900/60 rounded-xl p-3 text-[11px] text-slate-400 border border-slate-900/80">
-              <span class="font-bold text-slate-300 block mb-1">상세 원리 요약:</span>
+              <span class="font-bold text-slate-300 block mb-1" data-i18n="descSummary">상세 원리 요약:</span>
               <p id="sandbox-desc" class="leading-relaxed whitespace-pre-wrap">Description</p>
             </div>
           </div>

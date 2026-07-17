@@ -45,7 +45,149 @@ const DEFAULT_TEMPLATES = [
   }
 ];
 
+const TRANSLATIONS = {
+  ko: {
+    // Header & Hub
+    headerSearchPlaceholder: "검색하여 과학 템플릿 즉시 매칭...",
+    heroTitle: "실험, 화학, 물리, 시뮬레이션까지<br /><span class='text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-indigo-600'>쉬운 과학의 시작!</span>",
+    heroSubtitle: "직접 해보고 과학의 흥미를 느껴보세요!",
+    heroSearchPlaceholder: "원하는 과학 시뮬레이션 명칭이나 키워드를 검색해 보세요...",
+    exploreTitle: "과학 실험 시뮬레이션 탐색",
+    exploreSubtitle: "마우스 클릭 시 즉시 실시간 런타임 실험실에 진입합니다.",
+    emptyTitle: "가상 실험실이 비어 있습니다",
+    emptyDesc: "학술 플래너, 타이머, 계산기 등 모든 프리셋 템플릿과 시뮬레이션이 성공적으로 삭제되었습니다.",
+    noMatchingTitle: "일치하는 템플릿이 없습니다.",
+    noMatchingDesc: "다른 검색어 또는 필터를 변경해 보세요.",
+    resetFilterBtn: "필터 초기화",
+    clickToExecute: "시뮬레이션 실행하기",
+    lastUpdated: "2일 전 업데이트",
+    
+    // Studio
+    backToHome: "메인 홈으로",
+    tabRun: "🚀 실행 가이드",
+    tabCode: "💻 코드 편집",
+    tabMeta: "⚙️ 설정 & 제거",
+    runTitle: "실시간 과학실 관측 정보",
+    runGuideTitle: "실시간 시뮬레이션 가이드",
+    runGuideDesc: "현재 이 과학 시뮬레이션은 격리된 가상 샌드박스 내부에서 안전하게 실행되고 있습니다. 우측 화면을 조작하여 가상 과학 반응과 움직임을 관찰하고, 상단의 '코드 편집' 탭을 통해 언제든지 코드를 수정해 보세요.",
+    runTheoryTitle: "이론적 원리 & 공식 가이드",
+    runLikes: "즐겨찾기 횟수 (Stars)",
+    runCategory: "학술 카테고리",
+    runAuthor: "프로그램 개발자",
+    runRebootBtn: "실험 기기 및 런타임 재부팅 (Reboot Instance)",
+    
+    codeTitle: "HTML5 소스 코드 에디터",
+    codeDesc: "오른쪽 가상 샌드박스 화면에 즉시 로드되는 소스코드를 수정하세요.<br /><span class='text-emerald-600 font-bold'>● 실시간 자동 저장(Auto-save)이 적용됩니다.</span>",
+    codeSaved: "✓ 실시간 자동 저장됨",
+    codeRunBtn: "컴파일 & 즉시 실행",
+    
+    metaTitle: "연구 설정 및 카드 메타데이터 변경",
+    metaNameLabel: "시뮬레이션 연구 과제명",
+    metaNamePlaceholder: "시뮬레이션 연구명 입력",
+    metaAuthorLabel: "연구 개발자 / 채널명",
+    metaAuthorPlaceholder: "개발자 이름 입력",
+    metaDescLabel: "이론적 설명 및 가이드",
+    metaDescPlaceholder: "시뮬레이션 과학 원리 및 조작법 설명",
+    metaStyleLabel: "카드 썸네일 스타일",
+    metaDeleteBtn: "이 시뮬레이션 연구 영구 삭제하기",
+    
+    // Sandbox
+    rebootBtn: "재생 재부팅",
+    likeAdd: "즐겨찾기 추가",
+    likeSaved: "즐겨찾기 보존중",
+    descSummary: "상세 원리 요약:",
+    descPlaceholder: "별도 기술된 원리가 없습니다. 왼쪽 설정 탭을 사용하여 이 시뮬레이션의 가치를 설명해 보세요.",
+    
+    // Default templates
+    templatePhysicsName: "역학 및 운동 법칙 시뮬레이션",
+    templatePhysicsAuthor: "All Science 물리 랩",
+    templatePhysicsDesc: "힘과 가속도(F=ma) 및 운동량 보존과 충돌을 다루는 인터랙티브 물리 시뮬레이션입니다. 질량, 힘, 마찰계수를 조절하며 물체의 운동을 관찰하거나 충돌 실험을 할 수 있습니다.",
+    
+    templateWaveName: "파동의 간섭 시뮬레이션",
+    templateWaveAuthor: "All Science 물리 랩",
+    templateWaveDesc: "서로 다른 방향으로 진행하는 두 파동의 중첩과 간섭 현상을 관찰할 수 있는 인터랙티브 시뮬레이션입니다. 진폭, 너비, 형태 등을 조절하여 보강 간섭과 상쇄 간섭을 탐구해 보세요.",
+
+    templateChemistryName: "물의 전기분해 실험 시뮬레이션",
+    templateChemistryAuthor: "All Science 화학 랩",
+    templateChemistryDesc: "수산화나트륨(NaOH) 또는 염화나트륨(NaCl) 전해질을 녹인 물에 전류를 흘려주어 수소, 산소, 염소 기체로 분해하는 전기분해 실험 시뮬레이션입니다.",
+
+    templateEarthScienceName: "일식과 월식 시뮬레이션",
+    templateEarthScienceAuthor: "All Science 지구과학 랩",
+    templateEarthScienceDesc: "태양, 지구, 달의 상대적인 위치와 궤도를 조절하여 일식(개기일식, 금환일식, 부분일식)과 월식(개기월식, 부분월식, 반영월식)의 원리를 탐구하는 시뮬레이션입니다."
+  },
+  en: {
+    // Header & Hub
+    headerSearchPlaceholder: "Search to match science templates instantly...",
+    heroTitle: "From experiments, chemistry, physics to simulations<br /><span class='text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-indigo-600'>Science Made Easy!</span>",
+    heroSubtitle: "Try it yourself and experience the fun of science!",
+    heroSearchPlaceholder: "Search for simulation name or keyword...",
+    exploreTitle: "Explore Science Simulations",
+    exploreSubtitle: "Click to enter the real-time laboratory sandbox instantly.",
+    emptyTitle: "Virtual Lab is Empty",
+    emptyDesc: "All presets, templates, and simulations have been deleted.",
+    noMatchingTitle: "No matching templates found.",
+    noMatchingDesc: "Try changing your search terms or filters.",
+    resetFilterBtn: "Reset Filters",
+    clickToExecute: "Run Simulation",
+    lastUpdated: "Updated 2 days ago",
+    
+    // Studio
+    backToHome: "Go to Home",
+    tabRun: "🚀 Run Guide",
+    tabCode: "💻 Edit Code",
+    tabMeta: "⚙️ Settings & Delete",
+    runTitle: "Real-time Lab Information",
+    runGuideTitle: "Real-time Simulation Guide",
+    runGuideDesc: "This simulation is running safely inside an isolated virtual sandbox. Control the screen on the right to observe scientific reactions and motions, and edit the code anytime using the 'Edit Code' tab.",
+    runTheoryTitle: "Theoretical Principles & Formula",
+    runLikes: "Favorites (Stars)",
+    runCategory: "Academic Category",
+    runAuthor: "Developer",
+    runRebootBtn: "Reboot Lab Equipment & Runtime",
+    
+    codeTitle: "HTML5 Source Code Editor",
+    codeDesc: "Edit the source code loaded directly into the virtual sandbox.<br /><span class='text-emerald-600 font-bold'>● Auto-save is applied in real-time.</span>",
+    codeSaved: "✓ Auto-saved in real-time",
+    codeRunBtn: "Compile & Run",
+    
+    metaTitle: "Research Settings & Metadata",
+    metaNameLabel: "Simulation Project Name",
+    metaNamePlaceholder: "Enter project name",
+    metaAuthorLabel: "Developer / Channel Name",
+    metaAuthorPlaceholder: "Enter developer name",
+    metaDescLabel: "Description & User Guide",
+    metaDescPlaceholder: "Explain scientific principles and controls",
+    metaStyleLabel: "Card Thumbnail Style",
+    metaDeleteBtn: "Permanently Delete Simulation",
+    
+    // Sandbox
+    rebootBtn: "Restart Run",
+    likeAdd: "Add to Favorites",
+    likeSaved: "In Favorites",
+    descSummary: "Detailed Principles:",
+    descPlaceholder: "No description provided. Use the Settings tab to explain the principles of this simulation.",
+    
+    // Default templates
+    templatePhysicsName: "Mechanics & Laws of Motion",
+    templatePhysicsAuthor: "All Science Physics Lab",
+    templatePhysicsDesc: "An interactive physics simulation covering force and acceleration (F=ma) and conservation of momentum. Adjust mass, force, and friction to observe motion or run collision experiments.",
+    
+    templateWaveName: "Wave Interference Simulation",
+    templateWaveAuthor: "All Science Physics Lab",
+    templateWaveDesc: "An interactive simulation to observe the superposition and interference of two waves traveling in opposite directions. Adjust amplitude, width, and shape to study constructive and destructive interference.",
+
+    templateChemistryName: "Water Electrolysis Simulation",
+    templateChemistryAuthor: "All Science Chemistry Lab",
+    templateChemistryDesc: "A simulation of water electrolysis where electric current passes through water containing sodium hydroxide (NaOH) or sodium chloride (NaCl) electrolyte to decompose it into hydrogen, oxygen, and chlorine gases.",
+
+    templateEarthScienceName: "Solar and Lunar Eclipse Simulation",
+    templateEarthScienceAuthor: "All Science Earth Science Lab",
+    templateEarthScienceDesc: "Explore solar eclipses (total, annular, partial) and lunar eclipses (total, partial, penumbral) by adjusting the relative positions and orbits of the Sun, Earth, and Moon."
+  }
+};
+
 const app = {
+  currentLang: 'ko',
   programs: [],
   likedPrograms: {},
   viewMode: 'hub',
@@ -55,11 +197,91 @@ const app = {
   sandboxKey: 0,
  
   init() {
+    this.currentLang = localStorage.getItem('sci-lab-lang') || 'ko';
     this.loadData();
     this.bindEvents();
+    this.applyLanguage();
     this.render();
     lucide.createIcons();
     window.addEventListener('resize', () => this.updateIframeScale());
+  },
+
+  getTranslation(prog) {
+    const t = TRANSLATIONS[this.currentLang];
+    if (prog.id === 'default-1') {
+      return {
+        name: t.templatePhysicsName,
+        author: t.templatePhysicsAuthor,
+        description: t.templatePhysicsDesc
+      };
+    }
+    if (prog.id === 'default-2') {
+      return {
+        name: t.templateWaveName,
+        author: t.templateWaveAuthor,
+        description: t.templateWaveDesc
+      };
+    }
+    if (prog.id === 'default-3') {
+      return {
+        name: t.templateChemistryName,
+        author: t.templateChemistryAuthor,
+        description: t.templateChemistryDesc
+      };
+    }
+    if (prog.id === 'default-4') {
+      return {
+        name: t.templateEarthScienceName,
+        author: t.templateEarthScienceAuthor,
+        description: t.templateEarthScienceDesc
+      };
+    }
+    return {
+      name: prog.name,
+      author: prog.author,
+      description: prog.description
+    };
+  },
+
+  setLanguage(lang) {
+    this.currentLang = lang;
+    localStorage.setItem('sci-lab-lang', lang);
+    this.applyLanguage();
+    this.render();
+    if (this.viewMode === 'studio') {
+      this.refreshSandbox();
+    }
+  },
+
+  applyLanguage() {
+    const lang = this.currentLang;
+    const t = TRANSLATIONS[lang];
+    
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key]) {
+        el.innerHTML = t[key];
+      }
+    });
+    
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (t[key]) {
+        el.placeholder = t[key];
+      }
+    });
+
+    const btnKo = document.getElementById('lang-ko');
+    const btnEn = document.getElementById('lang-en');
+    if (btnKo && btnEn) {
+      if (lang === 'ko') {
+        btnKo.className = "px-2.5 py-1 text-xs font-bold rounded-lg border border-teal-600 bg-teal-600 text-white cursor-pointer transition-colors";
+        btnEn.className = "px-2.5 py-1 text-xs font-bold rounded-lg border border-slate-200 text-slate-600 bg-white hover:bg-slate-50 cursor-pointer transition-colors";
+      } else {
+        btnKo.className = "px-2.5 py-1 text-xs font-bold rounded-lg border border-slate-200 text-slate-600 bg-white hover:bg-slate-50 cursor-pointer transition-colors";
+        btnEn.className = "px-2.5 py-1 text-xs font-bold rounded-lg border border-teal-600 bg-teal-600 text-white cursor-pointer transition-colors";
+      }
+    }
   },
  
   loadData() {
@@ -492,28 +714,30 @@ const app = {
 
   renderGrid() {
     const grid = document.getElementById('template-explorer-grid');
-    const filtered = this.programs.filter(prog => 
-      prog.name.toLowerCase().includes(this.searchQuery.toLowerCase()) || 
-      (prog.description || '').toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-      prog.author.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
+    const t = TRANSLATIONS[this.currentLang];
+    const filtered = this.programs.filter(prog => {
+      const trans = this.getTranslation(prog);
+      return trans.name.toLowerCase().includes(this.searchQuery.toLowerCase()) || 
+        (trans.description || '').toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        trans.author.toLowerCase().includes(this.searchQuery.toLowerCase());
+    });
 
 
     if (this.programs.length === 0) {
       grid.innerHTML = `
         <div class="bg-slate-50 border border-dashed border-slate-200/80 rounded-3xl p-16 text-center flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto my-4 shadow-xs">
           <div class="w-16 h-16 rounded-full bg-teal-50 border border-teal-100 flex items-center justify-center text-3xl shadow-sm">🔬</div>
-          <h4 class="font-black text-slate-800 text-sm">가상 실험실이 비어 있습니다</h4>
-          <p class="text-xs text-slate-500 max-w-sm leading-relaxed font-semibold">학술 플래너, 타이머, 계산기 등 모든 프리셋 템플릿과 시뮬레이션이 성공적으로 삭제되었습니다.</p>
+          <h4 class="font-black text-slate-800 text-sm" data-i18n="emptyTitle">${t.emptyTitle}</h4>
+          <p class="text-xs text-slate-500 max-w-sm leading-relaxed font-semibold" data-i18n="emptyDesc">${t.emptyDesc}</p>
         </div>
       `;
     } else if (filtered.length === 0) {
       grid.innerHTML = `
         <div class="bg-slate-50 border border-dashed border-slate-200 rounded-3xl p-12 text-center flex flex-col items-center justify-center gap-3">
           <span class="text-3xl">🔍</span>
-          <h4 class="font-bold text-slate-700 text-xs">일치하는 템플릿이 없습니다.</h4>
-          <p class="text-[11px] text-slate-400">다른 검색어 또는 필터를 변경해 보세요.</p>
-          <button onclick="app.searchQuery=''; document.getElementById('header-search-input').value=''; document.getElementById('hero-search-input').value=''; app.renderGrid();" class="mt-2 px-3 py-1.5 bg-teal-500 hover:bg-teal-600 text-white rounded text-[11px] font-bold">필터 초기화</button>
+          <h4 class="font-bold text-slate-700 text-xs" data-i18n="noMatchingTitle">${t.noMatchingTitle}</h4>
+          <p class="text-[11px] text-slate-400" data-i18n="noMatchingDesc">${t.noMatchingDesc}</p>
+          <button onclick="app.searchQuery=''; document.getElementById('header-search-input').value=''; document.getElementById('hero-search-input').value=''; app.renderGrid();" class="mt-2 px-3 py-1.5 bg-teal-500 hover:bg-teal-600 text-white rounded text-[11px] font-bold" data-i18n="resetFilterBtn">${t.resetFilterBtn}</button>
         </div>
       `;
     } else {
@@ -527,18 +751,18 @@ const app = {
                   <div class="w-10 h-10 rounded-full bg-teal-600 text-white flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
                     <i data-lucide="play" class="w-5 h-5 fill-white ml-0.5"></i>
                   </div>
-                  <span class="text-[10px] text-white font-extrabold tracking-widest bg-slate-900/80 px-2.5 py-1 rounded-full shadow-lg backdrop-blur-xs">시뮬레이션 실행하기</span>
+                  <span class="text-[10px] text-white font-extrabold tracking-widest bg-slate-900/80 px-2.5 py-1 rounded-full shadow-lg backdrop-blur-xs" data-i18n="clickToExecute">${t.clickToExecute}</span>
                 </div>
               </div>
               <div class="px-4 pb-4 pt-1 flex gap-3 relative">
                 <div class="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center shrink-0 font-bold text-slate-700 text-xs font-mono shadow-xs mt-1">
-                  ${prog.author.charAt(0).toUpperCase()}
+                  ${this.getTranslation(prog).author.charAt(0).toUpperCase()}
                 </div>
                 <div class="flex-1 min-w-0 flex flex-col gap-0.5">
-                  <h4 class="font-extrabold text-slate-900 text-xs group-hover:text-teal-700 transition-colors truncate leading-tight">${prog.name}</h4>
-                  <p class="text-[11px] text-slate-500 font-semibold truncate flex items-center gap-1"><span>${prog.author}</span></p>
+                  <h4 class="font-extrabold text-slate-900 text-xs group-hover:text-teal-700 transition-colors truncate leading-tight">${this.getTranslation(prog).name}</h4>
+                  <p class="text-[11px] text-slate-500 font-semibold truncate flex items-center gap-1"><span>${this.getTranslation(prog).author}</span></p>
                   <p class="text-[10px] text-slate-400 font-semibold flex items-center gap-1.5">
-                    <span>2일 전 업데이트</span>
+                    <span data-i18n="lastUpdated">${t.lastUpdated}</span>
                   </p>
                 </div>
               </div>
@@ -554,12 +778,15 @@ const app = {
     const p = this.activeProgram;
     if (!p) return;
 
+    const trans = this.getTranslation(p);
+    const t = TRANSLATIONS[this.currentLang];
+
     // Header & Canvas text
-    document.getElementById('studio-title').innerText = p.name;
+    document.getElementById('studio-title').innerText = trans.name;
     document.getElementById('studio-category').innerText = `${p.category.toUpperCase()} WORKSPACE`;
-    document.getElementById('sandbox-title').innerText = p.name;
-    document.getElementById('sandbox-author').innerText = `Author Channel: ${p.author}`;
-    document.getElementById('sandbox-desc').innerText = p.description || '별도 기술된 원리가 없습니다. 왼쪽 설정 탭을 사용하여 이 시뮬레이션의 가치를 설명해 보세요.';
+    document.getElementById('sandbox-title').innerText = trans.name;
+    document.getElementById('sandbox-author').innerText = `Author Channel: ${trans.author}`;
+    document.getElementById('sandbox-desc').innerText = trans.description || t.descPlaceholder;
 
     // Meta tab values
     document.getElementById('meta-input-name').value = p.name;
@@ -569,11 +796,11 @@ const app = {
     document.getElementById('code-editor').value = p.code;
 
     // Run tab values
-    document.getElementById('run-desc-container').style.display = p.description ? 'flex' : 'none';
-    document.getElementById('run-desc-text').innerText = p.description || '';
-    document.getElementById('run-meta-likes').innerText = `${p.likes}회`;
+    document.getElementById('run-desc-container').style.display = trans.description ? 'flex' : 'none';
+    document.getElementById('run-desc-text').innerText = trans.description || '';
+    document.getElementById('run-meta-likes').innerText = `${p.likes}${this.currentLang === 'ko' ? '회' : ''}`;
     document.getElementById('run-meta-category').innerText = p.category.toUpperCase();
-    document.getElementById('run-meta-author').innerText = p.author;
+    document.getElementById('run-meta-author').innerText = trans.author;
 
     // Like Button state
     const isLiked = this.likedPrograms[p.id];
@@ -584,11 +811,11 @@ const app = {
     if (isLiked) {
       btnLike.className = "px-3 py-1.5 rounded-full text-[11px] font-bold flex items-center gap-1.5 cursor-pointer bg-red-500/20 text-red-400 border border-red-500/30";
       iconLike.classList.add('fill-red-400', 'text-red-400');
-      textLike.innerText = "즐겨찾기 보존중";
+      textLike.innerText = t.likeSaved;
     } else {
       btnLike.className = "px-3 py-1.5 rounded-full text-[11px] font-bold flex items-center gap-1.5 cursor-pointer bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800";
       iconLike.classList.remove('fill-red-400', 'text-red-400');
-      textLike.innerText = "즐겨찾기 추가";
+      textLike.innerText = t.likeAdd;
     }
   },
 
@@ -609,6 +836,7 @@ const app = {
   },
 
   render() {
+    this.applyLanguage();
     const viewHub = document.getElementById('view-hub');
     const viewStudio = document.getElementById('view-studio');
 
