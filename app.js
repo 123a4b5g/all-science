@@ -5,6 +5,7 @@ const DEFAULT_TEMPLATES = [
     description: '힘과 가속도(F=ma) 및 운동량 보존과 충돌을 다루는 인터랙티브 물리 시뮬레이션입니다. 질량, 힘, 마찰계수를 조절하며 물체의 운동을 관찰하거나 충돌 실험을 할 수 있습니다.',
     category: 'physics',
     imageStyle: 'physics_thumbnail.png',
+    translationKey: 'Physics',
     views: 12500,
     likes: 430,
     url: './physics/index.html',
@@ -16,6 +17,7 @@ const DEFAULT_TEMPLATES = [
     description: '서로 다른 방향으로 진행하는 두 파동의 중첩과 간섭 현상을 관찰할 수 있는 인터랙티브 시뮬레이션입니다. 진폭, 너비, 형태 등을 조절하여 보강 간섭과 상쇄 간섭을 탐구해 보세요.',
     category: 'physics',
     imageStyle: 'wave_thumbnail.jpg',
+    translationKey: 'Wave',
     views: 9420,
     likes: 380,
     url: './wave/index.html',
@@ -27,6 +29,7 @@ const DEFAULT_TEMPLATES = [
     description: '수산화나트륨(NaOH) 또는 염화나트륨(NaCl) 전해질을 녹인 물에 전류를 흘려주어 수소, 산소, 염소 기체로 분해하는 전기분해 실험 시뮬레이션입니다.',
     category: 'chemistry',
     imageStyle: 'electrolysis_thumbnail.png',
+    translationKey: 'Chemistry',
     views: 8500,
     likes: 310,
     url: './electrolysis/index.html',
@@ -38,6 +41,7 @@ const DEFAULT_TEMPLATES = [
     description: '태양, 지구, 달의 상대적인 위치와 궤도를 조절하여 일식(개기일식, 금환일식, 부분일식)과 월식(개기월식, 부분월식, 반영월식)의 원리를 탐구하는 시뮬레이션입니다.',
     category: 'earth_science',
     imageStyle: 'eclipse_thumbnail.jpg',
+    translationKey: 'EarthScience',
     views: 11000,
     likes: 420,
     url: './eclipse/index.html',
@@ -49,6 +53,7 @@ const DEFAULT_TEMPLATES = [
     description: '볼록렌즈와 오목렌즈를 통과하는 빛의 굴절 현상과 실시간 상(Image)의 형성을 관측하고, 복합 렌즈 정렬을 다루는 광학 레일 실험을 수행하는 시뮬레이션입니다.',
     category: 'physics',
     imageStyle: 'lens_thumbnail.png',
+    translationKey: 'Lens',
     views: 7200,
     likes: 290,
     url: './lens/index.html',
@@ -227,39 +232,12 @@ const app = {
 
   getTranslation(prog) {
     const t = TRANSLATIONS[this.currentLang];
-    if (prog.id === 'default-1') {
+    const def = DEFAULT_TEMPLATES.find(d => d.url === prog.url);
+    if (def && def.translationKey) {
       return {
-        name: t.templatePhysicsName,
-        author: t.templatePhysicsAuthor,
-        description: t.templatePhysicsDesc
-      };
-    }
-    if (prog.id === 'default-2') {
-      return {
-        name: t.templateWaveName,
-        author: t.templateWaveAuthor,
-        description: t.templateWaveDesc
-      };
-    }
-    if (prog.id === 'default-3') {
-      return {
-        name: t.templateChemistryName,
-        author: t.templateChemistryAuthor,
-        description: t.templateChemistryDesc
-      };
-    }
-    if (prog.id === 'default-4') {
-      return {
-        name: t.templateEarthScienceName,
-        author: t.templateEarthScienceAuthor,
-        description: t.templateEarthScienceDesc
-      };
-    }
-    if (prog.id === 'default-5') {
-      return {
-        name: t.templateLensName,
-        author: t.templateLensAuthor,
-        description: t.templateLensDesc
+        name: t[`template${def.translationKey}Name`],
+        author: t[`template${def.translationKey}Author`],
+        description: t[`template${def.translationKey}Desc`]
       };
     }
     return {
@@ -315,7 +293,7 @@ const app = {
       const saved = localStorage.getItem('sci-lab-custom-programs-v5');
       let loadedPrograms = [];
       if (saved) {
-        loadedPrograms = JSON.parse(saved).filter(p => p.url !== './physics.html' && p.url !== './wave.html');
+        loadedPrograms = JSON.parse(saved).filter(p => !p.url.match(/^\.\/(physics|wave|electrolysis|eclipse|lens)\.html$/));
       }
       
       const defaultWithIds = DEFAULT_TEMPLATES.map((t, idx) => ({
