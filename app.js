@@ -42,6 +42,17 @@ const DEFAULT_TEMPLATES = [
     likes: 420,
     url: './eclipse/index.html',
     code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./eclipse/index.html -->'
+  },
+  {
+    name: '볼록렌즈와 오목렌즈 시뮬레이션',
+    author: 'All Science 물리 랩',
+    description: '볼록렌즈와 오목렌즈를 통과하는 빛의 굴절 현상과 실시간 상(Image)의 형성을 관측하고, 복합 렌즈 정렬을 다루는 광학 레일 실험을 수행하는 시뮬레이션입니다.',
+    category: 'physics',
+    imageStyle: 'lens_thumbnail.png',
+    views: 7200,
+    likes: 290,
+    url: './lens/index.html',
+    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./lens/index.html -->'
   }
 ];
 
@@ -113,7 +124,11 @@ const TRANSLATIONS = {
 
     templateEarthScienceName: "일식과 월식 시뮬레이션",
     templateEarthScienceAuthor: "All Science 지구과학 랩",
-    templateEarthScienceDesc: "태양, 지구, 달의 상대적인 위치와 궤도를 조절하여 일식(개기일식, 금환일식, 부분일식)과 월식(개기월식, 부분월식, 반영월식)의 원리를 탐구하는 시뮬레이션입니다."
+    templateEarthScienceDesc: "태양, 지구, 달의 상대적인 위치와 궤도를 조절하여 일식(개기일식, 금환일식, 부분일식)과 월식(개기월식, 부분월식, 반영월식)의 원리를 탐구하는 시뮬레이션입니다.",
+    
+    templateLensName: "볼록렌즈와 오목렌즈 시뮬레이션",
+    templateLensAuthor: "All Science 물리 랩",
+    templateLensDesc: "볼록렌즈와 오목렌즈를 통과하는 빛의 굴절 현상과 실시간 상(Image)의 형성을 관측하고, 복합 렌즈 정렬을 다루는 광학 레일 실험을 수행하는 시뮬레이션입니다."
   },
   en: {
     // Header & Hub
@@ -182,7 +197,11 @@ const TRANSLATIONS = {
 
     templateEarthScienceName: "Solar and Lunar Eclipse Simulation",
     templateEarthScienceAuthor: "All Science Earth Science Lab",
-    templateEarthScienceDesc: "Explore solar eclipses (total, annular, partial) and lunar eclipses (total, partial, penumbral) by adjusting the relative positions and orbits of the Sun, Earth, and Moon."
+    templateEarthScienceDesc: "Explore solar eclipses (total, annular, partial) and lunar eclipses (total, partial, penumbral) by adjusting the relative positions and orbits of the Sun, Earth, and Moon.",
+    
+    templateLensName: "Convex & Concave Lens Simulation",
+    templateLensAuthor: "All Science Physics Lab",
+    templateLensDesc: "Observe the refraction of light passing through convex and concave lenses and the real-time formation of images, and conduct optical rail experiments covering compound lens alignment."
   }
 };
 
@@ -234,6 +253,13 @@ const app = {
         name: t.templateEarthScienceName,
         author: t.templateEarthScienceAuthor,
         description: t.templateEarthScienceDesc
+      };
+    }
+    if (prog.id === 'default-5') {
+      return {
+        name: t.templateLensName,
+        author: t.templateLensAuthor,
+        description: t.templateLensDesc
       };
     }
     return {
