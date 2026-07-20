@@ -58,6 +58,18 @@ const DEFAULT_TEMPLATES = [
     likes: 290,
     url: './lens/index.html',
     code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./lens/index.html -->'
+  },
+  {
+    name: '렌츠의 법칙 시뮬레이션',
+    author: 'All Science 물리 랩',
+    description: '자석의 운동에 의해 코일에 발생하는 유도 전류와 전자기 유도 현상을 관찰하고, 금속 원판 낙하 및 파이프 속 자석 낙하 실험을 통해 렌츠의 법칙을 탐구하는 시뮬레이션입니다.',
+    category: 'physics',
+    imageStyle: 'lenz_thumbnail.png',
+    translationKey: 'Lenz',
+    views: 9100,
+    likes: 340,
+    url: './lenz/index.html',
+    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./lenz/index.html -->'
   }
 ];
 
@@ -133,7 +145,11 @@ const TRANSLATIONS = {
     
     templateLensName: "볼록렌즈와 오목렌즈 시뮬레이션",
     templateLensAuthor: "All Science 물리 랩",
-    templateLensDesc: "볼록렌즈와 오목렌즈를 통과하는 빛의 굴절 현상과 실시간 상(Image)의 형성을 관측하고, 복합 렌즈 정렬을 다루는 광학 레일 실험을 수행하는 시뮬레이션입니다."
+    templateLensDesc: "볼록렌즈와 오목렌즈를 통과하는 빛의 굴절 현상과 실시간 상(Image)의 형성을 관측하고, 복합 렌즈 정렬을 다루는 광학 레일 실험을 수행하는 시뮬레이션입니다.",
+    
+    templateLenzName: "렌츠의 법칙 시뮬레이션",
+    templateLenzAuthor: "All Science 물리 랩",
+    templateLenzDesc: "자석의 운동에 의해 코일에 발생하는 유도 전류와 전자기 유도 현상을 관찰하고, 금속 원판 낙하 및 파이프 속 자석 낙하 실험을 통해 렌츠의 법칙을 탐구하는 시뮬레이션입니다."
   },
   en: {
     // Header & Hub
@@ -206,7 +222,11 @@ const TRANSLATIONS = {
     
     templateLensName: "Convex & Concave Lens Simulation",
     templateLensAuthor: "All Science Physics Lab",
-    templateLensDesc: "Observe the refraction of light passing through convex and concave lenses and the real-time formation of images, and conduct optical rail experiments covering compound lens alignment."
+    templateLensDesc: "Observe the refraction of light passing through convex and concave lenses and the real-time formation of images, and conduct optical rail experiments covering compound lens alignment.",
+    
+    templateLenzName: "Lenz's Law Simulation",
+    templateLenzAuthor: "All Science Physics Lab",
+    templateLenzDesc: "Observe induced current and electromagnetic induction in a coil caused by magnet motion, and explore Lenz's law through metal disk drop and magnet drop in pipe experiments."
   }
 };
 
