@@ -313,7 +313,7 @@ const app = {
       const saved = localStorage.getItem('sci-lab-custom-programs-v5');
       let loadedPrograms = [];
       if (saved) {
-        loadedPrograms = JSON.parse(saved).filter(p => !p.url.match(/^\.\/(physics|wave|electrolysis|eclipse|lens)\.html$/));
+        loadedPrograms = JSON.parse(saved).filter(p => !p.url.match(/^\.\/(physics|wave|electrolysis|eclipse|lens|lenz)\.html$/));
       }
       
       const defaultWithIds = DEFAULT_TEMPLATES.map((t, idx) => ({
