@@ -70,6 +70,18 @@ const DEFAULT_TEMPLATES = [
     likes: 340,
     url: './lenz/index.html',
     code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./lenz/index.html -->'
+  },
+  {
+    name: '원소 주기율표 시뮬레이션',
+    author: 'All Science 화학 랩',
+    description: '원소들의 특성을 한눈에 보여주는 인터랙티브 주기율표와 화합물의 결합 모형을 만들고 화학 반응을 시각적으로 탐색하는 화합물 조합 실험실 시뮬레이션입니다.',
+    category: 'chemistry',
+    imageStyle: 'periodictable_thumbnail.jpg',
+    translationKey: 'PeriodicTable',
+    views: 15400,
+    likes: 510,
+    url: './periodictable/index.html',
+    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./periodictable/index.html -->'
   }
 ];
 
@@ -149,7 +161,11 @@ const TRANSLATIONS = {
     
     templateLenzName: "렌츠의 법칙 시뮬레이션",
     templateLenzAuthor: "All Science 물리 랩",
-    templateLenzDesc: "자석의 운동에 의해 코일에 발생하는 유도 전류와 전자기 유도 현상을 관찰하고, 금속 원판 낙하 및 파이프 속 자석 낙하 실험을 통해 렌츠의 법칙을 탐구하는 시뮬레이션입니다."
+    templateLenzDesc: "자석의 운동에 의해 코일에 발생하는 유도 전류와 전자기 유도 현상을 관찰하고, 금속 원판 낙하 및 파이프 속 자석 낙하 실험을 통해 렌츠의 법칙을 탐구하는 시뮬레이션입니다.",
+    
+    templatePeriodicTableName: "원소 주기율표 시뮬레이션",
+    templatePeriodicTableAuthor: "All Science 화학 랩",
+    templatePeriodicTableDesc: "원소들의 특성을 한눈에 보여주는 인터랙티브 주기율표와 화합물의 결합 모형을 만들고 화학 반응을 시각적으로 탐색하는 화합물 조합 실험실 시뮬레이션입니다."
   },
   en: {
     // Header & Hub
@@ -226,7 +242,11 @@ const TRANSLATIONS = {
     
     templateLenzName: "Lenz's Law Simulation",
     templateLenzAuthor: "All Science Physics Lab",
-    templateLenzDesc: "Observe induced current and electromagnetic induction in a coil caused by magnet motion, and explore Lenz's law through metal disk drop and magnet drop in pipe experiments."
+    templateLenzDesc: "Observe induced current and electromagnetic induction in a coil caused by magnet motion, and explore Lenz's law through metal disk drop and magnet drop in pipe experiments.",
+    
+    templatePeriodicTableName: "Interactive Periodic Table of Elements",
+    templatePeriodicTableAuthor: "All Science Chemistry Lab",
+    templatePeriodicTableDesc: "An interactive periodic table showing properties of elements, featuring a compound simulator laboratory to combine elements and visually explore chemical reactions."
   }
 };
 

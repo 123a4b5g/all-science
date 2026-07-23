@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>인터랙티브 원소 주기율표 시뮬레이션</title>
+  
+  <!-- FontAwesome & Google Fonts (Noto Sans KR, Inter, Outfit, JetBrains Mono) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@400;600;800&family=JetBrains+Mono:wght@500;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Unified Science App Container -->
+  <div class="app-container">
+    <header class="app-header">
+      <div class="header-left">
+        <button class="back-btn" onclick="location.href='../index.html'">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="vertical-align: middle; margin-right: 4px;"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+          뒤로
+        </button>
+        <div class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-atom"></i></div>
+          <h1>원소 탐구 시뮬레이션</h1>
+        </div>
+      </div>
+      <div class="nav-tabs">
+        <button class="nav-tab active" data-tab="ptable"><i class="fa-solid fa-table-cells"></i> 주기율표</button>
+        <button class="nav-tab" data-tab="compound"><i class="fa-solid fa-flask-vial"></i> 화합물 조합 실험실</button>
+      </div>
+    </header>
+
+    <!-- Main View Area -->
+    <main>
+      <!-- TAB 1: Periodic Table View -->
+      <section id="tab-ptable" class="tab-content active">
+        <!-- Toolbar Controls -->
+        <div class="toolbar-panel">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="원소 이름, 기호, 번호 검색 (예: 수소, H, 1)...">
+          </div>
+          <div class="filter-group">
+            <select id="categoryFilter" class="select-control">
+              <option value="all">모든 계열 전체</option>
+              <option value="alkali">알칼리 금속</option>
+              <option value="alkaline-earth">알칼리 토금속</option>
+              <option value="transition">전이 금속</option>
+              <option value="post-transition">전이후 금속</option>
+              <option value="metalloid">준금속</option>
+              <option value="reactive-nonmetal">반응성 비금속</option>
+              <option value="noble-gas">비활성 기체</option>
+              <option value="lanthanide">란타넘족</option>
+              <option value="actinide">악티늄족</option>
+            </select>
+
+            <select id="stateFilter" class="select-control">
+              <option value="all">상온 상태 전체</option>
+              <option value="gas">기체 (Gas)</option>
+              <option value="liquid">액체 (Liquid)</option>
+              <option value="solid">고체 (Solid)</option>
+            </select>
+
+            <select id="heatmapSelect" class="select-control">
+              <option value="none">히트맵 모드 꺼짐</option>
+              <option value="mass">원자량 스펙트럼</option>
+              <option value="electronegativity">전기음성도</option>
+              <option value="melting">녹는점 스펙트럼</option>
+              <option value="boiling">끓는점 스펙트럼</option>
+              <option value="ionization">이온화 에너지</option>
+              <option value="radius">원자 반지름</option>
+              <option value="density">밀도 스펙트럼</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Category Badges Bar -->
+        <div class="category-legend-bar">
+          <div class="cat-badge"><span class="cat-dot" style="background:#f87171;"></span>알칼리 금속</div>
+          <div class="cat-badge"><span class="cat-dot" style="background:#fb923c;"></span>알칼리 토금속</div>
+          <div class="cat-badge"><span class="cat-dot" style="background:#facc15;"></span>전이 금속</div>
+          <div class="cat-badge"><span class="cat-dot" style="background:#a3e635;"></span>전이후 금속</div>
+          <div class="cat-badge"><span class="cat-dot" style="background:#2dd4bf;"></span>준금속</div>
+          <div class="cat-badge"><span class="cat-dot" style="background:#38bdf8;"></span>반응성 비금속</div>
+          <div class="cat-badge"><span class="cat-dot" style="background:#c084fc;"></span>비활성 기체</div>
+          <div class="cat-badge"><span class="cat-dot" style="background:#f472b6;"></span>란타넘족</div>
+          <div class="cat-badge"><span class="cat-dot" style="background:#fb7185;"></span>악티늄족</div>
+        </div>
+
+        <!-- Heatmap Spectrum Legend Bar (Hidden by default) -->
+        <div id="heatmapLegend" class="heatmap-legend-container" style="display: none;">
+          <span id="legendTitle" style="font-weight:700; font-size:0.75rem; color:#38bdf8;"></span>
+          <span id="legendMin" style="font-size:0.7rem; color:var(--text-muted);"></span>
+          <div class="heatmap-bar"></div>
+          <span id="legendMax" style="font-size:0.7rem; color:var(--text-muted);"></span>
+        </div>
+
+        <!-- Periodic Table Container -->
+        <div class="ptable-container">
+          <!-- 19-Column IUPAC Periodic Table Grid -->
+          <div id="ptableGrid" class="ptable-grid"></div>
+
+          <!-- Lanthanides & Actinides Sub-Grids -->
+          <div class="lanthanide-actinide-container">
+            <div id="lanthanidesGrid" class="sub-grid"></div>
+            <div id="actinidesGrid" class="sub-grid"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: Compound Simulator Lab -->
+      <section id="tab-compound" class="tab-content">
+        <div id="compoundSimulatorContainer"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Side-by-Side Element Detail & Atom Model Modal with Prev/Next Navigation Arrows -->
+  <div id="elementModal" class="modal-overlay">
+    <div class="modal-card side-by-side-modal">
+      <button id="modalCloseBtn" class="modal-close" title="닫기"><i class="fa-solid fa-xmark"></i></button>
+      
+      <!-- Prev & Next Element Navigation Arrow Buttons -->
+      <button id="modalPrevBtn" class="modal-nav-btn nav-prev" title="이전 원소"><i class="fa-solid fa-chevron-left"></i></button>
+      <button id="modalNextBtn" class="modal-nav-btn nav-next" title="다음 원소"><i class="fa-solid fa-chevron-right"></i></button>
+
+      <!-- Left Column: Atom Orbit Model Visualizer -->
+      <div class="modal-left-atom">
+        <div class="modal-atom-header">
+          <i class="fa-solid fa-orbit"></i> 원자 구조 궤도 모형
+        </div>
+        <canvas id="modalBohrCanvas"></canvas>
+      </div>
+
+      <!-- Right Column: Element Details & Properties Grid -->
+      <div class="modal-right-info">
+        <div class="modal-header-hero">
+          <div id="modalHeroBox" class="hero-sym-box">
+            <span id="modalNum" class="hero-num">78</span>
+            <span id="modalSym" class="hero-sym">Pt</span>
+          </div>
+          <div>
+            <h2 id="modalNameKr" style="font-family:'Outfit','Noto Sans KR',sans-serif; font-size:1.4rem;">백금</h2>
+          </div>
+        </div>
+
+        <div class="modal-grid-props">
+          <div class="prop-box"><div class="prop-lbl">원소 계열</div><div id="modalCategory" class="prop-val">전이 금속</div></div>
+          <div class="prop-box"><div class="prop-lbl">상온 상태</div><div id="modalState" class="prop-val">고체</div></div>
+          <div class="prop-box"><div class="prop-lbl">원자량</div><div id="modalWeight" class="prop-val">195.08 u</div></div>
+          <div class="prop-box"><div class="prop-lbl">전자 배치</div><div id="modalElectronConfig" class="prop-val">[Xe] 4f¹⁴ 5d⁹ 6s¹</div></div>
+          <div class="prop-box"><div class="prop-lbl">전기음성도</div><div id="modalEN" class="prop-val">2.28</div></div>
+          <div class="prop-box"><div class="prop-lbl">녹는점</div><div id="modalMP" class="prop-val">1768.3 °C</div></div>
+          <div class="prop-box"><div class="prop-lbl">끓는점</div><div id="modalBP" class="prop-val">3825 °C</div></div>
+          <div class="prop-box"><div class="prop-lbl">밀도</div><div id="modalDensity" class="prop-val">21.45 g/cm³</div></div>
+          <div class="prop-box"><div class="prop-lbl">이온화 에너지</div><div id="modalIonization" class="prop-val">870 kJ/mol</div></div>
+          <div class="prop-box"><div class="prop-lbl">원자 반지름</div><div id="modalRadius" class="prop-val">139 pm</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/elementsData.js"></script>
+  <script src="js/atomVisualizer.js"></script>
+  <script src="js/compoundSimulator.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
