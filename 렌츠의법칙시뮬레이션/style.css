@@ -816,32 +816,36 @@ input[type=range]:focus {
   }
 
   .app-header {
-    padding: 10px;
-    flex-wrap: wrap;
-    gap: 10px;
+    flex-direction: column;
+    padding: 12px;
+    gap: 12px;
+    align-items: stretch;
   }
 
   .header-left {
+    order: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-    justify-content: flex-start;
+  }
+
+  .sim-tab-menu {
+    order: 2;
+    position: static;
+    transform: none;
+    width: 100%;
+    margin-left: 0;
   }
 
   .header-right {
+    order: 3;
     width: 100%;
   }
 
   .title-container h1 {
     font-size: 1rem;
     letter-spacing: -0.5px;
-  }
-  
-  .sim-tab-menu {
-    position: static;
-    transform: none;
-    width: 100%;
-    margin-left: 0;
-    margin-top: 10px;
-    order: 3; /* 헤더 요소들 맨 밑으로 */
   }
 
   .sim-tab-menu .tab-btn {
