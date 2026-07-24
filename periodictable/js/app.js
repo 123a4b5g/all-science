@@ -173,12 +173,15 @@ document.addEventListener('DOMContentLoaded', () => {
       cell.style.borderColor = 'rgba(255,255,255,0.4)';
     }
 
+    const isEn = (localStorage.getItem('sci-lab-lang') === 'en');
+    const elName = isEn ? el.nameEn : el.nameKr;
+
     cell.innerHTML = `
       <div class="cell-top-bar">
         <span class="el-num">${el.number}</span>
       </div>
       <div class="el-sym">${el.symbol}</div>
-      <div class="el-name" title="${el.nameKr}">${el.nameKr}</div>
+      <div class="el-name" title="${elName}">${elName}</div>
       <div class="el-weight">${displayVal}</div>
     `;
 
@@ -225,12 +228,14 @@ document.addEventListener('DOMContentLoaded', () => {
       modalNextBtn.style.display = (idx === ELEMENTS.length - 1 || el.number === 118) ? 'none' : 'flex';
     }
 
-    // Right Side Property Info (Korean Name Only, English Name removed)
+    const isEn = (localStorage.getItem('sci-lab-lang') === 'en');
+
+    // Right Side Property Info
     document.getElementById('modalNum').textContent = el.number;
     document.getElementById('modalSym').textContent = el.symbol;
-    document.getElementById('modalNameKr').textContent = el.nameKr;
-    document.getElementById('modalCategory').textContent = el.categoryKr;
-    document.getElementById('modalState').textContent = el.stateKr;
+    document.getElementById('modalNameKr').textContent = isEn ? el.nameEn : el.nameKr;
+    document.getElementById('modalCategory').textContent = isEn ? (el.categoryEn || el.categoryKr) : el.categoryKr;
+    document.getElementById('modalState').textContent = isEn ? (el.stateEn || el.stateKr) : el.stateKr;
     document.getElementById('modalWeight').textContent = el.weight + ' u';
     document.getElementById('modalElectronConfig').textContent = el.electronConfig;
     document.getElementById('modalEN').textContent = el.electronegativity !== null ? el.electronegativity : 'N/A';

@@ -76,6 +76,7 @@ class CompoundSimulator {
     const grid = document.getElementById('pickerGrid');
     if (!grid) return;
 
+    const isEn = (localStorage.getItem('sci-lab-lang') === 'en');
     // Elements 1 through 20 continuously + key metals (26 Fe, 29 Cu)
     const commonIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 26, 29];
     const commonElements = ELEMENTS.filter(e => commonIds.includes(e.number));
@@ -84,7 +85,7 @@ class CompoundSimulator {
       <button type="button" class="picker-card" data-id="${el.number}">
         <span class="p-num">${el.number}</span>
         <span class="p-sym">${el.symbol}</span>
-        <span class="p-name">${el.nameKr}</span>
+        <span class="p-name">${isEn ? el.nameEn : el.nameKr}</span>
       </button>
     `).join('');
   }
@@ -201,6 +202,8 @@ class CompoundSimulator {
 
     if (runBtn) runBtn.disabled = false;
 
+    const isEn = (localStorage.getItem('sci-lab-lang') === 'en');
+
     flask.innerHTML = keys.map(numStr => {
       const num = parseInt(numStr, 10);
       const el = ELEMENTS.find(e => e.number === num);
@@ -209,7 +212,7 @@ class CompoundSimulator {
         <div class="flask-item">
           <div class="f-atom-badge">
             <span class="f-sym">${el.symbol}</span>
-            <span class="f-name">${el.nameKr}</span>
+            <span class="f-name">${isEn ? el.nameEn : el.nameKr}</span>
           </div>
           <div class="f-count-controls">
             <button class="count-btn" onclick="window.compoundSim.removeElement(${num})">-</button>
