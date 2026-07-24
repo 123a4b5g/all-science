@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Main Application Script for Periodic Table Simulation
  * Standard IUPAC Grid + Lanthanides & Actinides + Side-by-Side Detail/Bohr Modal with Boundary Navigation Arrows
  */
@@ -125,8 +125,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (state.selectedCategory !== 'all' && el.category !== state.selectedCategory) return false;
     if (state.selectedState !== 'all' && el.state !== state.selectedState) return false;
     if (state.searchQuery) {
-      const q = state.searchQuery.toLowerCase();
-      const matchSym = el.symbol.toLowerCase().includes(q);
+      const q = state.searchQuery.trim().toLowerCase();
+      if (!q) return true;
+      const isEnglishSearch = (localStorage.getItem('sci-lab-lang') === 'en') || /[a-zA-Z]/.test(q);
+      const matchSym = !isEnglishSearch && el.symbol.toLowerCase().includes(q);
       const matchNameKr = el.nameKr.includes(q);
       const matchNameEn = el.nameEn.toLowerCase().includes(q);
       const matchNum = el.number.toString() === q;

@@ -1,4 +1,4 @@
-(function() {
+﻿(function() {
   const lang = localStorage.getItem('sci-lab-lang') || 'ko';
   if (lang !== 'en') return;
 
@@ -443,7 +443,7 @@
     "원소 탐구 시뮬레이션": "Periodic Table & Element Simulator",
     "주기율표": "Periodic Table",
     "화합물 조합 실험실": "Compound Simulator Lab",
-    "원소 이름, 기호, 번호 검색 (예: 수소, H, 1)...": "Search name, symbol, number (e.g. Hydrogen, H, 1)...",
+    "원소 이름, 번호 검색 (예: 수소, 1)...": "Search name, number (e.g. Hydrogen, 1)...",
     "모든 계열 전체": "All Categories",
     "알칼리 금속": "Alkali Metals",
     "알칼리 토금속": "Alkaline Earth Metals",
