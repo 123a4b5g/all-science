@@ -97,7 +97,7 @@ const TRANSLATIONS = {
     emptyTitle: "가상 실험실이 비어 있습니다",
     emptyDesc: "학술 플래너, 타이머, 계산기 등 모든 프리셋 템플릿과 시뮬레이션이 성공적으로 삭제되었습니다.",
     noMatchingTitle: "일치하는 템플릿이 없습니다.",
-    noMatchingDesc: "다른 검색어 또는 필터를 변경해 보세요.",
+    noMatchingDesc: "다른 검색어를 입력해 보세요.",
     resetFilterBtn: "필터 초기화",
     clickToExecute: "시뮬레이션 실행하기",
     lastUpdated: "2일 전 업데이트",
@@ -178,7 +178,7 @@ const TRANSLATIONS = {
     emptyTitle: "Virtual Lab is Empty",
     emptyDesc: "All presets, templates, and simulations have been deleted.",
     noMatchingTitle: "No matching templates found.",
-    noMatchingDesc: "Try changing your search terms or filters.",
+    noMatchingDesc: "Try searching with different keywords.",
     resetFilterBtn: "Reset Filters",
     clickToExecute: "Run Simulation",
     lastUpdated: "Updated 2 days ago",
@@ -394,15 +394,21 @@ const app = {
     const headerInput = document.getElementById('header-search-input');
     const heroInput = document.getElementById('hero-search-input');
 
-    headerInput.addEventListener('input', (e) => {
-      this.searchQuery = e.target.value;
-      this.renderGrid();
-    });
+    if (headerInput) {
+      headerInput.addEventListener('input', (e) => {
+        this.searchQuery = e.target.value;
+        if (heroInput) heroInput.value = '';
+        this.renderGrid();
+      });
+    }
 
-    heroInput.addEventListener('input', (e) => {
-      this.searchQuery = e.target.value;
-      this.renderGrid();
-    });
+    if (heroInput) {
+      heroInput.addEventListener('input', (e) => {
+        this.searchQuery = e.target.value;
+        if (headerInput) headerInput.value = '';
+        this.renderGrid();
+      });
+    }
   },
 
   get activeProgram() {
@@ -785,7 +791,6 @@ const app = {
           <span class="text-3xl">🔍</span>
           <h4 class="font-bold text-slate-700 text-xs" data-i18n="noMatchingTitle">${t.noMatchingTitle}</h4>
           <p class="text-[11px] text-slate-400" data-i18n="noMatchingDesc">${t.noMatchingDesc}</p>
-          <button onclick="app.searchQuery=''; document.getElementById('header-search-input').value=''; document.getElementById('hero-search-input').value=''; app.renderGrid();" class="mt-2 px-3 py-1.5 bg-teal-500 hover:bg-teal-600 text-white rounded text-[11px] font-bold" data-i18n="resetFilterBtn">${t.resetFilterBtn}</button>
         </div>
       `;
     } else {
