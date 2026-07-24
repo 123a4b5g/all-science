@@ -557,21 +557,31 @@
     "원소를 선택하여 보어 원자 구조를 시뮬레이션하세요.": "Select an element to simulate Bohr atomic structure."
   };
 
+  // Cache map to prevent O(N) loops on 60FPS canvas fillText calls
+  const translationCache = new Map();
+
   // Function to translate a single text value
   function translateText(text) {
     if (!text) return null;
+    if (translationCache.has(text)) {
+      return translationCache.get(text);
+    }
+
+    let result = null;
     const trimmed = text.trim();
     if (dictionary[trimmed]) {
-      return text.replace(trimmed, dictionary[trimmed]);
-    }
-    
-    // Check for partial substring matches or dynamic numbers
-    for (let key in dictionary) {
-      if (trimmed.includes(key)) {
-        return text.replace(key, dictionary[key]);
+      result = text.replace(trimmed, dictionary[trimmed]);
+    } else {
+      for (let key in dictionary) {
+        if (trimmed.includes(key)) {
+          result = text.replace(key, dictionary[key]);
+          break;
+        }
       }
     }
-    return null;
+
+    translationCache.set(text, result);
+    return result;
   }
 
   // Walk DOM
@@ -610,6 +620,13 @@
     const trans = translateText(document.title);
     if (trans) document.title = trans;
   }
+
+  // Real-time synchronization on language storage change
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'sci-lab-lang') {
+      window.location.reload();
+    }
+  });
 
   // MutationObserver to translate dynamic content
   const observer = new MutationObserver((mutations) => {

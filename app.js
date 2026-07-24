@@ -8,8 +8,8 @@ const DEFAULT_TEMPLATES = [
     translationKey: 'Physics',
     views: 12500,
     likes: 430,
-    url: './physics/index.html',
-    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./physics/index.html -->'
+    url: './역학및운동법칙시뮬레이션/index.html',
+    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./역학및운동법칙시뮬레이션/index.html -->'
   },
   {
     name: '파동의 간섭 시뮬레이션',
@@ -20,8 +20,8 @@ const DEFAULT_TEMPLATES = [
     translationKey: 'Wave',
     views: 9420,
     likes: 380,
-    url: './wave/index.html',
-    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./wave/index.html -->'
+    url: './파동의간섭시뮬레이션/index.html',
+    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./파동의간섭시뮬레이션/index.html -->'
   },
   {
     name: '물의 전기분해 실험 시뮬레이션',
@@ -32,8 +32,8 @@ const DEFAULT_TEMPLATES = [
     translationKey: 'Chemistry',
     views: 8500,
     likes: 310,
-    url: './electrolysis/index.html',
-    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./electrolysis/index.html -->'
+    url: './물의전기분해실험시뮬레이션/index.html',
+    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./물의전기분해실험시뮬레이션/index.html -->'
   },
   {
     name: '일식과 월식 시뮬레이션',
@@ -44,8 +44,8 @@ const DEFAULT_TEMPLATES = [
     translationKey: 'EarthScience',
     views: 11000,
     likes: 420,
-    url: './eclipse/index.html',
-    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./eclipse/index.html -->'
+    url: './일식과월식시뮬레이션/index.html',
+    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./일식과월식시뮬레이션/index.html -->'
   },
   {
     name: '볼록렌즈와 오목렌즈 시뮬레이션',
@@ -56,8 +56,8 @@ const DEFAULT_TEMPLATES = [
     translationKey: 'Lens',
     views: 7200,
     likes: 290,
-    url: './lens/index.html',
-    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./lens/index.html -->'
+    url: './볼록렌즈와오목렌즈시뮬레이션/index.html',
+    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./볼록렌즈와오목렌즈시뮬레이션/index.html -->'
   },
   {
     name: '렌츠의 법칙 시뮬레이션',
@@ -68,8 +68,8 @@ const DEFAULT_TEMPLATES = [
     translationKey: 'Lenz',
     views: 9100,
     likes: 340,
-    url: './lenz/index.html',
-    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./lenz/index.html -->'
+    url: './렌츠의법칙시뮬레이션/index.html',
+    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./렌츠의법칙시뮬레이션/index.html -->'
   },
   {
     name: '원소 주기율표 시뮬레이션',
@@ -80,8 +80,8 @@ const DEFAULT_TEMPLATES = [
     translationKey: 'PeriodicTable',
     views: 15400,
     likes: 510,
-    url: './periodictable/index.html',
-    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./periodictable/index.html -->'
+    url: './원소주기율표시뮬레이션/index.html',
+    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./원소주기율표시뮬레이션/index.html -->'
   }
 ];
 
@@ -267,7 +267,11 @@ const app = {
     this.applyLanguage();
     this.render();
     lucide.createIcons();
-    window.addEventListener('resize', () => this.updateIframeScale());
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+      if (resizeTimer) cancelAnimationFrame(resizeTimer);
+      resizeTimer = requestAnimationFrame(() => this.updateIframeScale());
+    });
   },
 
   getTranslation(prog) {
@@ -333,7 +337,7 @@ const app = {
       const saved = localStorage.getItem('sci-lab-custom-programs-v5');
       let loadedPrograms = [];
       if (saved) {
-        loadedPrograms = JSON.parse(saved).filter(p => !p.url.match(/^\.\/(physics|wave|electrolysis|eclipse|lens|lenz)\.html$/));
+        loadedPrograms = JSON.parse(saved).filter(p => !p.url.match(/^\.\/(physics|wave|electrolysis|eclipse|lens|lenz|periodictable|역학및운동법칙시뮬레이션|파동의간섭시뮬레이션|물의전기분해실험시뮬레이션|일식과월식시뮬레이션|볼록렌즈와오목렌즈시뮬레이션|렌츠의법칙시뮬레이션|원소주기율표시뮬레이션)/));
       }
       
       const defaultWithIds = DEFAULT_TEMPLATES.map((t, idx) => ({
@@ -805,9 +809,6 @@ const app = {
                 <div class="flex-1 min-w-0 flex flex-col gap-0.5">
                   <h4 class="font-extrabold text-slate-900 text-xs group-hover:text-teal-700 transition-colors truncate leading-tight">${this.getTranslation(prog).name}</h4>
                   <p class="text-[11px] text-slate-500 font-semibold truncate flex items-center gap-1"><span>${this.getTranslation(prog).author}</span></p>
-                  <p class="text-[10px] text-slate-400 font-semibold flex items-center gap-1.5">
-                    <span data-i18n="lastUpdated">${t.lastUpdated}</span>
-                  </p>
                 </div>
               </div>
             </div>
