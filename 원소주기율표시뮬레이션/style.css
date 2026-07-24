@@ -1412,15 +1412,18 @@ canvas#modalBohrCanvas {
   .nav-tab {
     flex: 1;
     justify-content: center;
+    align-items: center;
     text-align: center;
-    padding: 6px 12px;
-    font-size: 0.85rem;
+    padding: 6px 8px;
+    font-size: 0.78rem;
     font-weight: 600;
     border-radius: 8px;
     color: var(--text-muted);
     background: transparent;
     border: 1px solid transparent;
     touch-action: manipulation;
+    white-space: nowrap;
+    gap: 4px;
   }
 
   .nav-tab.active {
@@ -1648,4 +1651,13 @@ canvas#modalBohrCanvas {
 .back-btn:hover {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.25);
+}
+
+
+@media (max-width: 420px) {
+  .nav-tab {
+    padding: 5px 4px;
+    font-size: 0.72rem;
+    gap: 3px;
+  }
 }
