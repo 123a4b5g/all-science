@@ -1080,7 +1080,11 @@ function render() {
 }
 
 // 윈도우 리사이즈 대응
-window.addEventListener('resize', render);
+let resizeTimer = null;
+window.addEventListener('resize', () => {
+  if (resizeTimer) cancelAnimationFrame(resizeTimer);
+  resizeTimer = requestAnimationFrame(render);
+});
 
 // 프로그램 시작 초기화
 switchTab('solar');

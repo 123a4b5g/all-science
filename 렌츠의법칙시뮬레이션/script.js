@@ -1356,4 +1356,9 @@ function tick() {
 
 // 초기화 시작
 resizeCanvas();
+let resizeTimer = null;
+window.addEventListener('resize', () => {
+  if (resizeTimer) cancelAnimationFrame(resizeTimer);
+  resizeTimer = requestAnimationFrame(resizeCanvas);
+});
 tick();

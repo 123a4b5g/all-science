@@ -433,5 +433,9 @@ function resizeCanvas() {
     canvas.height = rect.height;
 }
 
-window.addEventListener('resize', resizeCanvas);
+let resizeTimer = null;
+window.addEventListener('resize', () => {
+    if (resizeTimer) cancelAnimationFrame(resizeTimer);
+    resizeTimer = requestAnimationFrame(resizeCanvas);
+});
 init();

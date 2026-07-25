@@ -91,8 +91,10 @@ document.addEventListener('DOMContentLoaded', () => {
         drawCustomChart();
     }
     
+    let resizeTimeout = null;
     const resizeObserver = new ResizeObserver(() => {
-        resizeCanvases();
+        if (resizeTimeout) cancelAnimationFrame(resizeTimeout);
+        resizeTimeout = requestAnimationFrame(() => resizeCanvases());
     });
     resizeObserver.observe(canvas.parentElement);
 

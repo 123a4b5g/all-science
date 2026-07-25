@@ -123,7 +123,11 @@ let animTime = 0;
 // 초기화 함수
 function init() {
   resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
+  let resizeTimer = null;
+  window.addEventListener('resize', () => {
+    if (resizeTimer) cancelAnimationFrame(resizeTimer);
+    resizeTimer = requestAnimationFrame(resizeCanvas);
+  });
   
   // 슬라이더 이벤트 바인딩
   const onFocalChange = (e) => {
@@ -235,7 +239,7 @@ function init() {
 
 // 화면 해상도 보정 및 크기 결정
 function resizeCanvas() {
-  const dpr = window.devicePixelRatio || 1;
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
   const rect = canvas.getBoundingClientRect();
   canvas.width = rect.width * dpr;
   canvas.height = rect.height * dpr;
