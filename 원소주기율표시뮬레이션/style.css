@@ -1342,6 +1342,7 @@ canvas#modalBohrCanvas {
 
 @media (max-width: 840px) {
   html, body {
+    display: block !important;
     height: auto !important;
     min-height: 100vh;
     overflow-y: auto !important;
@@ -1472,6 +1473,8 @@ canvas#modalBohrCanvas {
   }
 
   /* Compound Simulator Mobile Layout - Single Page Seamless Natural Touch Scroll (Zero Scroll Traps) */
+  .tab-content,
+  .tab-content.active,
   #tab-compound,
   #tab-compound.active,
   #compoundSimulatorContainer,
