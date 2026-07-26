@@ -40,11 +40,29 @@
 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1266249617001236" crossorigin="anonymous"></script>
   
-  <!-- Tailwind CSS -->
-  <script src="https://unpkg.com/@tailwindcss/browser@4" defer></script>
+  <!-- Anti-FOUC (Flash of Unstyled Content) Guard -->
+  <style>
+    html:not(.fouc-ready) body {
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }
+    body {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.2s ease-in-out;
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.documentElement.classList.add('fouc-ready');
+    });
+  </script>
+
+  <!-- Tailwind CSS (Synchronous load to prevent unstyled flash) -->
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
   
   <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
 
   <!-- Custom Styles -->
   <link rel="stylesheet" href="style.css">

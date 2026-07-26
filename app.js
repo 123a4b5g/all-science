@@ -267,6 +267,7 @@ const app = {
     this.applyLanguage();
     this.render();
     lucide.createIcons();
+    document.documentElement.classList.add('fouc-ready');
     let resizeTimer = null;
     window.addEventListener('resize', () => {
       if (resizeTimer) cancelAnimationFrame(resizeTimer);

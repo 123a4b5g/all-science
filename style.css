@@ -119,3 +119,8 @@ canvas {
   -webkit-user-select: none;
 }
 
+/* Layout Shift Prevention for Lucide Icons */
+i[data-lucide] {
+  display: inline-block;
+  vertical-align: middle;
+}
