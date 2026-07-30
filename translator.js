@@ -1,4 +1,4 @@
-﻿(function() {
+(function() {
   const lang = localStorage.getItem('sci-lab-lang') || 'ko';
   if (lang !== 'en') return;
 
@@ -554,8 +554,278 @@
     "벤젠": "Benzene",
     "설탕 (자당)": "Sucrose (Sugar)",
     "폼알데하이드": "Formaldehyde",
-    "원소를 선택하여 보어 원자 구조를 시뮬레이션하세요.": "Select an element to simulate Bohr atomic structure."
+    "원소를 선택하여 보어 원자 구조를 시뮬레이션하세요.": "Select an element to simulate Bohr atomic structure.",
+
+    // H-R Diagram Simulation
+    "별의 H-R도표 시뮬레이션": "H-R Diagram Simulation",
+    "별의 H-R도표": "Hertzsprung-Russell (H-R) Diagram",
+    "H-R도 탐구": "H-R Diagram Explorer",
+    "별의 진화 실험실": "Stellar Evolution Lab",
+    "항성 크기 비교실": "Star Scale Sandbox",
+    "진화 진행:": "Evolution Progress:",
+    "초기 질량:": "Initial Mass:",
+    "속도:": "Speed:",
+    "0.1x (슬로우)": "0.1x (Slow)",
+    "모든 분류 전체": "All Categories",
+    "없음 (항성 표시 숨김)": "None (Hide Stars)",
+    "주계열성 (Main Sequence)": "Main Sequence",
+    "적색거성 (Red Giant)": "Red Giant",
+    "적색/청색 초거성 (Supergiant)": "Red/Blue Supergiant",
+    "백색왜성 (White Dwarf)": "White Dwarf",
+    "항성 이름": "Star Name",
+    "진화 분류 / 분광형": "Spectral & Evolution Class",
+    "표면 온도 (T)": "Surface Temp (T)",
+    "광도 (L / L☉)": "Luminosity (L / L☉)",
+    "반경 (R / R☉)": "Radius (R / R☉)",
+    "중심부 핵 반응": "Core Fusion Reaction",
+    "거리 / 예상 수명": "Distance / Est. Lifetime",
+    "최종 진화 운명": "Final Evolution Fate",
+    "H-R도 상의 별을 클릭하시면 세부 천문학 데이터와 진화 물리 설명이 표시됩니다.": "Click a star on the H-R diagram to view detailed astronomical data and evolutionary physics descriptions.",
+    "유명 관측 별 선택 (클릭 시 상세 데이터 조회)": "Select Famous Stars (Click for details)",
+    "진화 궤적 (Evolution Track) 시뮬레이터": "Evolution Track Simulator",
+    "질량을 조절하면 별의 초기 원시성 단계부터 수소가 소진된 후 거성 팽창, 초신성 폭발, 왜성/블랙홀 이동 궤적이 그려집니다.": "Adjust mass to trace the evolution path from protostar, main sequence, giant expansion, supernova explosion, to dwarf/black hole.",
+    "항성 실시간 3D/2D Visual": "Real-time Star Visual",
+    "내부 핵융합 단면 보기": "View Core Cross-Section",
+    "천체 상대적 반경 크기 비교 (Star Scale Sandbox)": "Star Scale Comparison Sandbox",
+    "배율 Zoom:": "Zoom Scale:",
+    "H-R도 및 항성 진화 천문학 가이드": "H-R Diagram & Stellar Evolution Guide",
+    "1. H-R도 (Hertzsprung-Russell Diagram) 란?": "1. What is the H-R Diagram?",
+    "2. 별의 분광형 (Spectral Types: O, B, A, F, G, K, M)": "2. Spectral Types (O, B, A, F, G, K, M)",
+    "3. 슈테판-볼츠만 법칙과 등반경선 (Isoradius Lines)": "3. Stefan-Boltzmann Law & Isoradius Lines",
+    "4. 질량에 따른 별의 최종 진화 운명": "4. Final Stellar Evolution Fates by Mass",
+
+    // Canvas Labels & Text
+    "적색 초거성 (Red Supergiants)": "Red Supergiants",
+    "적색 거성 (Red Giants)": "Red Giants",
+    "백색 왜성 (White Dwarfs)": "White Dwarfs",
+    "주계열성 (Main Sequence)": "Main Sequence",
+    "← 표면 온도 T (Kelvin, 대수 역축)": "← Surface Temperature T (Kelvin, log reversed)",
+    "광도 L / L☉ (대수 축)": "Luminosity L / L☉ (log scale)",
+    "절대 등급 (M_v)": "Absolute Magnitude (M_v)",
+    "1 (태양)": "1 (Sun)",
+
+    // Star Categories & Evolution Terms
+    "주계열성": "Main Sequence",
+    "적색거성": "Red Giant",
+    "적색초거성": "Red Supergiant",
+    "청색초거성": "Blue Supergiant",
+    "청색거성": "Blue Giant",
+    "백색왜성": "White Dwarf",
+    "중성자별": "Neutron Star",
+    "블랙홀": "Black Hole",
+    "원시성": "Protostar",
+    "준거성": "Subgiant",
+    "수평가지": "Horizontal Branch",
+    "점근거성가지": "Asymptotic Giant Branch (AGB)",
+    "행성상 성운": "Planetary Nebula",
+    "행성상 성운 분사": "Planetary Nebula Ejection",
+    "행성상 성운 방출": "Planetary Nebula Ejection",
+    "탄소-산소 백색왜성": "Carbon-Oxygen White Dwarf",
+    "헬륨 백색왜성": "Helium White Dwarf",
+    "O-Ne-Mg 백색왜성": "O-Ne-Mg White Dwarf",
+    "II형 초신성 폭발 (Supernova)": "Type II Supernova Explosion",
+    "중성자별 / 펄서 (Pulsar)": "Neutron Star / Pulsar",
+    "볼프-레이에 성 (Wolf-Rayet)": "Wolf-Rayet Star",
+    "적색 하이퍼거성": "Red Hypergiant",
+    "극초신성 폭발 & 감마선 폭발": "Hypernova & Gamma-Ray Burst",
+    "항성 질량 블랙홀 (Black Hole)": "Stellar Mass Black Hole",
+
+    // Internal Shell Names
+    "수소 (H) 외층": "Hydrogen (H) Envelope",
+    "헬륨 (He) 껍질": "Helium (He) Shell",
+    "탄소 (C) 껍질": "Carbon (C) Shell",
+    "산소 (O) 껍질": "Oxygen (O) Shell",
+    "네온/규소 (Ne/Si)": "Neon/Silicon (Ne/Si)",
+    "철 (Fe) 코어 (붕괴 임계)": "Iron (Fe) Core (Collapse Critical)",
+    "수소 (H) 대기": "Hydrogen (H) Atmosphere",
+    "수소 껍질 융합층": "Hydrogen Shell Fusion Layer",
+    "탄소-산소 (C-O) 코어": "Carbon-Oxygen (C-O) Core",
+    "수소 (H) 전체 대류층": "Hydrogen (H) Convective Zone",
+    "헬륨 (He) 중심부": "Helium (He) Core",
+
+    // Star Names in Presets
+    "태양 (Sun)": "Sun",
+    "시리우스 A (Sirius A)": "Sirius A",
+    "시리우스 B (Sirius B)": "Sirius B",
+    "베텔게우스 (Betelgeuse)": "Betelgeuse",
+    "리겔 (Rigel)": "Rigel",
+    "알데바란 (Aldebaran)": "Aldebaran",
+    "아크투루스 (Arcturus)": "Arcturus",
+    "베가 (Vega)": "Vega",
+    "북극성 (Polaris)": "Polaris",
+    "프록시마 센타우리 (Proxima Centauri)": "Proxima Centauri",
+    "안타레스 (Antares)": "Antares",
+    "스피카 (Spica)": "Spica",
+    "프로키온 A (Procyon A)": "Procyon A",
+    "데네브 (Deneb)": "Deneb",
+    "지구 (Earth)": "Earth",
+
+    // Famous Star Descriptions
+    "우리 태양계의 중심별로, 중심부에서 수소 핵융합(p-p chain)을 진행하고 있는 안정적인 G형 주계열성입니다.": "A stable G-type main-sequence star at the center of our solar system performing hydrogen fusion (p-p chain) in its core.",
+    "밤하늘에서 가장 밝게 관측되는 대표적인 백색 주계열성입니다.": "The brightest star visible in the night sky, a prominent white main-sequence star.",
+    "지구 크기 정도로 붕괴한 초고밀도 사체별로, 시리우스 A 주위를 궤도 운행하는 백색왜성입니다.": "An ultra-dense stellar remnant collapsed to Earth's size, orbiting Sirius A as a white dwarf.",
+    "오리온자리의 어깨별로 궤도가 목성까지 미치는 거대한 적색초거성입니다. 머지않은 미래에 II형 초신성 폭발을 일으킵니다.": "A massive red supergiant at Orion's shoulder whose radius extends to Jupiter. It will undergo a Type II supernova explosion in the near future.",
+    "오리온자리의 다리에 해당하는 웅장한 청색초거성으로, 엄청난 복사에너지를 발산합니다.": "A luminous blue supergiant at Orion's foot emitting immense radiative energy.",
+    "황소자리의 붉은 눈에 해당하는 거성으로, 주계열 수소를 모두 태우고 적색거성으로 팽창하였습니다.": "The red eye of Taurus, a giant star that exhausted its main-sequence hydrogen and expanded into a red giant.",
+    "목동자리의 주황색 주별로 중심부에서 헬륨 융합 반응이 활발히 일어나고 있는 거성입니다.": "The alpha star of Boötes, an orange giant star actively fusing helium in its core.",
+    "거문고자리의 알파별이자 여름철 대삼각형을 형성하는 청백색 영천문학의 등급 기준별입니다.": "The alpha star of Lyra, forming the Summer Triangle, a blue-white standard reference star in astronomy.",
+    "작은곰자리의 지축 방향 정렬별로, 주기적으로 반경이 맥동하는 세페이드 변광성 성격의 초거성입니다.": "The North Star in Ursa Minor, a Cepheid variable supergiant with periodically pulsating radius.",
+    "태양계와 가장 가까운 이웃 항성으로 질량이 매우 작은 어두운 M형 적색왜성입니다.": "The closest neighboring star to the Solar System, a low-mass dim M-type red dwarf.",
+    "전갈자리의 심장에 위치한 진붉은색 초대형 초거성입니다.": "A deep-red supergiant located at the heart of Scorpius.",
+    "처녀자리의 가장 밝은 푸른색 거성입니다.": "The brightest blue giant star in Virgo.",
+    "작은개자리의 주별로 수소 소진 단계에 진입한 준거성 특성의 황백색 별입니다.": "The main star of Canis Minor, a yellow-white subgiant entering hydrogen depletion.",
+    "백조자리의 주별로, 수천 광년 거리에서도 눈부시게 빛나는 백색 초거성입니다.": "The primary star of Cygnus, a luminous white supergiant shining brightly even from thousands of light-years away.",
+
+    // Star Distances & Lifetimes
+    "0 광년 (1 AU)": "0 ly (1 AU)",
+    "8.6 광년": "8.6 ly",
+    "550 광년": "550 ly",
+    "860 광년": "860 ly",
+    "65.3 광년": "65.3 ly",
+    "36.7 광년": "36.7 ly",
+    "25.0 광년": "25.0 ly",
+    "433 광년": "433 ly",
+    "4.24 광년": "4.24 ly",
+    "250 광년": "250 ly",
+    "11.46 광년": "11.46 ly",
+    "2600 광년": "2600 ly",
+    "수천억 ~ 수조 년": "Hundreds of Billions to Trillions of Years",
+    "수백만 년 이하": "Under a Few Million Years",
+    "약 100억 년": "Approx. 10 Billion Years",
+    "백만 년": "Million Years",
+    "0억 년": "Billion Years",
+    "광년": "ly",
+
+    // Spectral Types & Colors
+    "가장 뜨겁고 질량이 큰 항성 (스피카, O형 주계열)": "Hottest and most massive stars (Spica, O-type main sequence)",
+    "표면온도가 매우 높은 별 (리겔)": "Stars with very high surface temperatures (Rigel)",
+    "강한 수소 흡수선을 가지는 백색 항성 (시리우스A, 베가)": "White stars with strong hydrogen absorption lines (Sirius A, Vega)",
+    "밝은 황백색 항성 (북극성, 프로키온A)": "Luminous yellow-white stars (Polaris, Procyon A)",
+    "우리 태양과 같은 중간 질량 주계열성 (태양)": "Intermediate-mass main-sequence stars like our Sun (Sun)",
+    "주황색 거성 및 왜성 (알데바란, 아크투루스)": "Orange giants and dwarfs (Aldebaran, Arcturus)",
+    "가장 낮은 표면 온도를 지닌 적색 왜성 및 초거성 (베텔게우스, 프록시마)": "Red dwarfs and supergiants with lowest surface temperatures (Betelgeuse, Proxima)",
+    "청백색": "Blue-White",
+    "황백색": "Yellow-White",
+    "황색": "Yellow",
+    "주황색": "Orange",
+
+    // Evolution Track Names & Outcomes
+    "저질량 적색왜성": "Low-mass Red Dwarf",
+    "태양형 별": "Sun-like Star",
+    "중질량 별": "Intermediate-mass Star",
+    "고질량 초거성": "High-mass Supergiant",
+    "극대질량 하이퍼거성": "Hypergiant",
+    "행성상 성운 + 탄소/산소 백색왜성": "Planetary Nebula + Carbon/Oxygen White Dwarf",
+    "행성상 성운 + O-Ne-Mg 백색왜성": "Planetary Nebula + O-Ne-Mg White Dwarf",
+    "II형 초신성 폭발 → 중성자별 (펄서)": "Type II Supernova → Neutron Star (Pulsar)",
+    "극초신성 폭발 (Hypernova) → 블랙홀": "Hypernova Explosion → Black Hole",
+
+    // Core Reactions
+    "중력 수축": "Gravitational Contraction",
+    "수소 핵융합": "Hydrogen Fusion",
+    "전체 대류 수소 융합": "Convective Hydrogen Fusion",
+    "헬륨 코어 축적": "Helium Core Accumulation",
+    "전자 퇴적압 서서히 식음": "Electron Degeneracy Cooling",
+    "수소 핵융합 (p-p chain)": "Hydrogen Fusion (p-p chain)",
+    "수소 껍질 융합": "Hydrogen Shell Fusion",
+    "헬륨 코어 중력 수축": "Helium Core Contraction",
+    "헬륨 점화 (3-알파 반응)": "Helium Flash (Triple-Alpha Process)",
+    "이중 껍질 융합 (H & He)": "Double Shell Fusion (H & He)",
+    "외층 방출": "Envelope Ejection",
+    "전자 퇴적압 식음": "Electron Degeneracy Cooling",
+    "CNO 수소 융합": "CNO Hydrogen Fusion",
+    "헬륨 및 탄소 융합": "Helium & Carbon Fusion",
+    "중심부 헬륨 융합": "Core Helium Fusion",
+    "외층 가스 방출": "Envelope Gas Ejection",
+    "전자 퇴적압": "Electron Degeneracy Pressure",
+    "CNO 고속 융합": "Rapid CNO Fusion",
+    "철(Fe) 코어 반응까지 연속 융합": "Sequential Fusion up to Iron (Fe) Core",
+    "철 코어 중력 붕괴": "Iron Core Gravitational Collapse",
+    "중성자 퇴적압": "Neutron Degeneracy Pressure",
+    "초고속 중력 붕괴": "Ultra-fast Gravitational Collapse",
+    "극초고속 CNO 융합": "Extreme CNO Fusion",
+    "강력 항성풍 물질 방출": "Strong Stellar Wind Ejection",
+    "철 코어 형성": "Iron Core Formation",
+    "직접 블랙홀 중력 붕괴": "Direct Black Hole Collapse",
+    "특이점 붕괴": "Singularity Collapse",
+    "핵 반응:": "Core Fusion:",
+
+    // Evolution Stage Descriptions
+    "거대한 가스 구름이 중력 수축하며 원시 항성으로 형성됩니다.": "Formed as a massive gas cloud collapses under gravity into a protostar.",
+    "중심 온도가 약 1,000만 K에 달하여 안정적 수소 핵융합이 진행됩니다.": "Core temperature reaches ~10 million K, initiating stable hydrogen fusion.",
+    "별 전체 대류로 내부 수소를 남김없이 소비하므로 우주 나이보다 더 오래 생존합니다.": "Fully convective, consuming hydrogen completely and outliving the age of the universe.",
+    "수소가 모두 헬륨으로 변환되며 표면온도가 상승합니다.": "Hydrogen is fully converted to helium, causing surface temperature to rise.",
+    "거성 팽창 단계를 거치지 않고 식어가는 헬륨 백색왜성이 됩니다.": "Cools into a helium white dwarf without undergoing giant expansion.",
+    "성간 물질 붕괴로 형성된 원시별 단계입니다.": "Protostar phase formed by the collapse of interstellar matter.",
+    "수소를 헬륨으로 융합하며 정역학적 평형을 유지합니다.": "Fuses hydrogen into helium, maintaining hydrostatic equilibrium.",
+    "중심 수소가 소진되어 껍질 융합으로 외층이 팽창하기 시작합니다.": "Core hydrogen is depleted; shell fusion begins and the envelope expands.",
+    "외층이 거대하게 팽창하여 적색거성이 됩니다.": "The outer layers expand enormously into a red giant.",
+    "중심부 헬륨이 폭발적으로 점화하여 탄소와 산소를 생성합니다.": "Core helium ignites explosively, producing carbon and oxygen.",
+    "중심 탄소 코어 주위에서 이중 껍질 융합 반응이 일어납니다.": "Double-shell fusion occurs around the central carbon core.",
+    "불안정한 열 맥동으로 외층 가스를 우주 공간으로 방출합니다.": "Thermal pulsations expel the outer gas envelope into space.",
+    "초고밀도 중심 코어가 남아 백색왜성으로 천천히 식어갑니다.": "An ultra-dense central core remains, slowly cooling into a white dwarf.",
+    "빠른 중력 수축 단계입니다.": "Rapid gravitational contraction phase.",
+    "CNO 순환 반응으로 수소를 빠르게 소비합니다.": "Rapidly consumes hydrogen via the CNO cycle.",
+    "광도가 매우 높아진 팽창 단계입니다.": "Expanded phase with significantly increased luminosity.",
+    "H-R도 상에서 고온 청색 구역으로 이동하는 주기입니다.": "Loop moving toward high-temperature blue region on the H-R diagram.",
+    "강력한 성운 방출을 일으킵니다.": "Causes powerful planetary nebula ejection.",
+    "대질량 백색왜성이 됩니다.": "Becomes a massive white dwarf.",
+    "격렬한 아웃보스트와 함께 탄생합니다.": "Born with violent outbursts.",
+    "강력한 자외선을 뿜어내는 청색 거대 주계열성입니다.": "Massive blue main-sequence star emitting intense ultraviolet radiation.",
+    "높은 광도를 자랑합니다.": "Boasts exceptionally high luminosity.",
+    "H->He->C->O->Ne->Si->Fe 양파 껍질 핵융합 구조가 완성됩니다.": "Completed H->He->C->O->Ne->Si->Fe onion-shell nuclear fusion structure.",
+    "철 코어 중력 붕괴로 은하 전체보다 밝은 무서운 폭발이 일어납니다!": "Iron core collapses, triggering a colossal explosion brighter than an entire galaxy!",
+    "반경 10km의 초고밀도 중성자별이 탄생하여 고속 자전 자기장 빔을 사출합니다.": "An ultra-dense 10km neutron star forms, emitting rapid-rotating magnetic beams.",
+    "엄청난 가스 물질 붕괴로 형성됩니다.": "Formed by catastrophic collapse of massive gas clouds.",
+    "복사압이 항성을 찢을 만큼 강력한 최상위 주계열성입니다.": "Extreme top-tier main-sequence star with radiation pressure strong enough to tear itself apart.",
+    "자신의 외각층을 폭풍처럼 분사합니다.": "Ejects its outer layers in tempestuous stellar winds.",
+    "우주에서 가장 거대한 반경의 항성이 됩니다.": "Expands into one of the largest radius stars in the universe.",
+    "강력한 감마선 버스트와 함께 폭발합니다!": "Explodes violently with intense gamma-ray bursts!",
+    "빛조차 탈출할 수 없는 시공간 굴절 블랙홀이 탄생합니다.": "A spacetime-warping black hole is born from which even light cannot escape.",
+
+    // Modal Section 4 & Compound Terms
+    "저질량 별 ($< 0.5 M_\\odot$)": "Low-mass Star ($< 0.5 M_\\odot$)",
+    ": 거성 팽창 없이 직접 헬륨 백색왜성으로 서서히 식어감.": ": Slowly cools directly into a helium white dwarf without giant expansion.",
+    "거성 팽창 없이 직접 헬륨 백색왜성으로 서서히 식어감.": "Slowly cools directly into a helium white dwarf without giant expansion.",
+    "태양형 별 ($0.8 \\sim 8 M_\\odot$)": "Sun-like Star ($0.8 \\sim 8 M_\\odot$)",
+    ": 주계열성 $\\rightarrow$ 적색거성 $\\rightarrow$ 행성상 성운 분사 $\\rightarrow$ 탄소-산소 백색왜성.": ": Main Sequence $\\rightarrow$ Red Giant $\\rightarrow$ Planetary Nebula Ejection $\\rightarrow$ Carbon-Oxygen White Dwarf.",
+    "주계열성 $\\rightarrow$ 적색거성 $\\rightarrow$ 행성상 성운 분사 $\\rightarrow$ 탄소-산소 백색왜성.": "Main Sequence $\\rightarrow$ Red Giant $\\rightarrow$ Planetary Nebula Ejection $\\rightarrow$ Carbon-Oxygen White Dwarf.",
+    "고질량 별 ($> 8 M_\\odot$)": "High-mass Star ($> 8 M_\\odot$)",
+    ": 청색주계열성 $\\rightarrow$ 적색초거성(철 코어 산출) $\\rightarrow$ II형 초신성 폭발 $\\rightarrow$ 중성자별(펄서) 또는 블랙홀.": ": Blue Main Sequence $\\rightarrow$ Red Supergiant (Iron Core) $\\rightarrow$ Type II Supernova $\rightarrow$ Neutron Star (Pulsar) or Black Hole.",
+    "청색주계열성 $\\rightarrow$ 적색초거성(철 코어 산출) $\\rightarrow$ II형 초신성 폭발 $\\rightarrow$ 중성자별(펄서) 또는 블랙홀.": "Blue Main Sequence $\\rightarrow$ Red Supergiant (Iron Core) $\\rightarrow$ Type II Supernova $\rightarrow$ Neutron Star (Pulsar) or Black Hole.",
+    "청색주계열성": "Blue Main Sequence",
+    "철 코어 산출": "Iron Core",
+    "(철 코어 산출)": "(Iron Core)",
+    "II형 초신성 폭발": "Type II Supernova",
+    "(펄서) 또는": "(Pulsar) or",
+    "탄소-산소 백색왜성": "Carbon-Oxygen White Dwarf",
+    "탄소-산소": "Carbon-Oxygen",
+    "탄소-": "Carbon-",
+
+    // Single Star Names for Preset Chips
+    "태양": "Sun",
+    "시리우스": "Sirius",
+    "베텔게우스": "Betelgeuse",
+    "리겔": "Rigel",
+    "알데바란": "Aldebaran",
+    "아크투루스": "Arcturus",
+    "베가": "Vega",
+    "북극성": "Polaris",
+    "프록시마": "Proxima",
+    "안타레스": "Antares",
+    "스피카": "Spica",
+    "프로키온": "Procyon",
+    "데네브": "Deneb"
   };
+
+  // Pre-sort dictionary keys by length in descending order to prevent partial word corruption
+  let sortedKeys = null;
+  function getSortedKeys() {
+    if (!sortedKeys) {
+      sortedKeys = Object.keys(dictionary).sort((a, b) => b.length - a.length);
+    }
+    return sortedKeys;
+  }
 
   // Cache map to prevent O(N) loops on 60FPS canvas fillText calls
   const translationCache = new Map();
@@ -572,15 +842,24 @@
     if (dictionary[trimmed]) {
       result = text.replace(trimmed, dictionary[trimmed]);
     } else {
-      for (let key in dictionary) {
-        if (trimmed.includes(key)) {
-          result = text.replace(key, dictionary[key]);
-          break;
+      let currentText = text;
+      let modified = false;
+      const keys = getSortedKeys();
+      for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+        if (currentText.includes(key)) {
+          currentText = currentText.replaceAll(key, dictionary[key]);
+          modified = true;
         }
+      }
+      if (modified) {
+        result = currentText;
       }
     }
 
-    translationCache.set(text, result);
+    if (result !== null) {
+      translationCache.set(text, result);
+    }
     return result;
   }
 

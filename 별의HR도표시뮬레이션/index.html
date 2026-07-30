@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>별의 H-R도표 시뮬레이션</title>
+    <meta name="description" content="별의 표면 온도(색상)와 광도(밝기)에 따른 H-R도 상의 위치 분포, 실측 항성 탐구, 및 질량별 진화 과정(주계열성, 적색거성, 백색왜성, 초신성, 블랙홀)을 시각화한 최고 수준의 과학 시뮬레이션입니다.">
+    
+    <!-- FontAwesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+    <link rel="stylesheet" href="style.css">
+    <script src="../translator.js"></script>
+</head>
+<body>
+
+    <!-- 앱 전체 컨테이너 -->
+    <div class="app-container">
+        
+        <!-- 상단 헤더 바 -->
+        <header class="app-header">
+            <div class="header-left">
+                <button class="icon-btn back-btn" onclick="location.href='../index.html'">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                    뒤로
+                </button>
+                <div class="title-container">
+                    <div class="pulse-dot"></div>
+                    <h1>별의 H-R도표 시뮬레이션</h1>
+                </div>
+            </div>
+
+
+
+            <div class="header-right">
+                <button class="icon-btn principle-btn" id="btn-info">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                    설명
+                </button>
+            </div>
+        </header>
+
+        <!-- 메인 뷰 구역 -->
+        <main>
+            <!-- TAB 1: H-R도 탐구 -->
+            <section id="tab-hr-explorer" class="tab-content active">
+                <div class="grid-2col">
+                    <div class="card">
+                        <!-- 통합 컨트롤 바 헤더: [시작/리셋] -> [진화 진행 (좌측)] -> [초기 질량 (우측)] -> [속도] -> [분류 선택 (없음 옵션 추가)] -->
+                        <div class="card-header" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px;">
+                            <div class="controls-bar" style="margin-top: 0; padding: 4px 10px; background: rgba(15, 23, 42, 0.6); flex: 1;">
+                                <div style="display: flex; gap: 6px;">
+                                    <button id="playBtn" class="btn-primary">
+                                        <i class="fa-solid fa-play"></i> 시작
+                                    </button>
+                                    <button id="resetBtn" class="btn-secondary">
+                                        <i class="fa-solid fa-rotate-left"></i> 리셋
+                                    </button>
+                                </div>
+
+                                <!-- 왼쪽에 진화 진행 슬라이더 배치 -->
+                                <div style="display: flex; align-items: center; gap: 6px; flex: 1; min-width: 140px;">
+                                    <span style="font-size: 11px; font-weight: 600; color: var(--text-muted); min-width: 55px;">진화 진행:</span>
+                                    <input type="range" id="timelineProgress" min="0" max="100" value="0" style="flex: 1;">
+                                </div>
+
+                                <!-- 초기 질량 조절기 -->
+                                <div style="display: flex; align-items: center; gap: 6px;">
+                                    <span style="font-size: 11px; color: var(--text-muted);">초기 질량:</span>
+                                    <input type="range" id="massSlider" min="0.1" max="40.0" step="0.1" value="1.0" style="width: 95px;">
+                                    <span id="massValueBadge" class="val-badge">1.0 M☉</span>
+                                </div>
+
+                                <!-- 속도 선택 -->
+                                <div style="display: flex; align-items: center; gap: 6px;">
+                                    <span style="font-size: 11px; color: var(--text-muted);">속도:</span>
+                                    <select id="speedSelect" class="select-control" style="padding: 4px 6px; font-size: 11px;">
+                                        <option value="0.1">0.1x (슬로우)</option>
+                                        <option value="0.5">0.5x</option>
+                                        <option value="1" selected>1x</option>
+                                        <option value="2">2x</option>
+                                        <option value="5">5x</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <select id="categoryFilter" class="select-control">
+                                <option value="all">모든 분류 전체</option>
+                                <option value="none">없음 (항성 표시 숨김)</option>
+                                <option value="주계열">주계열성 (Main Sequence)</option>
+                                <option value="거성">적색거성 (Red Giant)</option>
+                                <option value="초거성">적색/청색 초거성 (Supergiant)</option>
+                                <option value="백색왜성">백색왜성 (White Dwarf)</option>
+                            </select>
+                        </div>
+
+                        <div class="canvas-box">
+                            <canvas id="hrCanvas"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card" style="display: flex; flex-direction: column; gap: 10px;">
+                        <!-- 상단 물리 속성 계기판 -->
+                        <div>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <div class="info-key">항성 이름</div>
+                                    <div id="infoName" class="info-val">태양 (Sun)</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-key">진화 분류 / 분광형</div>
+                                    <div id="infoCategory" class="info-val">주계열성 (G2V)</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-key">표면 온도 (T)</div>
+                                    <div id="infoTemp" class="info-val">5,778 K</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-key">광도 (L / L☉)</div>
+                                    <div id="infoLum" class="info-val">1.0 L☉</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-key">반경 (R / R☉)</div>
+                                    <div id="infoRadius" class="info-val">1.0 R☉</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-key">중심부 핵 반응</div>
+                                    <div id="infoCore" class="info-val">수소 핵융합 (p-p chain)</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-key">거리 / 예상 수명</div>
+                                    <div id="infoLifetime" class="info-val">약 100억 년</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-key">최종 진화 운명</div>
+                                    <div id="infoOutcome" class="info-val">백색왜성</div>
+                                </div>
+                            </div>
+
+                            <div id="stageDescText" class="desc-box">
+                                H-R도 상의 별을 클릭하시면 세부 천문학 데이터와 진화 물리 설명이 표시됩니다.
+                            </div>
+                        </div>
+
+                        <!-- 관측 별 선택 그리드 -->
+                        <div style="display: flex; flex-direction: column; flex: 1; min-height: 0; margin-top: 4px;">
+                            <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; flex-shrink: 0;">
+                                <i class="fa-solid fa-list"></i> 유명 관측 별 선택 (클릭 시 상세 데이터 조회)
+                            </div>
+                            <div id="starPresetsGrid" class="presets-grid"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: 별의 진화 실험실 -->
+            <section id="tab-star-evolution" class="tab-content">
+                <div class="grid-2col">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="fa-solid fa-route" style="color: var(--primary);"></i>
+                            <span>진화 궤적 (Evolution Track) 시뮬레이터</span>
+                        </div>
+
+                        <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;">
+                            질량을 조절하면 별의 초기 원시성 단계부터 수소가 소진된 후 거성 팽창, 초신성 폭발, 왜성/블랙홀 이동 궤적이 그려집니다.
+                        </div>
+
+                        <div class="canvas-box" style="flex: 1; min-height: 0;">
+                            <canvas id="evolutionHrCanvas"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <div class="card-title" style="margin-bottom: 0;">
+                                <i class="fa-solid fa-sun" style="color: var(--accent-amber);"></i>
+                                <span>항성 실시간 3D/2D Visual</span>
+                            </div>
+                            <label style="font-size: 11px; color: var(--primary); cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                                <input type="checkbox" id="internalViewToggle">
+                                <span>내부 핵융합 단면 보기</span>
+                            </label>
+                        </div>
+
+                        <div class="canvas-box">
+                            <canvas id="starVisualCanvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: 항성 크기 비교실 -->
+            <section id="tab-star-scale" class="tab-content">
+                <div class="card">
+                    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <div class="card-title" style="margin-bottom: 0;">
+                            <i class="fa-solid fa-up-right-and-down-left-from-center" style="color: var(--primary);"></i>
+                            <span>천체 상대적 반경 크기 비교 (Star Scale Sandbox)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 12px; color: var(--text-muted);">배율 Zoom:</span>
+                            <input type="range" id="scaleZoomSlider" min="0.1" max="5.0" step="0.1" value="1.0" style="width: 130px;">
+                            <span id="scaleZoomVal" class="val-badge">1.0x</span>
+                        </div>
+                    </div>
+
+                    <div class="canvas-box">
+                        <canvas id="scaleCanvas"></canvas>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- MODAL: 천문학 원리 설명 가이드 -->
+    <div id="info-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-book-open"></i> H-R도 및 항성 진화 천문학 가이드</h2>
+                <button id="btn-close-modal" class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <h3>1. H-R도 (Hertzsprung-Russell Diagram) 란?</h3>
+                    <p>
+                        20세기 초 천문학자 에이르나르 허츠스프룽과 헨리 노리스 러셀이 창안한 그래프로, 별의 <strong>표면 온도 (X축)</strong>와 <strong>광도/밝기 (Y축)</strong> 사이의 상호 관계를 나타냅니다.
+                    </p>
+                </div>
+                <hr style="border-color: var(--panel-border);">
+
+                <div>
+                    <h3>2. 별의 분광형 (Spectral Types: O, B, A, F, G, K, M)</h3>
+                    <p>
+                        표면 온도가 높을수록 푸른 빛, 낮을수록 붉은 빛을 띱니다. <strong>빈의 변위 법칙 ($\lambda_{\text{max}} T = b$)</strong>에 따라 온도가 높아질수록 최대 파장은 자외선/청색으로 이동합니다.
+                    </p>
+                </div>
+                <hr style="border-color: var(--panel-border);">
+
+                <div>
+                    <h3>3. 슈테판-볼츠만 법칙과 등반경선 (Isoradius Lines)</h3>
+                    <p>
+                        항성의 총 광도 $L$ 은 표면적($4\pi R^2$)과 슈테판-볼츠만 복사 에너지 ($\sigma T^4$)의 곱인 <code>L = 4π R² σ T⁴</code> 로 결정됩니다.
+                    </p>
+                </div>
+                <hr style="border-color: var(--panel-border);">
+
+                <div>
+                    <h3>4. 질량에 따른 별의 최종 진화 운명</h3>
+                    <p>
+                        - <strong>저질량 별 ($< 0.5 M_\odot$)</strong>: 거성 팽창 없이 직접 헬륨 백색왜성으로 서서히 식어감.<br>
+                        - <strong>태양형 별 ($0.8 \sim 8 M_\odot$)</strong>: 주계열성 $\rightarrow$ 적색거성 $\rightarrow$ 행성상 성운 분사 $\rightarrow$ 탄소-산소 백색왜성.<br>
+                        - <strong>고질량 별 ($> 8 M_\odot$)</strong>: 청색주계열성 $\rightarrow$ 적색초거성(철 코어 산출) $\rightarrow$ II형 초신성 폭발 $\rightarrow$ 중성자별(펄서) 또는 블랙홀.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 스크립트 로드 순서 -->
+    <script src="js/data.js"></script>
+    <script src="js/hrDiagram.js"></script>
+    <script src="js/starVisual.js"></script>
+    <script src="js/starScale.js"></script>
+    <script src="js/evolutionEngine.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

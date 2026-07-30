@@ -82,6 +82,18 @@ const DEFAULT_TEMPLATES = [
     likes: 510,
     url: './원소주기율표시뮬레이션/index.html',
     code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./원소주기율표시뮬레이션/index.html -->'
+  },
+  {
+    name: '별의 H-R도표 시뮬레이션',
+    author: 'All Science 지구과학 랩',
+    description: '별의 표면 온도(색상)와 광도(밝기)에 따른 H-R도 상의 위치 분포, 실측 항성 탐구, 및 질량별 진화 과정(주계열성, 적색거성, 백색왜성, 초신성, 블랙홀)을 시각화한 최고 수준의 과학 시뮬레이션입니다.',
+    category: 'earth_science',
+    imageStyle: 'hrdiagram_thumbnail.jpg',
+    translationKey: 'HRDiagram',
+    views: 13500,
+    likes: 480,
+    url: './별의HR도표시뮬레이션/index.html',
+    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./별의HR도표시뮬레이션/index.html -->'
   }
 ];
 
@@ -165,7 +177,11 @@ const TRANSLATIONS = {
     
     templatePeriodicTableName: "원소 주기율표 시뮬레이션",
     templatePeriodicTableAuthor: "All Science 화학 랩",
-    templatePeriodicTableDesc: "원소들의 특성을 한눈에 보여주는 인터랙티브 주기율표와 화합물의 결합 모형을 만들고 화학 반응을 시각적으로 탐색하는 화합물 조합 실험실 시뮬레이션입니다."
+    templatePeriodicTableDesc: "원소들의 특성을 한눈에 보여주는 인터랙티브 주기율표와 화합물의 결합 모형을 만들고 화학 반응을 시각적으로 탐색하는 화합물 조합 실험실 시뮬레이션입니다.",
+    
+    templateHRDiagramName: "별의 H-R도표 시뮬레이션",
+    templateHRDiagramAuthor: "All Science 지구과학 랩",
+    templateHRDiagramDesc: "별의 표면 온도(색상)와 광도(밝기)에 따른 H-R도 상의 위치 분포, 실측 항성 탐구, 및 질량별 진화 과정(주계열성, 적색거성, 백색왜성, 초신성, 블랙홀)을 시각화한 최고 수준의 과학 시뮬레이션입니다."
   },
   en: {
     // Header & Hub
@@ -246,7 +262,11 @@ const TRANSLATIONS = {
     
     templatePeriodicTableName: "Interactive Periodic Table of Elements",
     templatePeriodicTableAuthor: "All Science Chemistry Lab",
-    templatePeriodicTableDesc: "An interactive periodic table showing properties of elements, featuring a compound simulator laboratory to combine elements and visually explore chemical reactions."
+    templatePeriodicTableDesc: "An interactive periodic table showing properties of elements, featuring a compound simulator laboratory to combine elements and visually explore chemical reactions.",
+    
+    templateHRDiagramName: "Hertzsprung-Russell Diagram Simulation",
+    templateHRDiagramAuthor: "All Science Earth Science Lab",
+    templateHRDiagramDesc: "Visualize the distribution of stars on the H-R diagram according to surface temperature and luminosity, explore actual stellar properties, and observe stellar evolution based on initial mass."
   }
 };
 
