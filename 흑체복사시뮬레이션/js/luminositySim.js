@@ -21,7 +21,11 @@ class LuminositySim {
 
     init() {
         this.resize();
-        window.addEventListener('resize', () => this.resize());
+        let resizeTimer = null;
+        window.addEventListener('resize', () => {
+            if (resizeTimer) cancelAnimationFrame(resizeTimer);
+            resizeTimer = requestAnimationFrame(() => this.resize());
+        });
         this.startAnim();
     }
 

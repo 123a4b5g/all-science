@@ -18,7 +18,11 @@ class PlanckCurveSim {
 
     init() {
         this.resize();
-        window.addEventListener('resize', () => this.resize());
+        let resizeTimer = null;
+        window.addEventListener('resize', () => {
+            if (resizeTimer) cancelAnimationFrame(resizeTimer);
+            resizeTimer = requestAnimationFrame(() => this.resize());
+        });
 
         // 마우스 호버 이벤트
         const handleMove = (clientX, clientY) => {

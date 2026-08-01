@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
             osc.start();
             osc.stop(audioCtx.currentTime + 0.2);
         } catch (e) {
-            console.log("Audio play failed:", e);
+            // Audio play failure ignored silently
         }
     }
 
@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
             osc.start();
             osc.stop(audioCtx.currentTime + 0.6);
         } catch (e) {
-            console.log("Audio play failed:", e);
+            // Audio play failure ignored silently
         }
     }
 
