@@ -94,6 +94,18 @@ const DEFAULT_TEMPLATES = [
     likes: 480,
     url: './별의HR도표시뮬레이션/index.html',
     code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./별의HR도표시뮬레이션/index.html -->'
+  },
+  {
+    name: '별과 흑체 복사 시뮬레이션',
+    author: 'All Science 지구과학 랩',
+    description: '별의 표면 온도, 흑체 복사, 플랑크 곡선, 슈테판-볼츠만 법칙, 빈의 변위 법칙 및 별의 광도와 반지름 관계를 시각적으로 탐구하는 시뮬레이션입니다.',
+    category: 'earth_science',
+    imageStyle: 'blackbody_thumbnail.jpg',
+    translationKey: 'Blackbody',
+    views: 14200,
+    likes: 490,
+    url: './흑체복사시뮬레이션/index.html',
+    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./흑체복사시뮬레이션/index.html -->'
   }
 ];
 
@@ -181,7 +193,11 @@ const TRANSLATIONS = {
     
     templateHRDiagramName: "별의 H-R도표 시뮬레이션",
     templateHRDiagramAuthor: "All Science 지구과학 랩",
-    templateHRDiagramDesc: "별의 표면 온도(색상)와 광도(밝기)에 따른 H-R도 상의 위치 분포, 실측 항성 탐구, 및 질량별 진화 과정(주계열성, 적색거성, 백색왜성, 초신성, 블랙홀)을 시각화한 최고 수준의 과학 시뮬레이션입니다."
+    templateHRDiagramDesc: "별의 표면 온도(색상)와 광도(밝기)에 따른 H-R도 상의 위치 분포, 실측 항성 탐구, 및 질량별 진화 과정(주계열성, 적색거성, 백색왜성, 초신성, 블랙홀)을 시각화한 최고 수준의 과학 시뮬레이션입니다.",
+    
+    templateBlackbodyName: "별과 흑체 복사 시뮬레이션",
+    templateBlackbodyAuthor: "All Science 지구과학 랩",
+    templateBlackbodyDesc: "별의 표면 온도, 흑체 복사, 플랑크 곡선, 슈테판-볼츠만 법칙, 빈의 변위 법칙 및 별의 광도와 반지름 관계를 시각적으로 탐구하는 시뮬레이션입니다."
   },
   en: {
     // Header & Hub
@@ -266,7 +282,11 @@ const TRANSLATIONS = {
     
     templateHRDiagramName: "Hertzsprung-Russell Diagram Simulation",
     templateHRDiagramAuthor: "All Science Earth Science Lab",
-    templateHRDiagramDesc: "Visualize the distribution of stars on the H-R diagram according to surface temperature and luminosity, explore actual stellar properties, and observe stellar evolution based on initial mass."
+    templateHRDiagramDesc: "Visualize the distribution of stars on the H-R diagram according to surface temperature and luminosity, explore actual stellar properties, and observe stellar evolution based on initial mass.",
+    
+    templateBlackbodyName: "Star & Blackbody Radiation Simulation",
+    templateBlackbodyAuthor: "All Science Earth Science Lab",
+    templateBlackbodyDesc: "Explore stellar surface temperature, blackbody radiation, Planck's law curve, Stefan-Boltzmann law, Wien's displacement law, and the relationship between luminosity and stellar radius."
   }
 };
 

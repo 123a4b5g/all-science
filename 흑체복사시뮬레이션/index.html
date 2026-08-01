@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>별과 흑체 복사 시뮬레이션</title>
+    <meta name="description" content="별의 표면 온도, 흑체 복사, 플랑크 곡선, 슈테판-볼츠만 법칙, 별의 광도와 반지름 관계를 탐구하는 시뮬레이션입니다.">
+    
+    <!-- FontAwesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+    <link rel="stylesheet" href="style.css">
+    <script src="../translator.js"></script>
+</head>
+<body>
+
+    <!-- 앱 전체 컨테이너 -->
+    <div class="app-container">
+        
+        <!-- 상단 헤더 바 (데스크톱 1행 / 모바일 3행 반응형) -->
+        <header class="app-header">
+            <div class="header-left">
+                <button class="icon-btn back-btn" onclick="location.href='../index.html'">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                    <span>뒤로</span>
+                </button>
+                <div class="title-container">
+                    <div class="pulse-dot"></div>
+                    <h1>별과 흑체 복사 시뮬레이션</h1>
+                </div>
+            </div>
+
+            <!-- 네비게이션 탭 -->
+            <nav class="nav-tabs">
+                <button class="tab-btn active" data-tab="tab-planck">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>1. 플랑크 곡선 & 색상</span>
+                </button>
+                <button class="tab-btn" data-tab="tab-luminosity">
+                    <i class="fa-solid fa-sun"></i>
+                    <span>2. 광도 & 법칙</span>
+                </button>
+                <button class="tab-btn" data-tab="tab-comparison">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                    <span>3. 항성 비교</span>
+                </button>
+            </nav>
+
+            <div class="header-right">
+                <button class="icon-btn principle-btn" id="btn-info">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                    <span>설명</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- 메인 뷰 구역 -->
+        <main class="main-content">
+            
+            <!-- TAB 1: 플랑크 곡선 & 별의 색상 -->
+            <section id="tab-planck" class="tab-content active">
+                <div class="grid-layout grid-main-sidebar">
+                    
+                    <!-- 메인 시각화 카드: 플랑크 곡선 캔버스 -->
+                    <div class="card canvas-card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fa-solid fa-wave-square highlight"></i>
+                                <span>별의 복사 에너지 분포</span>
+                            </div>
+                        </div>
+
+                        <!-- 온도 조절 컨트롤 바 -->
+                        <div class="control-panel">
+                            <div class="control-header">
+                                <label for="tempSlider">
+                                    <i class="fa-solid fa-temperature-high text-amber"></i>
+                                    표면 온도 (<i>T</i>):
+                                </label>
+                                <span id="tempValueBadge" class="val-badge text-amber">5,778 K</span>
+                            </div>
+                            <input type="range" id="tempSlider" min="1000" max="30000" step="50" value="5778">
+
+                            <div class="preset-group">
+                                <span class="preset-label">대표 온도의 별:</span>
+                                <button class="preset-btn" data-temp="3000">3,000 K (붉은색 별)</button>
+                                <button class="preset-btn" data-temp="4000">4,000 K (주황색 별)</button>
+                                <button class="preset-btn active" data-temp="5778">5,778 K (태양)</button>
+                                <button class="preset-btn" data-temp="13000">13,000 K (청백색 별)</button>
+                            </div>
+                        </div>
+
+                        <!-- 캔버스 컨테이너 -->
+                        <div class="canvas-container" id="planckCanvasBox">
+                            <canvas id="planckCanvas"></canvas>
+                            <div id="planckTooltip" class="canvas-tooltip"></div>
+                        </div>
+
+                        <!-- 하단 파장 스펙트럼 밴드 안내 -->
+                        <div class="spectrum-bar-legend">
+                            <div class="spectrum-zone uv">
+                                자외선 (&lt; 400 nm)
+                            </div>
+                            <div class="spectrum-zone vis">
+                                가시광선 (400 ~ 700 nm)
+                            </div>
+                            <div class="spectrum-zone ir">
+                                적외선 (&gt; 700 nm)
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 우측 계기판 및 별 색상 시각화 -->
+                    <div class="card info-sidebar">
+                        <div class="card-title">
+                            <i class="fa-solid fa-atom highlight"></i>
+                            <span>핵심 관측 데이터</span>
+                        </div>
+
+                        <!-- 별 색상 프리뷰 박스 -->
+                        <div class="star-color-box">
+                            <div class="star-preview-glow" id="starGlowRing">
+                                <div class="star-preview-core" id="starCore"></div>
+                            </div>
+                            <div class="star-color-info">
+                                <div class="color-title" id="starColorName">황색 별</div>
+                                <div class="color-sub" id="starSpectralType">분광형 G2V (태양)</div>
+                            </div>
+                        </div>
+
+                        <!-- 측정값 카운터 -->
+                        <div class="metrics-grid">
+                            <div class="metric-card highlight-cyan">
+                                <div class="metric-label">최대 방출 파장 (λ<sub>max</sub>)</div>
+                                <div class="metric-value text-cyan" id="wienLambdaVal">501.5 nm</div>
+                                <div class="metric-sub" id="wienRegion">가시광선 (녹색~청록)</div>
+                            </div>
+
+                            <div class="metric-card highlight-rose">
+                                <div class="metric-label">단위 면적당 방출 에너지 (<i>E</i>)</div>
+                                <div class="metric-value text-rose" id="planckEVal">1.00 E<sub>☉</sub></div>
+                                <div class="metric-sub">태양 단위 면적당 에너지를 1로 볼 때의 상대 비</div>
+                            </div>
+                        </div>
+
+                        <!-- 흑체 복사 학습 팁 -->
+                        <div class="info-tip-box">
+                            <div class="tip-header">
+                                <i class="fa-solid fa-lightbulb"></i> 핵심 포인트
+                            </div>
+                            <p id="planckTipText">
+                                온도가 높을수록 <strong>모든 파장 영역에서 더 많은 에너지</strong>를 방출하며, 복사 에너지를 최대 세기로 방출하는 파장(λ<sub>max</sub>)은 <strong>짧아져 청색으로 보입니다.</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: 슈테판-볼츠만 법칙 & 별의 광도·반지름 -->
+            <section id="tab-luminosity" class="tab-content">
+                <div class="grid-layout grid-main-sidebar">
+                    
+                    <!-- 메인 시각화 카드: 별 3D 비주얼 & 광자 파티클 -->
+                    <div class="card canvas-card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fa-solid fa-sun highlight"></i>
+                                <span>별의 실제 크기 & 에너지 방출 시각화</span>
+                            </div>
+                        </div>
+
+                        <!-- 슬라이더 컨트롤 구역 -->
+                        <div class="control-panel dual-sliders">
+                            <div class="control-group">
+                                <div class="control-header">
+                                    <label for="radiusSlider">
+                                        <i class="fa-solid fa-expand text-cyan"></i>
+                                        별 반지름 (<i>R</i> / <i>R</i><sub>☉</sub>):
+                                    </label>
+                                    <span id="radiusValueBadge" class="val-badge text-cyan">1.00 R<sub>☉</sub></span>
+                                </div>
+                                <input type="range" id="radiusSlider" min="-1" max="3" step="0.01" value="0">
+                            </div>
+
+                            <div class="control-group">
+                                <div class="control-header">
+                                    <label for="lumTempSlider">
+                                        <i class="fa-solid fa-temperature-high text-amber"></i>
+                                        표면 온도 (<i>T</i>):
+                                    </label>
+                                    <span id="lumTempValueBadge" class="val-badge text-amber">5,778 K</span>
+                                </div>
+                                <input type="range" id="lumTempSlider" min="2000" max="40000" step="100" value="5778">
+                            </div>
+                        </div>
+
+                        <!-- 천체 시각화 캔버스 -->
+                        <div class="canvas-container" id="lumCanvasBox">
+                            <canvas id="lumCanvas"></canvas>
+                            <div id="lumScaleTag" class="scale-tag-overlay">반지름 = 1.00 R<sub>☉</sub> | 온도 = 5,778 K</div>
+                        </div>
+                    </div>
+
+                    <!-- 우측 수치 계기판 -->
+                    <div class="card info-sidebar">
+                        <div class="card-title">
+                            <i class="fa-solid fa-atom highlight"></i>
+                            <span>광도(<i>L</i>) 핵심 관측 수치</span>
+                        </div>
+
+                        <!-- 주요 수치 그리드 -->
+                        <div class="metrics-grid">
+                            <div class="metric-card highlight-card">
+                                <div class="metric-label">별의 총 광도 (<i>L</i>)</div>
+                                <div class="metric-value text-amber" id="lumValue">1.00 L<sub>☉</sub></div>
+                                <div class="metric-sub">태양 총 밝기(광도) 대비 배율</div>
+                            </div>
+
+                            <div class="metric-card highlight-rose">
+                                <div class="metric-label">단위 면적당 방출 에너지 (<i>E</i>)</div>
+                                <div class="metric-value text-rose" id="unitEnergyValue">1.00 E<sub>☉</sub></div>
+                                <div class="metric-sub">온도가 올라갈수록 <i>T</i><sup>4</sup>배로 급증</div>
+                            </div>
+
+                            <div class="metric-card highlight-cyan">
+                                <div class="metric-label">별의 표면적 (4π <i>R</i><sup>2</sup>)</div>
+                                <div class="metric-value text-cyan" id="surfaceAreaValue">1.00 S<sub>☉</sub></div>
+                                <div class="metric-sub">반지름이 2배가 되면 표면적은 4배가 됨</div>
+                            </div>
+                        </div>
+
+                        <!-- 흑체 복사 학습 팁 -->
+                        <div class="info-tip-box">
+                            <div class="tip-header">
+                                <i class="fa-solid fa-lightbulb"></i> 핵심 포인트
+                            </div>
+                            <p>
+                                별의 총 광도(<i>L</i>)는 <strong>표면적(<i>R</i><sup>2</sup>)과 단위 면적당 방출 에너지(<i>T</i><sup>4</sup>)의 곱에 의해 결정됩니다.</strong>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: 유명 항성 2체 비교 -->
+            <section id="tab-comparison" class="tab-content">
+                <div class="grid-layout grid-comparison-layout">
+                    
+                    <!-- 좌측: 항성 A 선택 & 카드 -->
+                    <div class="card star-comp-card" id="cardStarA">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fa-solid fa-star text-cyan"></i>
+                                <span>항성 A 선택</span>
+                            </div>
+                            <select id="selectStarA" class="star-select">
+                                <option value="sun" selected>태양 (Sun)</option>
+                                <option value="betelgeuse">베텔게우스 (Betelgeuse)</option>
+                                <option value="rigel">리겔 (Rigel)</option>
+                                <option value="siriusA">시리우스 A (Sirius A)</option>
+                                <option value="siriusB">시리우스 B (Sirius B)</option>
+                                <option value="aldebaran">알데바란 (Aldebaran)</option>
+                                <option value="spica">스피카 (Spica)</option>
+                                <option value="proxima">프록시마 센타우리 (Proxima Centauri)</option>
+                            </select>
+                        </div>
+
+                        <div class="star-visual-preview">
+                            <div class="star-glow-frame" id="glowA">
+                                <div class="star-core-disc" id="coreA"></div>
+                            </div>
+                            <div class="star-details">
+                                <h3 id="nameA">태양 (Sun)</h3>
+                                <div class="badge-type" id="typeA">황색 주계열성 (G2V)</div>
+                            </div>
+                        </div>
+
+                        <div class="comp-specs-list">
+                            <div class="spec-row">
+                                <span class="spec-label">표면 온도 (<i>T</i>):</span>
+                                <span class="spec-val text-amber" id="tempA">5,778 K</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">반지름 (<i>R</i>):</span>
+                                <span class="spec-val text-cyan" id="radA">1.00 R<sub>☉</sub></span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">최대 방출 파장 (λ<sub>max</sub>):</span>
+                                <span class="spec-val" id="lambdaA">501.5 nm</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">단위 면적당 에너지 (<i>E</i>):</span>
+                                <span class="spec-val text-rose" id="energyA">1.00 E<sub>☉</sub></span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">총 광도 (<i>L</i>):</span>
+                                <span class="spec-val text-amber" id="lumA">1.00 L<sub>☉</sub></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 중앙: 플랑크 곡선 2체 비교 & 수치 차이 캔버스 -->
+                    <div class="card center-comp-card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fa-solid fa-code-compare highlight"></i>
+                                <span>두 별의 복사 스펙트럼 및 물성 비교</span>
+                            </div>
+                        </div>
+
+                        <div class="canvas-container" id="compCanvasBox">
+                            <canvas id="compCanvas"></canvas>
+                        </div>
+
+                        <div class="ratio-readout-grid">
+                            <div class="ratio-box">
+                                <div class="ratio-title">온도 비 (<i>T</i><sub>B</sub> / <i>T</i><sub>A</sub>)</div>
+                                <div class="ratio-val text-amber" id="ratioTemp">1.00 배</div>
+                            </div>
+                            <div class="ratio-box">
+                                <div class="ratio-title">반지름 비 (<i>R</i><sub>B</sub> / <i>R</i><sub>A</sub>)</div>
+                                <div class="ratio-val text-cyan" id="ratioRad">1.00 배</div>
+                            </div>
+                            <div class="ratio-box">
+                                <div class="ratio-title">단위면적 에너지 비 (<i>E</i><sub>B</sub> / <i>E</i><sub>A</sub>)</div>
+                                <div class="ratio-val text-rose" id="ratioEnergy">1.00 배</div>
+                            </div>
+                            <div class="ratio-box">
+                                <div class="ratio-title">총 광도 비 (<i>L</i><sub>B</sub> / <i>L</i><sub>A</sub>)</div>
+                                <div class="ratio-val text-purple" id="ratioLum">1.00 배</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 우측: 항성 B 선택 & 카드 -->
+                    <div class="card star-comp-card" id="cardStarB">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fa-solid fa-star text-rose"></i>
+                                <span>항성 B 선택</span>
+                            </div>
+                            <select id="selectStarB" class="star-select">
+                                <option value="sun">태양 (Sun)</option>
+                                <option value="betelgeuse">베텔게우스 (Betelgeuse)</option>
+                                <option value="rigel" selected>리겔 (Rigel)</option>
+                                <option value="siriusA">시리우스 A (Sirius A)</option>
+                                <option value="siriusB">시리우스 B (Sirius B)</option>
+                                <option value="aldebaran">알데바란 (Aldebaran)</option>
+                                <option value="spica">스피카 (Spica)</option>
+                                <option value="proxima">프록시마 센타우리 (Proxima Centauri)</option>
+                            </select>
+                        </div>
+
+                        <div class="star-visual-preview">
+                            <div class="star-glow-frame" id="glowB">
+                                <div class="star-core-disc" id="coreB"></div>
+                            </div>
+                            <div class="star-details">
+                                <h3 id="nameB">리겔 (Rigel)</h3>
+                                <div class="badge-type" id="typeB">청백색 초거성 (B8Ia)</div>
+                            </div>
+                        </div>
+
+                        <div class="comp-specs-list">
+                            <div class="spec-row">
+                                <span class="spec-label">표면 온도 (<i>T</i>):</span>
+                                <span class="spec-val text-amber" id="tempB">12,100 K</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">반지름 (<i>R</i>):</span>
+                                <span class="spec-val text-cyan" id="radB">78.90 R<sub>☉</sub></span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">최대 방출 파장 (λ<sub>max</sub>):</span>
+                                <span class="spec-val" id="lambdaB">239.5 nm</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">단위 면적당 에너지 (<i>E</i>):</span>
+                                <span class="spec-val text-rose" id="energyB">19.26 E<sub>☉</sub></span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">총 광도 (<i>L</i>):</span>
+                                <span class="spec-val text-amber" id="lumB">120,000 L<sub>☉</sub></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 설명 모달 팝업 -->
+    <div id="infoModal" class="modal-backdrop">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-circle-info"></i> 별과 흑체 복사 설명</h2>
+                <button id="modalCloseBtn" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="principle-section">
+                    <h3>1. 흑체(Blackbody)와 별의 복사</h3>
+                    <p>
+                        <strong>흑체</strong>란 자신에게 입사되는 모든 전자기파 에너지를 100% 흡수하고, 흡수한 에너지를 복사의 형태로 모두 방출하는 이상적인 물체입니다. 별은 흑체에 가까운 성질을 지니고 있어, 표면 온도에 따라 각 파장에서 방출하는 복사 에너지의 양과 색깔이 결정됩니다.
+                    </p>
+                </div>
+
+                <div class="principle-section">
+                    <h3>2. 플랑크 곡선과 별의 색상</h3>
+                    <p>
+                        흑체의 표면 온도(<i>T</i>)가 높아질수록 <strong>모든 파장 영역에서 더 많은 복사 에너지</strong>를 방출합니다. 또한 에너지를 가장 강하게 방출하는 파장(λ<sub>max</sub>)은 온도가 높을수록 <strong>짧아져 파란색 방향으로 이동합니다.</strong>
+                    </p>
+                    <ul>
+                        <li><strong>고온의 별 (예: 리겔 ~12,100 K)</strong>: 최대 방출 파장이 짧아 청백색으로 보입니다.</li>
+                        <li><strong>저온의 별 (예: 베텔게우스 ~3,500 K)</strong>: 최대 방출 파장이 길어 붉은색으로 보입니다.</li>
+                    </ul>
+                </div>
+
+                <div class="principle-section">
+                    <h3>3. 슈테판 · 볼츠만 법칙</h3>
+                    <div class="html-formula-card">
+                        <i>E</i> = σ <i>T</i><sup>4</sup>
+                    </div>
+                    <p>
+                        흑체가 단위 시간 동안 <strong>단위 면적에서 방출하는 복사 에너지 양(<i>E</i>)</strong>은 표면 온도(<i>T</i>)의 <strong>4제곱에 비례합니다.</strong> 표면 온도가 2배가 되면 단위 면적당 방출 에너지는 2<sup>4</sup> = 16배가 됩니다.
+                    </p>
+                </div>
+
+                <div class="principle-section">
+                    <h3>4. 별의 광도(<i>L</i>)와 반지름(<i>R</i>)의 관계</h3>
+                    <div class="html-formula-card">
+                        <i>L</i> = (별의 표면적 4π <i>R</i><sup>2</sup>) × (단위 면적당 에너지 σ <i>T</i><sup>4</sup>) = 4π <i>R</i><sup>2</sup> σ <i>T</i><sup>4</sup>
+                    </div>
+                    <p>
+                        전체 표면에서 방출하는 에너지를 뜻하므로, <strong>반지름의 제곱(<i>R</i><sup>2</sup>)과 표면 온도의 4제곱(<i>T</i><sup>4</sup>)의 곱에 비례합니다.</strong>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JS 스크립트 모듈 -->
+    <script src="js/audio.js"></script>
+    <script src="js/planckCurve.js"></script>
+    <script src="js/luminositySim.js"></script>
+    <script src="js/starComparison.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
