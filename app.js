@@ -106,6 +106,18 @@ const DEFAULT_TEMPLATES = [
     likes: 490,
     url: './흑체복사시뮬레이션/index.html',
     code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./흑체복사시뮬레이션/index.html -->'
+  },
+  {
+    name: '부력과 아르키메데스 원리 시뮬레이션',
+    author: 'All Science 물리 랩',
+    description: '유체 속 물체의 부력 원리, 아르키메데스 법칙, 용수철 저울 측정, 선박 및 잠수함의 침강/부상원리, 열기구 기체 부력을 시각적으로 탐구하는 시뮬레이션입니다.',
+    category: 'physics',
+    imageStyle: 'buoyancy_thumbnail.jpg',
+    translationKey: 'Buoyancy',
+    views: 12800,
+    likes: 460,
+    url: './부력과아르키메데스원리시뮬레이션/index.html',
+    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./부력과아르키메데스원리시뮬레이션/index.html -->'
   }
 ];
 
@@ -197,7 +209,11 @@ const TRANSLATIONS = {
     
     templateBlackbodyName: "별과 흑체 복사 시뮬레이션",
     templateBlackbodyAuthor: "All Science 지구과학 랩",
-    templateBlackbodyDesc: "별의 표면 온도, 흑체 복사, 플랑크 곡선, 슈테판-볼츠만 법칙, 빈의 변위 법칙 및 별의 광도와 반지름 관계를 시각적으로 탐구하는 시뮬레이션입니다."
+    templateBlackbodyDesc: "별의 표면 온도, 흑체 복사, 플랑크 곡선, 슈테판-볼츠만 법칙, 빈의 변위 법칙 및 별의 광도와 반지름 관계를 시각적으로 탐구하는 시뮬레이션입니다.",
+    
+    templateBuoyancyName: "부력과 아르키메데스 원리 시뮬레이션",
+    templateBuoyancyAuthor: "All Science 물리 랩",
+    templateBuoyancyDesc: "유체 속 물체의 부력 원리, 아르키메데스 법칙, 용수철 저울 측정, 선박 및 잠수함의 침강/부상원리, 열기구 기체 부력을 시각적으로 탐구하는 시뮬레이션입니다."
   },
   en: {
     // Header & Hub
@@ -286,7 +302,11 @@ const TRANSLATIONS = {
     
     templateBlackbodyName: "Star & Blackbody Radiation Simulation",
     templateBlackbodyAuthor: "All Science Earth Science Lab",
-    templateBlackbodyDesc: "Explore stellar surface temperature, blackbody radiation, Planck's law curve, Stefan-Boltzmann law, Wien's displacement law, and the relationship between luminosity and stellar radius."
+    templateBlackbodyDesc: "Explore stellar surface temperature, blackbody radiation, Planck's law curve, Stefan-Boltzmann law, Wien's displacement law, and the relationship between luminosity and stellar radius.",
+    
+    templateBuoyancyName: "Buoyancy & Archimedes' Principle Simulation",
+    templateBuoyancyAuthor: "All Science Physics Lab",
+    templateBuoyancyDesc: "Explore buoyancy of objects in fluids, Archimedes' principle, spring balance measurements, principles of ships and submarines, and hot air balloon gas buoyancy."
   }
 };
 

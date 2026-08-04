@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>부력과 아르키메데스 원리 시뮬레이션</title>
+    <meta name="description" content="부력의 원리, 아르키메데스의 법칙, 용수철 저울 측정, 잠수함과 배의 원리, 열기구 기체 부력을 탐구하는 대화형 과학 시뮬레이션입니다.">
+    
+    <!-- FontAwesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+    <link rel="stylesheet" href="style.css">
+    <script src="../translator.js"></script>
+</head>
+<body>
+
+    <!-- 앱 전체 컨테이너 -->
+    <div class="app-container">
+        
+        <!-- 헤더 바 -->
+        <header class="app-header">
+            <div class="header-left">
+                <button class="icon-btn back-btn" onclick="location.href='../index.html'" title="목록으로 돌아가기">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                    <span>뒤로</span>
+                </button>
+                <div class="title-container">
+                    <div class="pulse-dot"></div>
+                    <h1>부력과 아르키메데스 원리</h1>
+                </div>
+            </div>
+
+            <!-- 네비게이션 탭 -->
+            <nav class="nav-tabs">
+                <button class="tab-btn active" data-tab="tab-archimedes">
+                    <i class="fa-solid fa-water"></i>
+                    <span class="tab-text-full">1. 아르키메데스 원리 & 힘 분석</span>
+                    <span class="tab-text-short">1. 아르키메데스 원리</span>
+                </button>
+                <button class="tab-btn" data-tab="tab-ship">
+                    <i class="fa-solid fa-ship"></i>
+                    <span class="tab-text-full">2. 배 & 잠수함 원리</span>
+                    <span class="tab-text-short">2. 배 & 잠수함</span>
+                </button>
+                <button class="tab-btn" data-tab="tab-balloon">
+                    <i class="fa-solid fa-plane-flight"></i>
+                    <span class="tab-text-full">3. 열기구 (기체 부력)</span>
+                    <span class="tab-text-short">3. 열기구</span>
+                </button>
+            </nav>
+
+            <div class="header-right">
+                <button class="icon-btn principle-btn" id="btn-info" title="원리 설명 보기">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                    <span>원리 설명</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- 메인 콘텐츠 영역 -->
+        <main class="main-content">
+            
+            <!-- Tab 1: 아르키메데스 원리 & 힘 분석 -->
+            <div class="tab-pane active" id="tab-archimedes">
+                <div class="simulation-layout">
+                    
+                    <!-- 캔버스 및 시각화 영역 -->
+                    <div class="canvas-container-wrapper">
+                        <div class="canvas-header">
+                            <div class="status-indicator">
+                                <span class="badge" id="state-badge">물체 상태: 떠오름</span>
+                                <span class="badge secondary" id="submerged-ratio-badge">잠긴 부피: 0%</span>
+                            </div>
+                            <div class="canvas-actions">
+                                <button class="sm-btn active" id="btn-toggle-vectors" title="힘 화살표 토글">
+                                    <i class="fa-solid fa-arrows-up-down"></i> 힘 화살표
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="canvas-viewport">
+                            <canvas id="canvas-archimedes"></canvas>
+                            
+                            <!-- 캔버스 위 실시간 수치 오버레이 -->
+                            <div class="canvas-overlay-data">
+                                <div class="data-chip gravity-chip">
+                                    <i class="fa-solid fa-arrow-down red"></i>
+                                    <span>중력 F<sub>g</sub> = <strong id="val-fg-display">0.00</strong> N</span>
+                                </div>
+                                <div class="data-chip buoyant-chip">
+                                    <i class="fa-solid fa-arrow-up green"></i>
+                                    <span>부력 F<sub>b</sub> = <strong id="val-fb-display">0.00</strong> N</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 튜토리얼 팁 -->
+                        <div class="interactive-tip">
+                            <i class="fa-solid fa-hand-pointer"></i>
+                            <span>물체를 마우스로 드래그하여 유체 속 깊이를 조절해보세요! 손을 놓으면 물리 법칙에 따라 움직입니다.</span>
+                        </div>
+                    </div>
+
+                    <!-- 제어 사이드바 -->
+                    <aside class="control-sidebar">
+                        
+                        <!-- 물체 설정 -->
+                        <div class="control-card">
+                            <h3><i class="fa-solid fa-cube"></i> 물체 설정</h3>
+                            
+                            <div class="form-group">
+                                <label>재질 프리셋</label>
+                                <div class="preset-grid" id="object-presets">
+                                    <button class="preset-btn" data-density="0.6" data-name="목재">목재 (0.6g/cm³)</button>
+                                    <button class="preset-btn active" data-density="0.92" data-name="얼음">얼음 (0.92g/cm³)</button>
+                                    <button class="preset-btn" data-density="0.95" data-name="플라스틱">플라스틱 (0.95g/cm³)</button>
+                                    <button class="preset-btn" data-density="2.7" data-name="알루미늄">알루미늄 (2.7g/cm³)</button>
+                                    <button class="preset-btn" data-density="7.87" data-name="철">철 (7.87g/cm³)</button>
+                                    <button class="preset-btn" data-density="19.3" data-name="금">금 (19.3g/cm³)</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="slider-header">
+                                    <span>물체 밀도 (ρ<sub>물체</sub>)</span>
+                                    <span class="value-display" id="val-obj-density">0.92 g/cm³</span>
+                                </div>
+                                <input type="range" id="slider-obj-density" min="0.1" max="20" step="0.05" value="0.92">
+                            </div>
+
+                            <div class="form-group">
+                                <div class="slider-header">
+                                    <span>물체 부피 (V)</span>
+                                    <span class="value-display" id="val-obj-volume">500 cm³</span>
+                                </div>
+                                <input type="range" id="slider-obj-volume" min="100" max="2000" step="50" value="500">
+                            </div>
+                        </div>
+
+                        <!-- 유체 및 환경 설정 -->
+                        <div class="control-card">
+                            <h3><i class="fa-solid fa-droplet"></i> 유체 & 환경 설정</h3>
+                            
+                            <div class="form-group">
+                                <label>유체 프리셋</label>
+                                <div class="preset-grid" id="fluid-presets">
+                                    <button class="preset-btn active" data-density="1.0" data-name="순수한 물">물 (1.00g/cm³)</button>
+                                    <button class="preset-btn" data-density="1.03" data-name="바닷물">바닷물 (1.03g/cm³)</button>
+                                    <button class="preset-btn" data-density="0.92" data-name="식용유">식용유 (0.92g/cm³)</button>
+                                    <button class="preset-btn" data-density="0.79" data-name="에탄올">에탄올 (0.79g/cm³)</button>
+                                    <button class="preset-btn" data-density="1.24" data-name="사해(소금물)">사해 (1.24g/cm³)</button>
+                                    <button class="preset-btn" data-density="13.6" data-name="수은">수은 (13.6g/cm³)</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="slider-header">
+                                    <span>유체 밀도 (ρ<sub>유체</sub>)</span>
+                                    <span class="value-display" id="val-fluid-density">1.00 g/cm³</span>
+                                </div>
+                                <input type="range" id="slider-fluid-density" min="0.2" max="14.0" step="0.05" value="1.00">
+                            </div>
+
+                            <div class="form-group">
+                                <div class="slider-header">
+                                    <span>중력 가속도 (g)</span>
+                                    <span class="value-display" id="val-gravity">9.80 m/s² (지구)</span>
+                                </div>
+                                <input type="range" id="slider-gravity" min="0" max="25" step="0.1" value="9.8">
+                            </div>
+                        </div>
+
+                    </aside>
+                </div>
+
+
+            </div>
+
+            <!-- Tab 2: 배 & 잠수함 원리 -->
+            <div class="tab-pane" id="tab-ship">
+                <div class="simulation-layout">
+                    <div class="canvas-container-wrapper">
+                        <div class="canvas-header">
+                            <div class="status-indicator">
+                                <span class="badge" id="ship-state-badge">모드: 철강 선박 (부력 형성)</span>
+                                <span class="badge secondary" id="ship-draft-badge">흘수선 높이: 45%</span>
+                            </div>
+                            <div class="btn-group">
+                                <button class="sm-btn active" id="btn-mode-ship">
+                                    <i class="fa-solid fa-ship"></i> 수상 선박 모드
+                                </button>
+                                <button class="sm-btn" id="btn-mode-sub">
+                                    <i class="fa-solid fa-water-lower"></i> 잠수함 모드
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="canvas-viewport">
+                            <canvas id="canvas-ship"></canvas>
+                        </div>
+
+                        <div class="interactive-tip">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <span id="ship-tip-text">화물 무게를 추가하거나 잠수함 바수조(Ballast Tank)의 물/공기 비율을 조절해보세요!</span>
+                        </div>
+                    </div>
+
+                    <aside class="control-sidebar">
+                        <!-- 선박 컨트롤 -->
+                        <div class="control-card" id="card-ship-controls">
+                            <h3><i class="fa-solid fa-boxes-stacked"></i> 화물 적재 (선박 모드)</h3>
+                            
+                            <div class="form-group">
+                                <div class="slider-header">
+                                    <span>선체 배치 화물 개수</span>
+                                    <span class="value-display" id="val-cargo-count">2 개 (총 200kg)</span>
+                                </div>
+                                <input type="range" id="slider-cargo" min="0" max="10" step="1" value="2">
+                            </div>
+
+                            <div class="form-group">
+                                <div class="slider-header">
+                                    <span>선체 내부 중공(공기층) 부피</span>
+                                    <span class="value-display" id="val-hull-volume">1500 cm³</span>
+                                </div>
+                                <input type="range" id="slider-hull-volume" min="500" max="3000" step="100" value="1500">
+                            </div>
+
+                            <div class="info-callout">
+                                <strong>💡 선박 부력 핵심</strong>
+                                철(7.87 g/cm³)도 속을 비워 내부 부피를 크게 만들어 배의 평균 밀도를 물(1.0 g/cm³)보다 낮추면 크게 떠오릅니다!
+                            </div>
+                        </div>
+
+                        <!-- 잠수함 컨트롤 -->
+                        <div class="control-card hidden" id="card-sub-controls">
+                            <h3><i class="fa-solid fa-sliders"></i> 벨러스트 탱크 (잠수함 모드)</h3>
+                            
+                            <div class="form-group">
+                                <div class="slider-header">
+                                    <span>탱크 내부 주입 물 비율 (%)</span>
+                                    <span class="value-display" id="val-ballast-water">50 % (중성 부력)</span>
+                                </div>
+                                <input type="range" id="slider-ballast" min="0" max="100" step="1" value="50">
+                            </div>
+
+                            <div class="quick-preset-row">
+                                <button class="sm-action-btn" id="btn-sub-surpass">부상 (공기 주입)</button>
+                                <button class="sm-action-btn" id="btn-sub-hover">정지 (중성 부력)</button>
+                                <button class="sm-action-btn" id="btn-sub-dive">잠수 (물 주입)</button>
+                            </div>
+
+                            <div class="info-callout">
+                                <strong>💡 잠수함의 침강/부상 원리</strong>
+                                밸러스트 탱크에 물을 채우면 무게가 늘어나 평균 밀도가 물보다 커져 잠수하고, 압축 공기로 물을 밀어내면 평균 밀도가 낮아져 부상합니다.
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+
+            <!-- Tab 3: 열기구 (기체 부력) -->
+            <div class="tab-pane" id="tab-balloon">
+                <div class="simulation-layout">
+                    <div class="canvas-container-wrapper">
+                        <div class="canvas-header">
+                            <div class="status-indicator">
+                                <span class="badge" id="balloon-status">상태: 고도 유지 중</span>
+                                <span class="badge secondary" id="balloon-altitude">현재 고도: 120 m</span>
+                            </div>
+                        </div>
+
+                        <div class="canvas-viewport">
+                            <canvas id="canvas-balloon"></canvas>
+
+                            <!-- 캔버스 위 실시간 수치 오버레이 -->
+                            <div class="canvas-overlay-data">
+                                <div class="data-chip buoyant-chip">
+                                    <i class="fa-solid fa-arrow-up green"></i>
+                                    <span>대기 부력 F<sub>b</sub> = <strong id="val-balloon-fb">0</strong> N</span>
+                                </div>
+                                <div class="data-chip gravity-chip">
+                                    <i class="fa-solid fa-arrow-down red"></i>
+                                    <span>총 중력 F<sub>g</sub> = <strong id="val-balloon-fg">0</strong> N</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="interactive-tip">
+                            <i class="fa-solid fa-fire-flame-curved red"></i>
+                            <span>버너 화력을 조절하여 공기를 가열하세요! 가열된 공기는 밀도가 낮아져 대기 부력을 받습니다.</span>
+                        </div>
+                    </div>
+
+                    <aside class="control-sidebar">
+                        <div class="control-card">
+                            <h3><i class="fa-solid fa-fire-flame-simple"></i> 열기구 가열 제어</h3>
+                            
+                            <div class="form-group">
+                                <div class="slider-header">
+                                    <span>버너 가열 화력</span>
+                                    <span class="value-display" id="val-burner-power">50 %</span>
+                                </div>
+                                <input type="range" id="slider-burner" min="0" max="100" step="1" value="50">
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <div class="slider-header">
+                                    <span>열기구 내 공기 온도</span>
+                                    <span class="value-display" id="val-air-temp">65 °C</span>
+                                </div>
+                                <div class="temp-indicator-bar">
+                                    <div class="temp-fill" id="temp-fill-bar" style="width: 50%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="slider-header">
+                                    <span>탑승 화물/승객 무게</span>
+                                    <span class="value-display" id="val-balloon-load">250 kg</span>
+                                </div>
+                                <input type="range" id="slider-balloon-load" min="50" max="600" step="25" value="250">
+                            </div>
+
+                            <div class="info-callout">
+                                <strong>🎈 기체 부력 공식</strong>
+                                대기 부력 F<sub>b</sub> = (ρ<sub>외부공기</sub> - ρ<sub>내부공기</sub>) × V<sub>열기구</sub> × g<br>
+                                공기는 가열할수록 기체 분자 운동이 활발해져 밀도(ρ)가 작아집니다.
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+
+
+
+        </main>
+    </div>
+
+    <!-- 원리 설명 모달 -->
+    <div class="modal-backdrop hidden" id="modal-info">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-book-bookmark"></i> 부력과 아르키메데스의 원리 개념 정리</h2>
+                <button class="close-btn" id="btn-close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <section class="info-section">
+                    <h3>1. 부력이란?</h3>
+                    <p>
+                        유체(액체나 기체) 속에 놓인 물체가 유체로부터 위쪽 방향으로 받는 힘을 <strong>부력</strong>이라고 합니다.
+                        액체 속 깊이가 깊어질수록 수압이 증가하기 때문에 물체의 아래쪽 면에 작용하는 위쪽 수압이 상단 면에 작용하는 아래쪽 수압보다 커서 알짜 힘이 위쪽으로 발생합니다.
+                    </p>
+                </section>
+
+                <section class="info-section">
+                    <h3>2. 아르키메데스의 원리</h3>
+                    <div class="formula-box">
+                        F<sub>b</sub> = ρ<sub>유체</sub> × V<sub>잠김</sub> × g
+                    </div>
+                    <ul>
+                        <li><strong>유체 속에 잠긴 물체가 받는 부력의 크기는 물체가 밀어낸 유체의 무게와 정확히 같다!</strong></li>
+                        <li>ρ<sub>유체</sub>: 유체의 밀도 (kg/m³ 또는 g/cm³)</li>
+                        <li>V<sub>잠김</sub>: 물체가 유체 속에 잠긴 부피 (m³ 또는 cm³)</li>
+                        <li>g: 중력 가속도 (m/s²)</li>
+                    </ul>
+                </section>
+
+                <section class="info-section">
+                    <h3>3. 물체의 떠오름, 가라앉음, 정지 조건</h3>
+                    <div class="condition-grid">
+                        <div class="cond-card float">
+                            <h4>떠오름</h4>
+                            <p><strong>ρ<sub>물체</sub> &lt; ρ<sub>유체</sub></strong></p>
+                            <p>중력보다 부력이 커서 위로 부유하며, 잠긴 부피의 비율만큼만 물에 잠겨 평형(F<sub>g</sub> = F<sub>b</sub>)을 이룹니다.</p>
+                        </div>
+                        <div class="cond-card neutral">
+                            <h4>중성 부력</h4>
+                            <p><strong>ρ<sub>물체</sub> = ρ<sub>유체</sub></strong></p>
+                            <p>유체 속 임의의 깊이에 가만히 정지해 있습니다 (예: 잠수함 호버링).</p>
+                        </div>
+                        <div class="cond-card sink">
+                            <h4>가라앉음</h4>
+                            <p><strong>ρ<sub>물체</sub> &gt; ρ<sub>유체</sub></strong></p>
+                            <p>중력이 최대 부력보다 커서 바닥까지 가라앉습니다. (물속 겉보기 무게 = 중력 - 부력)</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script File -->
+    <script src="script.js"></script>
+</body>
+</html>
