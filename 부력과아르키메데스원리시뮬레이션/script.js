@@ -214,7 +214,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
-    window.addEventListener('resize', resizeCanvases);
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+        if (resizeTimer) cancelAnimationFrame(resizeTimer);
+        resizeTimer = requestAnimationFrame(resizeCanvases);
+    });
     resizeCanvases();
 
     // Helper to calculate canvas coordinates from mouse/touch event
