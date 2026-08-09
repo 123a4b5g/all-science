@@ -733,7 +733,7 @@ const app = {
             <div class="bg-slate-50 px-2 py-1 border-b border-slate-100 flex items-center justify-between text-[6px] font-mono text-slate-400 shrink-0">
               <div class="flex gap-1 items-center">
                 <span class="w-1 h-1 rounded-full bg-slate-300"></span>
-                <span class="text-[5px] text-slate-400">https://timer.allscience.org</span>
+                <span class="text-[5px] text-slate-400">https://all-science.pages.dev</span>
               </div>
               <span>Timer Clock</span>
             </div>
