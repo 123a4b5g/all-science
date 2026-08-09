@@ -24,7 +24,7 @@ class AtomVisualizer {
     const rect = this.canvas.getBoundingClientRect();
     if (rect.width === 0 || rect.height === 0) return;
 
-    const dpr = window.devicePixelRatio || 1;
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     this.canvas.width = Math.floor(rect.width * dpr);
     this.canvas.height = Math.floor(rect.height * dpr);
     
@@ -65,7 +65,7 @@ class AtomVisualizer {
 
   draw() {
     if (!this.canvas) return;
-    const dpr = window.devicePixelRatio || 1;
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     const width = this.canvas.width / dpr || 400;
     const height = this.canvas.height / dpr || 400;
 

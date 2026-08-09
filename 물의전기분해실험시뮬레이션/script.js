@@ -1686,7 +1686,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Resizing the canvas dynamically
     function resizeCanvas() {
-        const dpr = window.devicePixelRatio || 1;
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
         const rect = canvas.getBoundingClientRect();
         canvas.width = rect.width * dpr;
         canvas.height = rect.height * dpr;
@@ -1884,7 +1884,7 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.addEventListener("click", (e) => {
         if (!state.showMicro) return;
         
-        const dpr = window.devicePixelRatio || 1;
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
         const rect = canvas.getBoundingClientRect();
         const clickX = (e.clientX - rect.left) * (width / rect.width);
         const clickY = (e.clientY - rect.top) * (height / rect.height);

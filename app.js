@@ -118,6 +118,18 @@ const DEFAULT_TEMPLATES = [
     likes: 460,
     url: './부력과아르키메데스원리시뮬레이션/index.html',
     code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./부력과아르키메데스원리시뮬레이션/index.html -->'
+  },
+  {
+    name: '돌림힘과 강체의 역학적 평형 시뮬레이션',
+    author: 'All Science 물리 랩',
+    description: '돌림힘(Torque)의 정의, 회전축과 팔의 길이, 힘의 분해, 수직항력 및 강체의 역학적 평형 조건(∑F=0, ∑τ=0)을 탐구하는 2022 개정 물리학 시뮬레이션입니다.',
+    category: 'physics',
+    imageStyle: 'torque_thumbnail.png',
+    translationKey: 'Torque',
+    views: 11500,
+    likes: 420,
+    url: './돌림힘과역학적평형시뮬레이션/index.html',
+    code: '<!-- 외부 URL로 연결된 시뮬레이션입니다. -->\n<!-- ./돌림힘과역학적평형시뮬레이션/index.html -->'
   }
 ];
 
@@ -213,7 +225,11 @@ const TRANSLATIONS = {
     
     templateBuoyancyName: "부력과 아르키메데스 원리 시뮬레이션",
     templateBuoyancyAuthor: "All Science 물리 랩",
-    templateBuoyancyDesc: "유체 속 물체의 부력 원리, 아르키메데스 법칙, 용수철 저울 측정, 선박 및 잠수함의 침강/부상원리, 열기구 기체 부력을 시각적으로 탐구하는 시뮬레이션입니다."
+    templateBuoyancyDesc: "유체 속 물체의 부력 원리, 아르키메데스 법칙, 용수철 저울 측정, 선박 및 잠수함의 침강/부상원리, 열기구 기체 부력을 시각적으로 탐구하는 시뮬레이션입니다.",
+    
+    templateTorqueName: "돌림힘과 강체의 역학적 평형 시뮬레이션",
+    templateTorqueAuthor: "All Science 물리 랩",
+    templateTorqueDesc: "돌림힘(Torque)의 정의, 회전축과 팔의 길이, 힘의 분해, 수직항력 및 강체의 역학적 평형 조건(∑F=0, ∑τ=0)을 탐구하는 2022 개정 물리학 시뮬레이션입니다."
   },
   en: {
     // Header & Hub
@@ -306,7 +322,11 @@ const TRANSLATIONS = {
     
     templateBuoyancyName: "Buoyancy & Archimedes' Principle Simulation",
     templateBuoyancyAuthor: "All Science Physics Lab",
-    templateBuoyancyDesc: "Explore buoyancy of objects in fluids, Archimedes' principle, spring balance measurements, principles of ships and submarines, and hot air balloon gas buoyancy."
+    templateBuoyancyDesc: "Explore buoyancy of objects in fluids, Archimedes' principle, spring balance measurements, principles of ships and submarines, and hot air balloon gas buoyancy.",
+    
+    templateTorqueName: "Torque & Rigid Body Equilibrium Simulation",
+    templateTorqueAuthor: "All Science Physics Lab",
+    templateTorqueDesc: "Explore definition of torque, axis of rotation, lever arm length, force resolution, normal forces, and mechanical equilibrium conditions (∑F=0, ∑τ=0) for rigid bodies."
   }
 };
 

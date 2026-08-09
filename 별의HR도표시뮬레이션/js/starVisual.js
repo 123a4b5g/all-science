@@ -31,10 +31,11 @@ class StarVisualizer {
 
     initResize() {
         const resize = () => {
+            const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
             const rect = this.canvas.parentElement.getBoundingClientRect();
-            this.canvas.width = rect.width * (window.devicePixelRatio || 1);
-            this.canvas.height = rect.height * (window.devicePixelRatio || 1);
-            this.ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+            this.canvas.width = rect.width * dpr;
+            this.canvas.height = rect.height * dpr;
+            this.ctx.scale(dpr, dpr);
             this.cssWidth = rect.width;
             this.cssHeight = rect.height;
         };
