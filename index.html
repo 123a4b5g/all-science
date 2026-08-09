@@ -382,107 +382,56 @@
           <div class="bg-slate-950 border border-slate-900 rounded-2xl p-3 shadow-xl flex flex-col relative h-full min-h-[380px]">
             <div class="flex items-center justify-between border-b border-slate-900 pb-2 mb-2">
               <div class="flex items-center gap-2">
-                <i data-lucide="terminal" class="w-4 h-4 text-te    <!-- Educational & Science Portal Overview Card (Googlebot & User Visible Content) -->
-    <article class="bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-8 shadow-xs flex flex-col gap-6 mt-4">
-      <div class="flex items-center gap-2 pb-3 border-b border-slate-100">
-        <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
-        <h2 class="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight">
-          All Science - 중등·고등 대화형 과학 실험 시뮬레이션 및 온라인 가상 실험실
-        </h2>
+                <i data-lucide="terminal" class="w-4 h-4 text-teal-400 animate-pulse"></i>
+                <span class="text-xs font-bold text-slate-300 font-mono">Runtime Sandbox Terminal: Isolated HTML5 Sandbox</span>
+              </div>
+              <button onclick="app.refreshSandbox()" class="text-[10px] text-teal-400 hover:text-teal-300 font-bold flex items-center gap-1 cursor-pointer font-sans bg-teal-500/10 px-2 py-0.5 rounded">
+                <i data-lucide="refresh-cw" class="w-3 h-3"></i>
+                <span data-i18n="rebootBtn">재생 재부팅</span>
+              </button>
+            </div>
+            <div class="relative flex-1 bg-black rounded-xl overflow-hidden border border-slate-900 flex flex-col min-h-[290px]" id="iframe-container">
+              <div id="iframe-scaler" class="w-full h-full origin-top-left">
+                <iframe id="sandbox-iframe" sandbox="allow-scripts allow-modals allow-same-origin" class="w-full h-full border-0 bg-white"></iframe>
+              </div>
+            </div>
+            <div class="mt-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-slate-400">
+              <div>
+                <h4 id="sandbox-title" class="font-extrabold text-slate-200">Title</h4>
+                <p id="sandbox-author" class="text-[10px] text-slate-500 font-mono mt-0.5">Author Channel: </p>
+              </div>
+              <div class="flex items-center gap-2">
+                <button id="btn-like" onclick="app.toggleLike()" class="px-3 py-1.5 rounded-full text-[11px] font-bold flex items-center gap-1.5 cursor-pointer bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800">
+                  <i data-lucide="heart" id="icon-like" class="w-3.5 h-3.5"></i>
+                  <span id="text-like" data-i18n="likeAdd">즐겨찾기 추가</span>
+                </button>
+              </div>
+            </div>
+            <div class="mt-3 bg-slate-900/60 rounded-xl p-3 text-[11px] text-slate-400 border border-slate-900/80">
+              <span class="font-bold text-slate-300 block mb-1" data-i18n="descSummary">상세 원리 요약:</span>
+              <p id="sandbox-desc" class="leading-relaxed whitespace-pre-wrap">Description</p>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <p class="text-xs text-slate-600 leading-relaxed font-medium">
-        All Science Systems 포털은 중등 및 고등 과학 교과 과정(물리, 화학, 지구과학)에서 다루는 주요 물리 법칙, 화학 반응, 지구 및 우주 현상을 대화형 자바스크립트 가상 시뮬레이터로 제공합니다. 웹 브라우저 상에서 매개변수를 직접 조정하며 과학적 원리를 시각적·정량적으로 실습할 수 있습니다.
-      </p>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-1">
-        <section class="p-4 rounded-2xl bg-slate-50 border border-slate-200/60 flex flex-col gap-1.5">
-          <h3 class="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-            <span class="text-teal-600 font-extrabold">01.</span> 역학 및 운동 법칙 (F=ma)
-          </h3>
-          <p class="text-[11.5px] text-slate-500 leading-normal">
-            질량($m$), 가하는 힘($F$), 마찰 계수($\mu$)를 자유롭게 조절하여 뉴턴의 제2법칙($F=ma$) 가속도 운동과 탄성/비탄성 충돌 시 운동량 보존 법칙($m_1 v_1 + m_2 v_2 = m_1 v_1' + m_2 v_2'$)을 관찰합니다.
-          </p>
-        </section>
-
-        <section class="p-4 rounded-2xl bg-slate-50 border border-slate-200/60 flex flex-col gap-1.5">
-          <h3 class="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-            <span class="text-teal-600 font-extrabold">02.</span> 파동의 간섭 (1D 펄스 중첩)
-          </h3>
-          <p class="text-[11.5px] text-slate-500 leading-normal">
-            서로 다른 방향으로 진행하는 두 파동 펄스의 보강 간섭과 상쇄 간섭 현상을 실시간 변위 그래프 및 수학적 중첩 공식으로 분석하는 파동 시뮬레이션입니다.
-          </p>
-        </section>
-
-        <section class="p-4 rounded-2xl bg-slate-50 border border-slate-200/60 flex flex-col gap-1.5">
-          <h3 class="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-            <span class="text-teal-600 font-extrabold">03.</span> 물의 전기분해 실험
-          </h3>
-          <p class="text-[11.5px] text-slate-500 leading-normal">
-            전해질 용액에 전류를 흘려 (+)극에서 산소($O_2$) 및 염소($Cl_2$) 기체, (-)극에서 수소($H_2$) 기체가 분해 생성되는 산화·환원 반응을 화학적으로 관측합니다.
-          </p>
-        </section>
-
-        <section class="p-4 rounded-2xl bg-slate-50 border border-slate-200/60 flex flex-col gap-1.5">
-          <h3 class="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-            <span class="text-teal-600 font-extrabold">04.</span> 일식과 월식 3D 관측
-          </h3>
-          <p class="text-[11.5px] text-slate-500 leading-normal">
-            태양, 지구, 달의 상대 위치 및 백도 경사각($5.14^\circ$)을 조절하여 개기일식, 금환일식, 개기월식의 발생 원리를 3D 우주 시점과 지구 관찰자 시점으로 탐구합니다.
-          </p>
-        </section>
-
-        <section class="p-4 rounded-2xl bg-slate-50 border border-slate-200/60 flex flex-col gap-1.5">
-          <h3 class="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-            <span class="text-teal-600 font-extrabold">05.</span> 렌즈의 빛 굴절
-          </h3>
-          <p class="text-[11.5px] text-slate-500 leading-normal">
-            볼록렌즈와 오목렌즈를 통과하는 빛의 굴절 공식($\frac{1}{a} + \frac{1}{b} = \frac{1}{f}$)과 실상 및 허상 형성 원리를 광학 실습 레일 위에서 확인합니다.
-          </p>
-        </section>
-
-        <section class="p-4 rounded-2xl bg-slate-50 border border-slate-200/60 flex flex-col gap-1.5">
-          <h3 class="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-            <span class="text-teal-600 font-extrabold">06.</span> 렌츠의 법칙 & 전자기 유도
-          </h3>
-          <p class="text-[11.5px] text-slate-500 leading-normal">
-            자석이 코일에 다가올 때 자속 변화를 방해하려는 유도 기전력과 유도 전류($V = -N \frac{d\Phi}{dt}$) 발생 현상을 검류계 바늘과 자기력선으로 시각화합니다.
-          </p>
-        </section>
-      </div>
-    </article>
+    </div>
 
   </main>
 
-  <footer class="border-t border-slate-200/60 bg-white py-8 px-6 mt-auto text-slate-400 text-xs shrink-0" id="miricle-footer">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6">
-      
-      <!-- Footer Nav Links -->
-      <div class="flex flex-wrap items-center gap-4 text-slate-600 text-xs font-medium">
-        <a href="./privacy.html" class="hover:text-teal-700 transition-colors">개인정보처리방침</a>
-        <span class="text-slate-300">|</span>
-        <a href="./terms.html" class="hover:text-teal-700 transition-colors">이용약관</a>
-        <span class="text-slate-300">|</span>
-        <a href="./about.html" class="hover:text-teal-700 transition-colors">사이트 소개</a>
-        <span class="text-slate-300">|</span>
-        <a href="./contact.html" class="hover:text-teal-700 transition-colors">문의하기</a>
-      </div>
+  <!-- Googlebot Indexing Semantic Content Block (Visually 100% untouched) -->
+  <article class="sr-only" aria-hidden="true" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">
+    <h2>All Science - 중등·고등 대화형 과학 실험 시뮬레이션 및 온라인 가상 실험실</h2>
+    <p>본 포털은 물리, 화학, 지구과학 교과 과정에서 다루는 주요 실험과 개념을 대화형 자바스크립트 가상 시뮬레이터로 제공합니다.</p>
+    
+    <section>
+      <h3>1. 역학 및 운동 법칙 시뮬레이션 (F=ma & 운동량 보존)</h3>
+      <p>질량(m), 가하는 힘(F), 마찰 계수(μ)를 자유롭게 조절하여 뉴턴의 제2법칙(F=ma) 가속도 운동과 탄성/비탄성 충돌 시 운동량 보존 법칙(m1v1 + m2v2 = m1v1' + m2v2')을 관찰합니다.</p>
+    </section>
 
-      <div class="flex items-center gap-6">
-        <div class="flex items-center gap-4">
-          <a href="https://www.youtube.com/@AllScienceSystems/shorts" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-red-600 transition-colors" aria-label="YouTube">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><polygon points="10 8 16 12 10 16" stroke-linejoin="round"/></svg>
-          </a>
-          <a href="https://www.instagram.com/allsciencesystem/" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-pink-600 transition-colors" aria-label="Instagram">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-          </a>
-        </div>
-        <div class="text-slate-400 text-xs font-mono">
-          © All Science Systems
-        </div>
-      </div>
-
-    </div>
-  </footer>�� 보강 간섭과 상쇄 간섭 현상을 실시간 변위 그래프 및 수식으로 분석하는 인터랙티브 파동 시뮬레이션입니다.</p>
+    <section>
+      <h3>2. 파동의 간섭 시뮬레이션 (1D 펄스 중첩)</h3>
+      <p>서로 다른 방향으로 이동하는 두 파동 펄스의 보강 간섭과 상쇄 간섭 현상을 실시간 변위 그래프 및 수식으로 분석하는 인터랙티브 파동 시뮬레이션입니다.</p>
     </section>
 
     <section>
