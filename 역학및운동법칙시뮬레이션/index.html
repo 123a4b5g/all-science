@@ -234,6 +234,65 @@
                 </div>
             </div>
         </main>
+
+        <!-- Dedicated Educational Article & Science Guide Section -->
+        <section class="edu-theory-container">
+            <div class="edu-card">
+                <div class="edu-header">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                    <h2>뉴턴 운동 법칙과 운동량 보존 법칙 상세 학술 가이드</h2>
+                </div>
+                <div class="edu-content">
+                    <div class="edu-section">
+                        <h3>1. 뉴턴의 운동 제2법칙: 힘과 가속도의 법칙 ($F = ma$)</h3>
+                        <p>
+                            물체에 알짜 힘(합력 $\Sigma F$)이 작용할 때, 물체는 힘의 방향으로 가속도($a$)를 얻게 되며, 
+                            가속도의 크기는 작용한 **알짜 힘에 비례**하고 물체의 **질량($m$)에 반비례**합니다.
+                        </p>
+                        <div class="formula-box">
+                            $$\vec{F}_{\text{net}} = m \vec{a} \implies \vec{a} = \frac{\vec{F}_{\text{net}}}{m}$$
+                        </div>
+                        <p>
+                            - <strong>마찰력이 존재하는 경우:</strong> 가한 외력($F_{\text{app}}$)에서 마찰력($f = \mu N = \mu m g$)을 뺀 알짜 힘($F_{\text{net}} = F_{\text{app}} - \mu m g$)에 의해 실제 가속도가 결정됩니다.<br>
+                            - 외력이 최대 정지 마찰력보다 작으면 알짜 힘이 0이 되어 물체는 정지 상태를 유지합니다.
+                        </p>
+                    </div>
+
+                    <div class="edu-section">
+                        <h3>2. 운동량(Momentum)과 운동량 보존 법칙</h3>
+                        <p>
+                            운동하는 물체의 운동 효과를 나타내는 물리량으로 질량($m$)과 속도($v$)의 곱인 **운동량($\vec{p} = m\vec{v}$)**으로 정의됩니다.
+                            외부에서 계에 작용하는 외력의 합이 0일 때, 두 물체가 충돌하기 전의 총 운동량은 충돌 후의 총 운동량과 항상 같습니다.
+                        </p>
+                        <div class="formula-box">
+                            $$m_1 v_1 + m_2 v_2 = m_1 v_1' + m_2 v_2' \quad (\Sigma \vec{p}_{\text{초기}} = \Sigma \vec{p}_{\text{나중}})$$
+                        </div>
+                    </div>
+
+                    <div class="edu-section">
+                        <h3>3. 탄성 충돌과 반발 계수 (Coefficient of Restitution)</h3>
+                        <div class="equilibrium-grid">
+                            <div class="eq-condition-card" style="border-left: 4px solid #10b981;">
+                                <h4 style="color:#10b981;">완전 탄성 충돌 (Elastic Collision, $e = 1.0$)</h4>
+                                <p>운동량뿐만 아니라 **계의 총 운동에너지($K = \frac{1}{2}m_1v_1^2 + \frac{1}{2}m_2v_2^2$)도 충돌 전후에 완전히 보존**됩니다. (예: 당구공 충돌, 원자 충돌)</p>
+                            </div>
+                            <div class="eq-condition-card" style="border-left: 4px solid #f43f5e;">
+                                <h4 style="color:#f43f5e;">비탄성 / 완전 비탄성 충돌 ($0 \le e < 1.0$)</h4>
+                                <p>운동량은 보존되지만, 충돌 과정에서 변형 및 열/소리 에너지로 손실되어 **총 운동에너지는 감소**합니다. 완전 비탄성($e=0$) 시 두 물체는 하나로 합쳐져 이동합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="edu-section">
+                        <h3>4. 가상 실험실 조작 및 관찰 포인트</h3>
+                        <ol>
+                            <li><strong>F=ma 탭:</strong> 질량($m$), 외력($F$), 마찰계수($\mu$)를 변경하며 실시간 가속도-시간 및 속도-시간 그래프의 기울기가 물리 공식 $a = F/m$과 정확히 일치하는지 비교합니다.</li>
+                            <li><strong>충돌 탭:</strong> 물체 1(빨강)과 물체 2(파랑)의 질량과 속도를 자유롭게 설정하고, 충돌 전후의 실시간 운동량 바 게이지(녹색 Total Bar)가 일정하게 보존됨을 확인합니다.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
     
     <script src="script.js"></script>

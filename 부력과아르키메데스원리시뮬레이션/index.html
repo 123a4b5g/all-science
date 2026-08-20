@@ -369,6 +369,68 @@
 
 
         </main>
+
+        <!-- Dedicated Educational Article & Science Guide Section -->
+        <section class="edu-theory-container">
+            <div class="edu-card">
+                <div class="edu-header">
+                    <i class="fa-solid fa-book-bookmark" style="color:var(--primary-cyan); font-size:1.4rem;"></i>
+                    <h2>유체역학과 아르키메데스의 원리(Archimedes' Principle) 상세 학술 가이드</h2>
+                </div>
+                <div class="edu-content">
+                    <div class="edu-section">
+                        <h3>1. 부력(Buoyancy)의 발생 원인과 정역학적 수압 차이</h3>
+                        <p>
+                            유체(액체나 기체) 속에 물체가 잠겨 있을 때, 유체의 깊이가 깊어질수록 상단에 쌓인 유체의 무게에 의해 **정전기적 수압($P = \rho g h$)**이 비례하여 증가합니다.
+                            물체의 윗면에 작용하는 아래 방향의 수압보다, 물체의 아랫면에 작용하는 위 방향의 수압이 더 크기 때문에, 물체 전체에는 위쪽을 향하는 알짜 힘인 <strong>부력(Buoyant Force, $F_b$)</strong>이 작용하게 됩니다.
+                        </p>
+                    </div>
+
+                    <div class="edu-section">
+                        <h3>2. 아르키메데스의 원리 (Archimedes' Principle) 수식 유도</h3>
+                        <p>
+                            고대 그리스의 물리학자 아르키메데스가 발견한 법칙으로, 
+                            <strong>"유체 속에 잠긴 물체가 받는 부력의 크기는 물체가 밀어낸 유체의 무게와 정확히 같다"</strong>는 원리입니다.
+                        </p>
+                        <div class="formula-box">
+                            $$F_b = m_{\text{밀어낸 유체}} \cdot g = \rho_{\text{유체}} \cdot V_{\text{잠긴 부피}} \cdot g$$
+                        </div>
+                        <p>
+                            - $\rho_{\text{유체}}$: 유체의 밀도 (물: $1.0\text{ g/cm}^3 = 1000\text{ kg/m}^3$, 기름: $\sim 0.8\text{ g/cm}^3$, 수은: $13.6\text{ g/cm}^3$)<br>
+                            - $V_{\text{잠긴 부피}}$: 물체가 유체 표면 아래로 밀고 들어간 순수 잠긴 부피 ($m^3$ 또는 $cm^3$)<br>
+                            - $g$: 중력 가속도 ($9.8\text{ m/s}^2$)
+                        </p>
+                    </div>
+
+                    <div class="edu-section">
+                        <h3>3. 물체의 밀도에 따른 부유(Float), 중성(Neutral), 침강(Sink) 조건</h3>
+                        <div class="equilibrium-grid">
+                            <div class="eq-condition-card" style="border-left: 4px solid #10b981;">
+                                <h4 style="color:#10b981;">떠오름 (Float): $\rho_{\text{물체}} < \rho_{\text{유체}}$</h4>
+                                <p>물체의 중력($F_g$)보다 최대 부력($F_{b,\text{max}}$)이 커서 위로 부유하며, 잠긴 부피의 비율($V_{\text{잠김}}/V_{\text{전체}} = \rho_{\text{물체}}/\rho_{\text{유체}}$)만큼만 잠겨 평형을 이룹니다. (예: 얼음빙산, 나무토막, 스티로폼)</p>
+                            </div>
+                            <div class="eq-condition-card" style="border-left: 4px solid #38bdf8;">
+                                <h4 style="color:#38bdf8;">중성 부력 (Neutral): $\rho_{\text{물체}} = \rho_{\text{유체}}$</h4>
+                                <p>물체의 평균 밀도가 유체 밀도와 완전히 같아, 유체 속 임의의 깊이에서 떠오르거나 가라앉지 않고 가만히 정지해 있는 상태입니다. (예: 잠수함 호버링, 어류의 부레)</p>
+                            </div>
+                            <div class="eq-condition-card" style="border-left: 4px solid #ef4444;">
+                                <h4 style="color:#ef4444;">가라앉음 (Sink): $\rho_{\text{물체}} > \rho_{\text{유체}}$</h4>
+                                <p>물체의 중력이 최대 부력보다 커서 바닥까지 침강합니다. 이때 물속에서의 <strong>겉보기 무게(Apparent Weight)</strong>는 '공기 중 무게 - 부력'으로 감소합니다. (예: 쇠구슬, 암석)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="edu-section">
+                        <h3>4. 실생활 응용: 거대 강철 선박, 잠수함, 열기구</h3>
+                        <ul>
+                            <li><strong>강철 선박(배):</strong> 철의 밀도($7.87\text{ g/cm}^3$)는 물보다 훨씬 크지만, 선체 내부를 비워 커다란 공기층(중공)을 만듦으로써 배 전체의 **평균 밀도**를 물($1.0\text{ g/cm}^3$)보다 훨씬 작게 만들어 물 위에 뜨게 합니다.</li>
+                            <li><strong>잠수함의 밸러스트 탱크:</strong> 탱크에 바닷물을 채우면 잠수함의 평균 밀도가 높아져 잠수하고, 압축 공기로 물을 배출하면 평균 밀도가 낮아져 수면으로 부상합니다.</li>
+                            <li><strong>열기구(기체 부력):</strong> 버너로 열기구 내부 공기를 가열하면 기체 분자의 운동이 활발해져 팽창하고 밀도가 감소($\rho_{\text{열기구}} < \rho_{\text{대기}}$)하여 하늘로 떠오릅니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
     <!-- 원리 설명 모달 -->

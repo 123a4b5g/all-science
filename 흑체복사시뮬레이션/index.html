@@ -421,6 +421,66 @@
                 </div>
             </section>
         </main>
+
+        <!-- Dedicated Educational Article & Science Guide Section -->
+        <section class="edu-theory-container">
+            <div class="edu-card">
+                <div class="edu-header">
+                    <i class="fa-solid fa-sun" style="font-size:1.4rem; color:var(--amber);"></i>
+                    <h2>흑체 복사(Blackbody Radiation)와 항성 광도 법칙 상세 학술 가이드</h2>
+                </div>
+                <div class="edu-content">
+                    <div class="edu-section">
+                        <h3>1. 흑체(Blackbody)의 정의와 별의 전자기파 방출</h3>
+                        <p>
+                            <strong>흑체</strong>란 자신에게 입사되는 모든 파장의 전자기파 에너지를 100% 흡수하고, 자신의 절대 온도($T$)에 따라 열평형 상태에서 가능한 최대의 전자기 복사 에너지를 방출하는 이상적인 물체입니다. 
+                            우주의 별(항성)은 흑체에 매우 근사한 방출 스펙트럼을 가지므로, 별의 표면 온도와 크기, 광도를 흑체 복사 법칙으로 정밀하게 해석할 수 있습니다.
+                        </p>
+                    </div>
+
+                    <div class="edu-section">
+                        <h3>2. 플랑크 복사 곡선과 빈의 변위 법칙 (Wien's Displacement Law)</h3>
+                        <p>
+                            흑체의 온도가 높을수록 <strong>모든 파장 대역에서 방출하는 복사 에너지의 양이 급격히 증가</strong>합니다. 
+                            또한 복사 에너지를 최대 세기로 방출하는 피크 파장 $\lambda_{\text{max}}$는 <strong>표면 온도($T$)에 반비례하여 짧은 파장(청색/자외선) 방향으로 이동</strong>합니다:
+                        </p>
+                        <div class="formula-box">
+                            $$\lambda_{\text{max}} \cdot T = b \approx 2.898 \times 10^{-3} \text{ m}\cdot\text{K}$$
+                        </div>
+                        <ul>
+                            <li><strong>고온의 별 (예: 리겔 ~12,100 K):</strong> $\lambda_{\text{max}}$가 자외선/청색 영역에 위치하여 눈에 <strong>청백색</strong>으로 보입니다.</li>
+                            <li><strong>태양 (5,778 K):</strong> $\lambda_{\text{max}} \approx 501.5\text{ nm}$ (가시광선 녹색-황색 영역)으로 <strong>황색</strong>으로 보입니다.</li>
+                            <li><strong>저온의 별 (예: 베텔게우스 ~3,500 K):</strong> $\lambda_{\text{max}}$가 적외선/붉은색 영역에 위치하여 눈에 <strong>적색</strong>으로 보입니다.</li>
+                        </ul>
+                    </div>
+
+                    <div class="edu-section">
+                        <h3>3. 슈테판-볼츠만 법칙과 별의 총 광도 ($L = 4\pi R^2 \sigma T^4$)</h3>
+                        <div class="equilibrium-grid">
+                            <div class="eq-condition-card" style="border-left: 4px solid #f43f5e;">
+                                <h4 style="color:#f43f5e;">슈테판-볼츠만 법칙 (단위 면적당 복사 에너지)</h4>
+                                <div class="formula-box">$$E = \sigma T^4 \quad (\sigma = 5.67 \times 10^{-8} \text{ W/m}^2\text{K}^4)$$</div>
+                                <p>단위 면적당 방출 에너지는 절대 온도의 <strong>4제곱에 비례</strong>합니다. 온도가 2배 상승하면 단위 면적당 방출 에너지는 $2^4 = 16$배 폭증합니다.</p>
+                            </div>
+                            <div class="eq-condition-card" style="border-left: 4px solid #fbbf24;">
+                                <h4 style="color:#fbbf24;">별의 총 광도 (Luminosity, $L$)</h4>
+                                <div class="formula-box">$$L = (\text{표면적 } 4\pi R^2) \times (\sigma T^4) = 4\pi R^2 \sigma T^4$$</div>
+                                <p>별 전체에서 1초 동안 방출되는 총 에너지(광도)는 <strong>반지름의 제곱($R^2$)</strong>과 <strong>표면 온도의 4제곱($T^4$)</strong>의 곱에 비례합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="edu-section">
+                        <h3>4. 가상 실험실 조작 및 관찰 포인트</h3>
+                        <ol>
+                            <li><strong>플랑크 곡선 탭:</strong> 온도 슬라이더($2,000\text{ K} \sim 40,000\text{ K}$)를 조절하여 가시광선 영역(무지개 띠)과 플랑크 곡선 면적의 변화, 별의 실제 발광 색채를 실시간 확인합니다.</li>
+                            <li><strong>광도 & 법칙 탭:</strong> 별의 반지름($R$)과 표면 온도($T$)를 독립적으로 변경하며 태양 대비 총 광도($L/L_\odot$) 수치가 $R^2 T^4$ 비례식에 맞게 계산되는 과정을 검증합니다.</li>
+                            <li><strong>항성 비교 탭:</strong> 리겔(청색초거성), 시리우스, 태양, 베텔게우스(적색초거성) 등 실제 우주 항성들의 크기와 광도를 1:1 스케일로 대조 관찰합니다.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
     <!-- 설명 모달 팝업 -->

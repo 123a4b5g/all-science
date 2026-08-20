@@ -243,6 +243,74 @@
                 </div>
             </section>
         </main>
+
+        <!-- Dedicated Educational Article & Science Guide Section -->
+        <section class="edu-theory-container">
+            <div class="edu-card">
+                <div class="edu-header">
+                    <i class="fa-solid fa-book-open"></i>
+                    <h2>H-R도(헤르츠스프룽-러셀 도표)와 항성 진화 상세 학술 가이드</h2>
+                </div>
+                <div class="edu-content">
+                    <div class="edu-section">
+                        <h3>1. H-R도 (Hertzsprung-Russell Diagram) 의 개념과 축의 구성</h3>
+                        <p>
+                            H-R도는 20세기 초 덴마크의 천문학자 에이르나르 헤르츠스프룽과 미국의 헨리 노리스 러셀이 독자적으로 고안한 천문학 다이어그램으로, 
+                            별들의 <strong>표면 온도 (X축, 분광형 O, B, A, F, G, K, M)</strong>와 <strong>광도 및 절대 등급 (Y축, \(L/L_\odot\))</strong> 사이의 물리적 상관관계를 나타낸 그래프입니다.
+                        </p>
+                        <p>
+                            - <strong>X축 (표면 온도)</strong>: 왼쪽으로 갈수록 온도가 높고(청색, 최고 40,000 K 이상), 오른쪽으로 갈수록 온도가 낮습니다(적색, 최저 2,500 K).<br>
+                            - <strong>Y축 (광도 / 절대 등급)</strong>: 위로 갈수록 밝기(광도 $L$)가 크고 절대 등급($M$)의 수치가 작으며, 아래로 갈수록 어둡습니다.
+                        </p>
+                    </div>
+
+                    <div class="edu-section">
+                        <h3>2. 슈테판-볼츠만 법칙과 등반경선(Isoradius Lines) 수식 유도</h3>
+                        <p>
+                            구형인 항성의 전체 표면적은 \(4\pi R^2\)이고, 단위 면적당 방출하는 에너지는 슈테판-볼츠만 복사 법칙에 의해 \(\sigma T^4\)입니다. 따라서 별의 총 광도 \(L\)은 다음과 같습니다:
+                        </p>
+                        <div class="formula-box">
+                            $$L = 4\pi R^2 \sigma T^4 \implies \frac{L}{L_\odot} = \left(\frac{R}{R_\odot}\right)^2 \left(\frac{T}{T_\odot}\right)^4$$
+                        </div>
+                        <p>
+                            이 관계식으로부터 별의 반지름 $R$은 다음과 같이 유도됩니다:
+                        </p>
+                        <div class="formula-box">
+                            $$R \propto \frac{\sqrt{L}}{T^2}$$
+                        </div>
+                        <p>
+                            따라서 H-R도에서 <strong>우측 상단으로 갈수록(온도는 낮고 광도는 클수록) 별의 반지름($R$)이 거대</strong>해지며(적색거성 및 적색초거성), <strong>좌측 하단으로 갈수록(온도는 높고 광도는 작을수록) 별의 반지름($R$)이 극히 작아집니다</strong>(백색왜성).
+                        </p>
+                    </div>
+
+                    <div class="edu-section">
+                        <h3>3. H-R도 상의 주요 별 집단과 항성의 진화 궤적</h3>
+                        <div class="equilibrium-grid">
+                            <div class="eq-condition-card">
+                                <h4>주계열성 (Main Sequence)</h4>
+                                <p>전체 항성의 약 90%가 속하며, 중심부에서 <strong>수소 핵융합 반응(\(4^1H \rightarrow ^4He\))</strong>이 일어나 정역학적 평형(중력 = 기체 압력차)을 유지하는 가장 긴 수명의 단계입니다. 질량이 큰 별일수록 좌측 상단에 위치합니다.</p>
+                            </div>
+                            <div class="eq-condition-card">
+                                <h4>거성 및 초거성 (Giants & Supergiants)</h4>
+                                <p>중심핵의 수소가 고갈된 후 외층이 급격히 팽창하여 표면 온도는 낮아지나(적색) 표면적이 거대해져 광도가 매우 높은 진화 후기 단계입니다 (예: 베텔게우스, 안타레스).</p>
+                            </div>
+                            <div class="eq-condition-card">
+                                <h4>백색왜성 (White Dwarfs)</h4>
+                                <p>진화의 최종 단계로 외층 물질을 성운으로 날려 보내고 남은 고밀도 탄소-산소 축퇴 코어입니다. 핵융합은 멈추었으나 고온의 잔열로 빛납니다 (예: 시리우스 B).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="edu-section">
+                        <h3>4. 가상 실험실 조작 및 관찰 포인트</h3>
+                        <ol>
+                            <li><strong>항성 진화 슬라이더:</strong> 별의 초기 질량(\(0.5 M_\odot \sim 40 M_\odot\))을 선택하고 진화 시간을 재생하여 주계열성 $\rightarrow$ 거성 $\rightarrow$ 초신성/행성상 성운 $\rightarrow$ 최종 잔해(백색왜성/중성자별/블랙홀) 궤적을 확인합니다.</li>
+                            <li><strong>등반경선 필터:</strong> \(1000 R_\odot, 100 R_\odot, 1 R_\odot, 0.01 R_\odot\) 선을 표시하여 실제 태양 크기 대비 항성 크기 비교 뷰어를 탐색합니다.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
     <!-- MODAL: 천문학 원리 설명 가이드 -->

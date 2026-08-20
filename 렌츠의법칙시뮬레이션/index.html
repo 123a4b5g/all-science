@@ -234,6 +234,65 @@
         </div> <!-- End of panel-pipe -->
       </div>
     </main>
+
+    <!-- Dedicated Educational Article & Science Guide Section -->
+    <section class="edu-theory-container">
+      <div class="edu-card">
+        <div class="edu-header">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          <h2>렌츠의 법칙 및 전자기 유도 상세 학술 가이드</h2>
+        </div>
+        <div class="edu-content">
+          <div class="edu-section">
+            <h3>1. 패러데이의 전자기 유도 법칙 (Faraday's Law of Induction)</h3>
+            <p>
+              코일 내부를 통과하는 자기선속(자기력선의 총 수, $\Phi = B \cdot A$)이 시간에 따라 변화할 때, 코일에 전류를 흐르게 하는 전압(유도 기전력 $V$)이 생성되는 현상을 **전자기 유도**라고 합니다.
+            </p>
+            <div class="formula-box">
+              $$V = -N \frac{\Delta\Phi}{\Delta t} = -N \frac{d\Phi}{dt}$$
+            </div>
+            <p>
+              여기서 $N$은 코일의 감은 수, $\Delta\Phi/\Delta t$는 단위 시간당 자기선속의 변화율입니다. 코일을 많이 감을수록, 자석을 더 빠르게 움직일수록(시간당 자속 변화율이 클수록), 더 강한 자석을 사용할수록 더 큰 유도 전압과 유도 전류가 발생합니다.
+            </p>
+          </div>
+
+          <div class="edu-section">
+            <h3>2. 렌츠의 법칙 (Lenz's Law) 과 마이너스($-$) 부호의 물리적 의미</h3>
+            <p>
+              패러데이 법칙 공식 앞의 마이너스($-$) 부호는 **렌츠의 법칙**을 나타냅니다. 
+              <strong>"유도 기전력과 유도 전류는 항상 코일 내부를 지나는 자기선속의 변화를 방해(상쇄)하려는 방향으로 생성된다"</strong>는 원리입니다.
+            </p>
+            <div class="equilibrium-grid">
+              <div class="eq-condition-card">
+                <h4>자석이 접근할 때 (자속 증가)</h4>
+                <p>코일 내부의 자기장이 증가하므로, 이를 밀어내어 방해하기 위해 <strong>자석과 같은 극</strong>을 형성하는 방향으로 유도 전류가 흐릅니다. (척력 발생 $\rightarrow$ 운동 방해)</p>
+              </div>
+              <div class="eq-condition-card">
+                <h4>자석이 멀어질 때 (자속 감소)</h4>
+                <p>코일 내부의 자기장이 감소하므로, 이를 끌어당겨 채우기 위해 <strong>자석과 반대 극</strong>을 형성하는 방향으로 유도 전류가 흐릅니다. (인력 발생 $\rightarrow$ 후퇴 방해)</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="edu-section">
+            <h3>3. 에너지 보존 법칙과의 관계</h3>
+            <p>
+              만약 자석이 다가올 때 자석을 끌어당기는 방향으로 유도 전류가 발생한다면, 외력을 가하지 않아도 자석이 저절로 가속되어 무한한 전기에너지가 생성되는 영구기관이 될 것입니다. 
+              그러나 자연계에서는 자석의 운동을 방해하는 방향으로 유도 자기장이 형성되므로, 외력이 자석을 움직이면서 한 **역학적 일(Work)**이 정확히 **전기 에너지**로 전환되는 **에너지 보존 법칙**이 성립합니다.
+            </p>
+          </div>
+
+          <div class="edu-section">
+            <h3>4. 가상 실험실 조작 및 관찰 포인트</h3>
+            <ol>
+              <li><strong>자석과 코일 탭:</strong> 자석의 극성(N극/S극)과 이동 속도, 코일 권선 수(N)를 조절하며 검류계(Galvanometer) 바늘의 편향 방향과 유도 전류의 세기 변화를 실시간으로 비교합니다.</li>
+              <li><strong>금속 원판 낙하(맴돌이 전류):</strong> 도체 원판이 자기장 영역을 통과할 때 발생하는 와전류(Eddy Current)에 의해 감속되는 자기 제동(Magnetic Braking) 현상을 관찰합니다.</li>
+              <li><strong>LED 파이프 실험:</strong> 구리관과 플라스틱관을 통과하는 네오디뮴 자석의 종단 낙하 속도 차이와 발광 다이오드의 점등 방향을 확인합니다.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 
   <!-- Theory modal -->

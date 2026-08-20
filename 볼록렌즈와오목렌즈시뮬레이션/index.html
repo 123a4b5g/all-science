@@ -254,6 +254,74 @@
         </div>
       </div>
     </main>
+
+    <!-- Dedicated Educational Article & Science Guide Section -->
+    <section class="edu-theory-container">
+      <div class="edu-card">
+        <div class="edu-header">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          <h2>기하 광학과 렌즈의 결상 원리 상세 학술 가이드</h2>
+        </div>
+        <div class="edu-content">
+          <div class="edu-section">
+            <h3>1. 얇은 렌즈 공식 (Thin Lens Equation) 과 부호 규약</h3>
+            <p>
+              물체에서 나온 빛이 렌즈를 통과하여 굴절된 후 상(Image)을 맺을 때, 렌즈 중심에서 물체까지의 거리 $a$, 렌즈 중심에서 상까지의 거리 $b$, 렌즈의 초점 거리 $f$ 사이에는 다음의 <strong>가우스-렌즈 공식</strong>이 성립합니다:
+            </p>
+            <div class="formula-box">
+              $$\frac{1}{a} + \frac{1}{b} = \frac{1}{f}$$
+            </div>
+            <p>
+              - <strong>물체 거리 ($a$)</strong>: 항상 양수($+$).<br>
+              - <strong>초점 거리 ($f$)</strong>: 볼록렌즈(수렴 렌즈)는 양수($+$), 오목렌즈(발산 렌즈)는 음수($-$).<br>
+              - <strong>상 거리 ($b$)</strong>: 실상(Real Image, 빛이 실제로 모여 맺힘)은 양수($+$), 허상(Virtual Image, 연장선이 모여 맺힘)은 음수($-$).
+            </p>
+          </div>
+
+          <div class="edu-section">
+            <h3>2. 렌즈의 배율 (Magnification, $m$)</h3>
+            <div class="formula-box">
+              $$m = -\frac{b}{a} = \frac{h'}{h}$$
+            </div>
+            <p>
+              - $m < 0$ (음수): <strong>도립상(상하좌우가 뒤집힌 상)</strong>이며 항상 실상입니다.<br>
+              - $m > 0$ (양수): <strong>정립상(바로 선 상)</strong>이며 항상 허상입니다.<br>
+              - $|m| > 1$: 확대된 상, $|m| < 1$: 축소된 상, $|m| = 1$: 크기가 같은 상.
+            </p>
+          </div>
+
+          <div class="edu-section">
+            <h3>3. 물체 위치에 따른 볼록렌즈와 오목렌즈의 상 특징</h3>
+            <div class="equilibrium-grid">
+              <div class="eq-condition-card">
+                <h4>볼록렌즈: $a > 2f$ (2배 초점 밖)</h4>
+                <p>축소된 도립 실상 ($0 < |m| < 1$). 사진기, 스마트폰 카메라 렌즈, 사람 눈의 망막 결상 원리입니다.</p>
+              </div>
+              <div class="eq-condition-card">
+                <h4>볼록렌즈: $f < a < 2f$ (초점~2배 초점 사이)</h4>
+                <p>확대된 도립 실상 ($|m| > 1$). 영화 프로젝터, 빔프로젝터, 현미경 대물렌즈 원리입니다.</p>
+              </div>
+              <div class="eq-condition-card">
+                <h4>볼록렌즈: $a < f$ (초점 거리 안쪽)</h4>
+                <p>확대된 정립 허상 ($m > 1$). 돋보기, 현미경 접안렌즈로 글자를 크게 확대해 볼 때의 원리입니다.</p>
+              </div>
+              <div class="eq-condition-card">
+                <h4>오목렌즈 (물체 위치 무관)</h4>
+                <p>항상 렌즈 앞쪽에 축소된 정립 허상 ($0 < m < 1$). 근시 교정용 안경, 도어뷰 파인더에 사용됩니다.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="edu-section">
+            <h3>4. 광학 레일 시스템 및 복합 렌즈계</h3>
+            <p>
+              광학 레일 탭에서는 1번 볼록렌즈와 2번 오목렌즈를 결합한 복합 광학계를 시뮬레이션합니다. 
+              1번 렌즈에 의해 형성된 1차 상이 2번 렌즈의 새로운 '가상 물체'로 작용하며, 최종 상의 초점 평면(Focal Plane)에 스크린을 정확히 일치시킬 때 가장 선명한 초점 이미지(Sharp Focus)가 관측됩니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 
   <!-- Theory modal -->

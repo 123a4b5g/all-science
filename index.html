@@ -698,66 +698,198 @@
 
   </main>
 
-  <!-- Googlebot Indexing Semantic Content Block (Visually 100% untouched) -->
-  <article class="sr-only" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">
-    <h2>All Science - 중등·고등 가상 과학 실험 시뮬레이션 및 온라인 가상 실험실</h2>
-    <p>본 포털은 물리, 화학, 지구과학 교과 과정에서 다루는 주요 실험과 개념을 인터랙티브 가상 시뮬레이터로 제공합니다.</p>
+  <!-- All Science Educational Article & Curriculum Guide Section -->
+  <section class="max-w-7xl mx-auto px-4 md:px-6 py-12 flex flex-col gap-10 text-slate-800" id="educational-guide-section">
     
-    <section>
-      <h3>1. 역학 및 운동 법칙 시뮬레이션 (F=ma & 운동량 보존)</h3>
-      <p>질량(m), 가하는 힘(F), 마찰 계수(μ)를 자유롭게 조절하여 뉴턴의 제2법칙(F=ma) 가속도 운동과 탄성/비탄성 충돌 시 운동량 보존 법칙(m1v1 + m2v2 = m1v1' + m2v2')을 관찰합니다.</p>
-    </section>
+    <!-- Portal Introduction Header -->
+    <div class="bg-white rounded-2xl p-6 md:p-8 border border-slate-200/80 shadow-sm flex flex-col md:flex-row gap-6 items-center justify-between">
+      <div class="flex-1 flex flex-col gap-2.5">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-teal-50 text-teal-700 rounded-full text-xs font-bold w-fit border border-teal-200">
+          <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+          <span>중·고등 2022 개정 교육과정 연계 과학 탐구 포털</span>
+        </div>
+        <h2 class="text-xl md:text-2xl font-black text-slate-900 tracking-tight">All Science 가상 과학 실험실 및 학습 탐구 가이드</h2>
+        <p class="text-slate-600 text-sm leading-relaxed">
+          All Science는 물리, 화학, 지구과학 교과서에 수록된 핵심 원리와 실험을 컴퓨터와 모바일에서 실시간으로 조작하고 분석할 수 있는 <strong>인터랙티브 과학 교육 플랫폼</strong>입니다. 추상적인 수식과 개념을 직관적인 그래픽 시뮬레이션과 정밀한 수치 데이터로 시각화하여 학생들의 과학적 사고력과 탐구 능력을 극대화합니다.
+        </p>
+      </div>
+    </div>
 
-    <section>
-      <h3>2. 파동의 간섭 시뮬레이션 (1D 펄스 중첩)</h3>
-      <p>서로 다른 방향으로 이동하는 두 파동 펄스의 보강 간섭과 상쇄 간섭 현상을 실시간 변위 그래프 및 수식으로 분석하는 파동 시뮬레이션입니다.</p>
-    </section>
+    <!-- Curriculum Subject Areas Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <!-- Physics Card -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm flex flex-col gap-4">
+        <div class="flex items-center gap-3 border-b border-slate-100 pb-3.5">
+          <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-black">
+            <i data-lucide="activity" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-base text-slate-900">물리학 (Physics)</h3>
+            <p class="text-xs text-slate-500">역학, 파동, 전자기, 광학</p>
+          </div>
+        </div>
+        <ul class="text-xs text-slate-600 flex flex-col gap-2.5 leading-relaxed">
+          <li class="flex items-start gap-2">
+            <span class="text-blue-500 font-bold">•</span>
+            <span><strong>역학 및 운동 법칙:</strong> 뉴턴 제2법칙(F=ma)의 가속도 운동과 탄성 충돌 시 운동량 및 운동에너지 보존 법칙 실시간 분석.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-blue-500 font-bold">•</span>
+            <span><strong>파동의 간섭:</strong> 1차원 펄스 파동의 중첩 원리와 위상에 따른 보강 간섭 및 상쇄 간섭 시각화.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-blue-500 font-bold">•</span>
+            <span><strong>기하 광학:</strong> 볼록렌즈와 오목렌즈의 굴절 법칙, 초점 거리 및 렌즈 공식(\(1/a + 1/b = 1/f\))에 따른 실상·허상 결상.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-blue-500 font-bold">•</span>
+            <span><strong>전자기 유도:</strong> 렌츠의 법칙과 패러데이 유도 법칙(\(V = -N \Delta\Phi/\Delta t\))에 의한 유도 기전력 관측.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-blue-500 font-bold">•</span>
+            <span><strong>돌림힘 & 회전 평형:</strong> 토크(\(\tau = r \times F\))와 지렛대 원리, 강체의 역학적 평형 조건 탐구.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-blue-500 font-bold">•</span>
+            <span><strong>부력과 유체역학:</strong> 아르키메데스의 원리(\(F_b = \rho V g\))와 배, 잠수함, 열기구의 부유·침강 조건.</span>
+          </li>
+        </ul>
+      </div>
 
-    <section>
-      <h3>3. 물의 전기분해 실험 시뮬레이션</h3>
-      <p>수산화나트륨(NaOH) 또는 염화나트륨(NaCl) 전해질 용액에 전류를 흘려 (+)극에서 산소(O₂) 및 염소(Cl₂) 기체, (-)극에서 수소(H₂) 기체가 분해되는 화학 반응을 관측합니다.</p>
-    </section>
+      <!-- Chemistry Card -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm flex flex-col gap-4">
+        <div class="flex items-center gap-3 border-b border-slate-100 pb-3.5">
+          <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center font-black">
+            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-base text-slate-900">화학 (Chemistry)</h3>
+            <p class="text-xs text-slate-500">원자 구조, 주기율표, 전기화학</p>
+          </div>
+        </div>
+        <ul class="text-xs text-slate-600 flex flex-col gap-2.5 leading-relaxed">
+          <li class="flex items-start gap-2">
+            <span class="text-teal-500 font-bold">•</span>
+            <span><strong>물의 전기분해:</strong> 전해질 용액에 전류를 인가하여 (+)극 산소(\(O_2\)), (-)극 수소(\(H_2\)) 기체의 1:2 부피비 분해 반응 관찰.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-teal-500 font-bold">•</span>
+            <span><strong>IUPAC 현대 주기율표:</strong> 1번부터 118번 원소의 원자 번호, 원자가 전자수, 동족 원소의 화학적 반응성 및 성질 비교.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-teal-500 font-bold">•</span>
+            <span><strong>보어 원자 모형:</strong> 주양자수에 따른 K, L, M, N 전자 껍질별 최대 수용 전자수(\(2n^2\))와 전자 배치 규칙.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-teal-500 font-bold">•</span>
+            <span><strong>화학 결합 실험실:</strong> 옥텟 규칙(Octet Rule)에 기반한 공유 결합(\(H_2O, CO_2, CH_4\)) 및 이온 결합(\(NaCl, CaO\)) 화합물 생성.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-teal-500 font-bold">•</span>
+            <span><strong>주기적 성질:</strong> 유효 핵전하, 전기음성도, 1차 이온화 에너지, 원자 반지름의 주기적 변화 스펙트럼.</span>
+          </li>
+        </ul>
+      </div>
 
-    <section>
-      <h3>4. 일식과 월식 3D 관측 시뮬레이션</h3>
-      <p>태양, 지구, 달의 상대 위치 및 백도 경사각(5.14°)을 조절하여 개기일식, 금환일식, 부분일식, 개기월식 및 반영월식의 발생 원리를 3D 우주 시점과 관찰자 시점으로 탐구합니다.</p>
-    </section>
+      <!-- Earth Science Card -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm flex flex-col gap-4">
+        <div class="flex items-center gap-3 border-b border-slate-100 pb-3.5">
+          <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-black">
+            <i data-lucide="globe" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-base text-slate-900">지구과학 (Earth Science)</h3>
+            <p class="text-xs text-slate-500">천문학, 천체 역학, 항성 물리학</p>
+          </div>
+        </div>
+        <ul class="text-xs text-slate-600 flex flex-col gap-2.5 leading-relaxed">
+          <li class="flex items-start gap-2">
+            <span class="text-purple-500 font-bold">•</span>
+            <span><strong>3D 일식과 월식:</strong> 태양-지구-달의 상대적 궤도 각도 및 백도 기울기(5.14°)에 따른 개기일식, 금환일식, 부분일식, 개기월식 원리.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-purple-500 font-bold">•</span>
+            <span><strong>별의 H-R도표:</strong> 별의 표면 온도(분광형 O, B, A, F, G, K, M)와 절대 등급/광도에 따른 주계열성, 적색거성, 백색왜성 진화 궤적.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-purple-500 font-bold">•</span>
+            <span><strong>흑체 복사와 플랑크 곡선:</strong> 온도에 따른 전자기 복사 에너지 분포 및 최대 방출 파장(\(\lambda_{\text{max}} T = b\)) 빈의 변위 법칙.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-purple-500 font-bold">•</span>
+            <span><strong>슈테판-볼츠만 법칙:</strong> 단위 면적당 방출 복사 에너지(\(E = \sigma T^4\))와 별의 반지름 및 총 광도(\(L = 4\pi R^2 \sigma T^4\)) 상관관계.</span>
+          </li>
+        </ul>
+      </div>
 
-    <section>
-      <h3>5. 볼록렌즈와 오목렌즈 빛의 굴절 시뮬레이션</h3>
-      <p>볼록렌즈와 오목렌즈를 통과하는 빛의 굴절 및 실상과 허상 형성 원리(1/a + 1/b = 1/f)를 실시간 광학 레일 위에서 확인합니다.</p>
-    </section>
+    </div>
 
-    <section>
-      <h3>6. 렌츠의 법칙 및 전자기 유도 시뮬레이션</h3>
-      <p>자석이 코일에 접근하거나 멀어질 때 발생되는 유도 기전력과 유도 전류(V = -N dΦ/dt) 및 전자기 유도 현상을 검류계 바늘과 자기력선으로 시각화합니다.</p>
-    </section>
+    <!-- 4-Step Virtual Lab Guide -->
+    <div class="bg-white rounded-2xl p-6 md:p-8 border border-slate-200/80 shadow-sm flex flex-col gap-6">
+      <div class="flex flex-col gap-1.5">
+        <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
+          <i data-lucide="compass" class="w-5 h-5 text-teal-600"></i>
+          <span>가상 실험실 효과적인 4단계 탐구 학습법</span>
+        </h3>
+        <p class="text-xs text-slate-500">과학적 방법론에 따라 체계적으로 가설을 수립하고 실험 데이터를 검증해 보세요.</p>
+      </div>
 
-    <section>
-      <h3>7. 원소 주기율표 및 화합물 결합 시뮬레이션</h3>
-      <p>원자 번호 1번부터 118번 원소의 보어 원자 구조와 전자 배치, 공유 결합 및 이온 결합 반응을 결합 시뮬레이터로 탐색합니다.</p>
-    </section>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col gap-2">
+          <div class="w-7 h-7 rounded-lg bg-teal-600 text-white font-black text-xs flex items-center justify-center">1</div>
+          <h4 class="font-bold text-sm text-slate-900">가설 설정 및 변수 통제</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">조작 변인(질량, 전압, 온도 등)과 종속 변인을 확인하고 결과 변화를 미리 예상합니다.</p>
+        </div>
+        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col gap-2">
+          <div class="w-7 h-7 rounded-lg bg-teal-600 text-white font-black text-xs flex items-center justify-center">2</div>
+          <h4 class="font-bold text-sm text-slate-900">인터랙티브 실험 조작</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">슬라이더와 컨트롤 버튼을 조작하여 물리적 애니메이션과 파티클 반응을 관찰합니다.</p>
+        </div>
+        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col gap-2">
+          <div class="w-7 h-7 rounded-lg bg-teal-600 text-white font-black text-xs flex items-center justify-center">3</div>
+          <h4 class="font-bold text-sm text-slate-900">실시간 데이터 & 수식 분석</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">화면에 표시되는 실시간 게이지, 그래프, 계산식 수치를 교과서 공식과 대조 분석합니다.</p>
+        </div>
+        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col gap-2">
+          <div class="w-7 h-7 rounded-lg bg-teal-600 text-white font-black text-xs flex items-center justify-center">4</div>
+          <h4 class="font-bold text-sm text-slate-900">결론 도출 및 원리 정리</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">실험 결과로부터 과학 법칙을 유도하고 '원리 설명' 가이드를 통해 개념을 확립합니다.</p>
+        </div>
+      </div>
+    </div>
 
-    <section>
-      <h3>8. 돌림힘과 역학적 평형 시뮬레이션 (토크 & 회전 평형)</h3>
-      <p>강체에 작용하는 돌림힘(Torque), 회전축과 회전 팔 길이, 알짜 토크 및 회전 평형 상태를 직관적으로 분석합니다.</p>
-    </section>
+    <!-- FAQ Section -->
+    <div class="bg-white rounded-2xl p-6 md:p-8 border border-slate-200/80 shadow-sm flex flex-col gap-6">
+      <div class="flex flex-col gap-1.5">
+        <h3 class="text-lg font-black text-slate-900 flex items-center gap-2">
+          <i data-lucide="help-circle" class="w-5 h-5 text-teal-600"></i>
+          <span>자주 묻는 질문 (FAQ)</span>
+        </h3>
+        <p class="text-xs text-slate-500">All Science 이용 및 학습 관련 안내사항입니다.</p>
+      </div>
 
-    <section>
-      <h3>9. 별의 H-R도표 시뮬레이션 (분광형 & 항성 진화)</h3>
-      <p>별의 표면 온도(분광형 O, B, A, F, G, K, M)와 광도에 따른 주계열성, 적색거성, 백색왜성 진화 궤적을 탐구합니다.</p>
-    </section>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-700">
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col gap-1.5">
+          <h4 class="font-bold text-slate-900 text-sm">Q. 어떤 교육 과정과 연계되어 있나요?</h4>
+          <p class="text-slate-600 leading-relaxed">대한민국 중학교 과학, 고등학교 통합과학, 물리학Ⅰ, 화학Ⅰ, 지구과학Ⅰ 교과 과정의 필수 탐구 실험 및 핵심 개념에 최적화되어 제작되었습니다.</p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col gap-1.5">
+          <h4 class="font-bold text-slate-900 text-sm">Q. 시뮬레이션의 물리적 계산은 정확한가요?</h4>
+          <p class="text-slate-600 leading-relaxed">실제 물리 및 화학 법칙(뉴턴 역학, 렌즈 공식, 열역학 슈테판-볼츠만 법칙 등)의 수치 해석 공식을 기반으로 실시간 렌더링되어 높은 학술적 신뢰도를 제공합니다.</p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col gap-1.5">
+          <h4 class="font-bold text-slate-900 text-sm">Q. 학교 수업 및 보고서 작성에 활용해도 되나요?</h4>
+          <p class="text-slate-600 leading-relaxed">네, 학교 온·오프라인 수업 교재, 자유 탐구 활동, 과학 보고서 작성 및 발표 자료 등으로 누구나 자유롭게 활용하실 수 있습니다.</p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col gap-1.5">
+          <h4 class="font-bold text-slate-900 text-sm">Q. 모바일 및 태블릿에서도 작동하나요?</h4>
+          <p class="text-slate-600 leading-relaxed">모든 시뮬레이션은 반응형 웹 표준 기술(HTML5 Canvas, CSS Grid, Web Audio API)로 개발되어 스마트폰, 태블릿, PC 등 모든 기기에서 별도의 설치 없이 원활하게 구동됩니다.</p>
+        </div>
+      </div>
+    </div>
 
-    <section>
-      <h3>10. 부력과 아르키메데스 원리 시뮬레이션</h3>
-      <p>유체 밀도와 물체 밀도에 따른 부력 크기, 잠수함과 배의 아르키메데스 부력 원리를 용수철 저울 변화로 확인합니다.</p>
-    </section>
-
-    <section>
-      <h3>11. 별과 흑체 복사 시뮬레이션 (플랑크 곡선 & 슈테판-볼츠만)</h3>
-      <p>온도 변화에 따른 흑체 복사 스펙트럼 에너지 분포, 플랑크 곡선 피크 파장 이동(빈의 변위 법칙)과 별의 광도 관계를 탐구합니다.</p>
-    </section>
-  </article>
+  </section>
 
   <footer class="border-t border-slate-200/60 bg-white py-8 px-6 mt-auto text-slate-400 text-xs shrink-0" id="miricle-footer">
     <div class="max-w-7xl mx-auto flex flex-col gap-4">

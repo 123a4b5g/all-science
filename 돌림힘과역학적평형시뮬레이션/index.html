@@ -319,6 +319,71 @@
             </div>
 
         </main>
+
+        <!-- Dedicated Educational Article & Science Guide Section -->
+        <section class="edu-theory-container">
+            <div class="edu-card">
+                <div class="edu-header">
+                    <i class="fa-solid fa-book-open"></i>
+                    <h2>돌림힘(Torque)과 강체의 역학적 평형 상세 학술 가이드</h2>
+                </div>
+                <div class="edu-content">
+                    <div class="edu-section">
+                        <h3>1. 돌림힘(Torque, \(\tau\))의 정의와 물리적 의미</h3>
+                        <p>
+                            돌림힘(토크)은 물체를 회전축을 중심으로 회전시키려는 물리적인 힘의 작용 효과(회전력)를 나타내는 물리량입니다. 
+                            병진 운동에서 물체의 속도를 변화시키는 원인이 '힘(\(F\))'이라면, 회전 운동에서 물체의 각가속도를 변화시키는 원인은 바로 '돌림힘(\(\tau\))'입니다.
+                        </p>
+                        <p>
+                            회전축에서 힘이 작용하는 작용점까지의 위치 벡터를 \(\vec{r}\), 가해진 힘 벡터를 \(\vec{F}\), 두 벡터 사이의 사잇각을 \(\theta\)라고 할 때, 돌림힘의 크기 \(\tau\)는 다음과 같이 정의됩니다:
+                        </p>
+                        <div class="formula-box">
+                            $$\tau = r F \sin\theta = F \cdot d$$
+                        </div>
+                        <p>
+                            여기서 \(d = r \sin\theta\)는 회전축에서 힘의 작용선까지의 수직 거리로, 이를 <strong>'회전 팔의 길이(Lever Arm)'</strong>라고 부릅니다. 
+                            따라서 같은 크기의 힘을 가하더라도 회전축으로부터 멀리 떨어진 곳(\(r\)이 클수록)에서, 회전축과 수직인 방향(\(\theta = 90^\circ, \sin 90^\circ = 1\))으로 힘을 가할 때 가장 큰 돌림힘이 발생합니다.
+                        </p>
+                    </div>
+
+                    <div class="edu-section">
+                        <h3>2. 강체의 역학적 평형 2대 조건 (Mechanical Equilibrium)</h3>
+                        <p>
+                            크기를 가진 물체(강체)가 정지 상태를 유지하거나 일정한 속도로 운동(정적/동적 평형)하기 위해서는 다음의 두 가지 평형 조건이 <strong>동시에 만족</strong>되어야 합니다:
+                        </p>
+                        <div class="equilibrium-grid">
+                            <div class="eq-condition-card">
+                                <h4>제1 평형 조건: 병진 평형 (알짜 힘 = 0)</h4>
+                                <div class="formula-box">$$\sum \vec{F} = 0 \quad (\sum F_x = 0, \; \sum F_y = 0)$$</div>
+                                <p>물체에 작용하는 모든 외력의 합(알짜 힘)이 0이어야 하며, 물체의 질량 중심은 가속되지 않습니다.</p>
+                            </div>
+                            <div class="eq-condition-card">
+                                <h4>제2 평형 조건: 회전 평형 (알짜 토크 = 0)</h4>
+                                <div class="formula-box">$$\sum \vec{\tau} = 0 \quad (\sum \tau_{\text{반시계}} = \sum \tau_{\text{시계}})$$</div>
+                                <p>임의의 회전축을 기준으로 물체에 작용하는 모든 돌림힘의 합(알짜 돌림힘)이 0이어야 하며, 물체는 회전하지 않습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="edu-section">
+                        <h3>3. 실생활 적용 사례 및 탐구 문제 해설</h3>
+                        <ul>
+                            <li><strong>문손잡이의 위치:</strong> 문손잡이가 경첩(회전축)의 반대편 가장자리에 위치하는 이유는 회전 팔의 길이(\(r\))를 최대로 하여 작은 힘으로도 문을 쉽게 열기 위함입니다.</li>
+                            <li><strong>스패너와 렌치:</strong> 볼트를 풀 때 손잡이가 긴 스패너를 사용하는 이유는 긴 회전 팔을 통해 강한 돌림힘을 전달하기 위함입니다.</li>
+                            <li><strong>시소와 지렛대(양팔 저울):</strong> 무게가 다른 두 물체가 시소에서 수평 평형을 이루려면, 무거운 물체는 받침점에 가깝게, 가벼운 물체는 받침점에서 멀리 위치하여 양쪽의 돌림힘(\(m_1 g d_1 = m_2 g d_2\))이 같아져야 합니다.</li>
+                        </ul>
+                    </div>
+
+                    <div class="edu-section">
+                        <h3>4. 가상 실험실 조작 및 관찰 포인트</h3>
+                        <ol>
+                            <li><strong>벡터 분석 모드:</strong> 힘의 크기(\(F\)), 작용점 위치(\(r\)), 가하는 각도(\(\theta\)) 슬라이더를 조작하여 실시간 벡터 화살표와 수직 회전 팔(\(d\))의 길이 변화를 관찰합니다.</li>
+                            <li><strong>역학적 평형 모드:</strong> 받침대 좌우에 질량이 다른 물체를 배치하고 위치를 이동시키며, 막대가 수평을 이루는 순간의 \(F_1 d_1\)과 \(F_2 d_2\) 수치가 정확히 일치함을 확인합니다.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
     <!-- 2022 개정 물리학 원리 설명 모달 팝업 -->

@@ -225,6 +225,73 @@
                 </div>
             </div>
         </main>
+
+        <!-- Dedicated Educational Article & Science Guide Section -->
+        <section class="edu-theory-container">
+            <div class="edu-card">
+                <div class="edu-header">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00f2fe" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                    <h2>물의 전기분해(Electrolysis of Water) 상세 학술 가이드</h2>
+                </div>
+                <div class="edu-content">
+                    <div class="edu-section">
+                        <h3>1. 물의 전기분해 원리와 전해질의 역할</h3>
+                        <p>
+                            순수한 물(\(H_2O\))은 공유 결합 물질로서 이온화도가 매우 낮아(\([H^+] = [OH^-] = 10^{-7}\text{ M}\)) 전기가 거의 통하지 않는 부도체에 가깝습니다. 
+                            따라서 물 분자에 전자를 원활하게 공급하고 이동시키기 위해 물에 잘 녹아 양이온과 음이온으로 완전 이온화되는 전해질(수산화나트륨 \(NaOH\), 황산나트륨 \(Na_2SO_4\) 등)을 소량 첨가합니다.
+                        </p>
+                        <p>
+                            이때 첨가된 \(Na^+\) 이온은 물보다 환원되기 어렵고, \(OH^-\)나 \(SO_4^{2-}\) 이온은 물보다 산화되기 어렵기 때문에, 전극에서는 첨가된 전해질 대신 <strong>물 분자 자체가 직접 산화·환원 반응</strong>에 참여하여 분해됩니다.
+                        </p>
+                    </div>
+
+                    <div class="edu-section">
+                        <h3>2. 각 전극에서의 산화·환원 반반응식 및 전체 반응</h3>
+                        <div class="equilibrium-grid">
+                            <div class="eq-condition-card" style="border-left: 4px solid #3b82f6;">
+                                <h4 style="color:#3b82f6;">(-)극 (음극, Cathode): 환원 반응</h4>
+                                <div class="formula-box">$$2H_2O(l) + 2e^- \rightarrow H_2(g)\uparrow + 2OH^-(aq)$$</div>
+                                <p>물 분자가 전원 장치로부터 전자를 얻어(환원) <strong>수소 기체(\(H_2\))</strong>가 포집되며, 수산화 이온(\(OH^-\))이 생성되어 전극 주변이 염기성을 띱니다 (BTB 용액 청색).</p>
+                            </div>
+                            <div class="eq-condition-card" style="border-left: 4px solid #ef4444;">
+                                <h4 style="color:#ef4444;">(+)극 (양극, Anode): 산화 반응</h4>
+                                <div class="formula-box">$$2H_2O(l) \rightarrow O_2(g)\uparrow + 4H^+(aq) + 4e^-$$</div>
+                                <p>물 분자가 전자를 잃고(산화) <strong>산소 기체(\(O_2\))</strong>가 포집되며, 수소 이온(\(H^+\))이 생성되어 전극 주변이 산성을 띱니다 (BTB 용액 황색).</p>
+                            </div>
+                        </div>
+                        <div class="formula-box" style="margin-top:14px; font-weight:700;">
+                            전체 화학 반응식: $$2H_2O(l) \xrightarrow{\text{전기에너지}} 2H_2(g)\uparrow + O_2(g)\uparrow$$
+                        </div>
+                    </div>
+
+                    <div class="edu-section">
+                        <h3>3. 기체 발생 부피비와 아보가드로 법칙</h3>
+                        <p>
+                            이동한 전자의 몰수가 $4 \text{ mol}$일 때, 생성되는 수소 기체는 $2 \text{ mol}$, 산소 기체는 $1 \text{ mol}$입니다. 
+                            <strong>아보가드로 법칙</strong>에 따라 일정한 온도와 압력에서 기체의 부피는 몰수에 비례하므로:
+                        </p>
+                        <div class="formula-box">
+                            $$V(H_2) : V(O_2) = 2 : 1 \quad (\text{수소 부피는 산소 부피의 정확히 2배})$$
+                        </div>
+                        <p>
+                            또한 기체의 분자량(\(H_2 = 2\text{ g/mol}, \; O_2 = 32\text{ g/mol}\))을 고려하면, 생성되는 질량비는 다음과 같습니다:
+                        </p>
+                        <div class="formula-box">
+                            $$m(H_2) : m(O_2) = (2 \text{ mol} \times 2) : (1 \text{ mol} \times 32) = 4 : 32 = 1 : 8$$
+                        </div>
+                    </div>
+
+                    <div class="edu-section">
+                        <h3>4. 가상 실험실 조작 및 관찰 포인트</h3>
+                        <ol>
+                            <li><strong>전압(Voltage) 조절:</strong> 인가 전압을 높일수록 단위 시간당 이동하는 전하량(전류 $I = V/R$)이 증가하여 기포 발생 속도와 반응 속도가 빨라집니다.</li>
+                            <li><strong>전해질 농도 조절:</strong> 전해질 수용액의 농도가 짙을수록 수용액 내부 이온 수가 증가하여 전기 전도도가 높아지고 분해 효율이 극대화됩니다.</li>
+                            <li><strong>기체 확인 불꽃 실험:</strong> 수소 기체는 불꽃을 대면 '퍽' 소리를 내며 타는 가연성 기체이고, 산소 기체는 깜부기불을 다시 타오르게 하는 조연성 기체임을 확인합니다.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
     
     <script src="script.js"></script>
