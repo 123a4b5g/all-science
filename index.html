@@ -217,7 +217,284 @@
       </div>
 
       <div id="template-explorer-grid" class="flex flex-col gap-5">
-        <!-- Rendered via JS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- 1. 역학 및 운동 법칙 -->
+          <div onclick="app.selectProgram('1')" class="group flex flex-col gap-3 bg-white rounded-2xl border border-slate-200/70 overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer relative">
+            <a href="./역학및운동법칙시뮬레이션/index.html" class="absolute inset-0 z-0" aria-label="역학 및 운동 법칙 시뮬레이션"></a>
+            <div class="aspect-video w-full bg-slate-100 border-b border-slate-100 overflow-hidden relative">
+              <div class="w-full h-full relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                <img src="physics_thumbnail.png" alt="역학 및 운동 법칙 시뮬레이션" class="w-full h-full object-fill" />
+              </div>
+              <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                <div class="w-10 h-10 rounded-full bg-teal-600 text-white flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                  <i data-lucide="play" class="w-5 h-5 fill-white ml-0.5"></i>
+                </div>
+                <span class="text-[10px] text-white font-extrabold tracking-widest bg-slate-900/80 px-2.5 py-1 rounded-full shadow-lg backdrop-blur-xs">실험실 실행하기</span>
+              </div>
+            </div>
+            <div class="px-4 pb-4 pt-1 flex gap-3 relative z-10 pointer-events-none">
+              <div class="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center shrink-0 font-bold text-slate-700 text-xs font-mono shadow-xs mt-1">
+                A
+              </div>
+              <div class="flex-1 min-w-0 flex flex-col gap-0.5">
+                <h4 class="font-extrabold text-slate-900 text-xs group-hover:text-teal-700 transition-colors truncate leading-tight">역학 및 운동 법칙 시뮬레이션</h4>
+                <p class="text-[11px] text-slate-500 font-semibold truncate flex items-center gap-1"><span>All Science 물리 랩</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. 파동의 간섭 -->
+          <div onclick="app.selectProgram('2')" class="group flex flex-col gap-3 bg-white rounded-2xl border border-slate-200/70 overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer relative">
+            <a href="./파동의간섭시뮬레이션/index.html" class="absolute inset-0 z-0" aria-label="파동의 간섭 시뮬레이션"></a>
+            <div class="aspect-video w-full bg-slate-100 border-b border-slate-100 overflow-hidden relative">
+              <div class="w-full h-full relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                <img src="wave_thumbnail.jpg" alt="파동의 간섭 시뮬레이션" class="w-full h-full object-fill" />
+              </div>
+              <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                <div class="w-10 h-10 rounded-full bg-teal-600 text-white flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                  <i data-lucide="play" class="w-5 h-5 fill-white ml-0.5"></i>
+                </div>
+                <span class="text-[10px] text-white font-extrabold tracking-widest bg-slate-900/80 px-2.5 py-1 rounded-full shadow-lg backdrop-blur-xs">실험실 실행하기</span>
+              </div>
+            </div>
+            <div class="px-4 pb-4 pt-1 flex gap-3 relative z-10 pointer-events-none">
+              <div class="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center shrink-0 font-bold text-slate-700 text-xs font-mono shadow-xs mt-1">
+                A
+              </div>
+              <div class="flex-1 min-w-0 flex flex-col gap-0.5">
+                <h4 class="font-extrabold text-slate-900 text-xs group-hover:text-teal-700 transition-colors truncate leading-tight">파동의 간섭 시뮬레이션</h4>
+                <p class="text-[11px] text-slate-500 font-semibold truncate flex items-center gap-1"><span>All Science 물리 랩</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. 물의 전기분해 -->
+          <div onclick="app.selectProgram('3')" class="group flex flex-col gap-3 bg-white rounded-2xl border border-slate-200/70 overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer relative">
+            <a href="./물의전기분해실험시뮬레이션/index.html" class="absolute inset-0 z-0" aria-label="물의 전기분해 실험 시뮬레이션"></a>
+            <div class="aspect-video w-full bg-slate-100 border-b border-slate-100 overflow-hidden relative">
+              <div class="w-full h-full relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                <img src="electrolysis_thumbnail.png" alt="물의 전기분해 실험 시뮬레이션" class="w-full h-full object-fill" />
+              </div>
+              <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                <div class="w-10 h-10 rounded-full bg-teal-600 text-white flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                  <i data-lucide="play" class="w-5 h-5 fill-white ml-0.5"></i>
+                </div>
+                <span class="text-[10px] text-white font-extrabold tracking-widest bg-slate-900/80 px-2.5 py-1 rounded-full shadow-lg backdrop-blur-xs">실험실 실행하기</span>
+              </div>
+            </div>
+            <div class="px-4 pb-4 pt-1 flex gap-3 relative z-10 pointer-events-none">
+              <div class="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center shrink-0 font-bold text-slate-700 text-xs font-mono shadow-xs mt-1">
+                A
+              </div>
+              <div class="flex-1 min-w-0 flex flex-col gap-0.5">
+                <h4 class="font-extrabold text-slate-900 text-xs group-hover:text-teal-700 transition-colors truncate leading-tight">물의 전기분해 실험 시뮬레이션</h4>
+                <p class="text-[11px] text-slate-500 font-semibold truncate flex items-center gap-1"><span>All Science 화학 랩</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. 일식과 월식 -->
+          <div onclick="app.selectProgram('4')" class="group flex flex-col gap-3 bg-white rounded-2xl border border-slate-200/70 overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer relative">
+            <a href="./일식과월식시뮬레이션/index.html" class="absolute inset-0 z-0" aria-label="일식과 월식 시뮬레이션"></a>
+            <div class="aspect-video w-full bg-slate-100 border-b border-slate-100 overflow-hidden relative">
+              <div class="w-full h-full relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                <img src="eclipse_thumbnail.jpg" alt="일식과 월식 시뮬레이션" class="w-full h-full object-fill" />
+              </div>
+              <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                <div class="w-10 h-10 rounded-full bg-teal-600 text-white flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                  <i data-lucide="play" class="w-5 h-5 fill-white ml-0.5"></i>
+                </div>
+                <span class="text-[10px] text-white font-extrabold tracking-widest bg-slate-900/80 px-2.5 py-1 rounded-full shadow-lg backdrop-blur-xs">실험실 실행하기</span>
+              </div>
+            </div>
+            <div class="px-4 pb-4 pt-1 flex gap-3 relative z-10 pointer-events-none">
+              <div class="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center shrink-0 font-bold text-slate-700 text-xs font-mono shadow-xs mt-1">
+                A
+              </div>
+              <div class="flex-1 min-w-0 flex flex-col gap-0.5">
+                <h4 class="font-extrabold text-slate-900 text-xs group-hover:text-teal-700 transition-colors truncate leading-tight">일식과 월식 시뮬레이션</h4>
+                <p class="text-[11px] text-slate-500 font-semibold truncate flex items-center gap-1"><span>All Science 지구과학 랩</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. 볼록렌즈와 오목렌즈 -->
+          <div onclick="app.selectProgram('5')" class="group flex flex-col gap-3 bg-white rounded-2xl border border-slate-200/70 overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer relative">
+            <a href="./볼록렌즈와오목렌즈시뮬레이션/index.html" class="absolute inset-0 z-0" aria-label="볼록렌즈와 오목렌즈 시뮬레이션"></a>
+            <div class="aspect-video w-full bg-slate-100 border-b border-slate-100 overflow-hidden relative">
+              <div class="w-full h-full relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                <img src="lens_thumbnail.png" alt="볼록렌즈와 오목렌즈 시뮬레이션" class="w-full h-full object-fill" />
+              </div>
+              <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                <div class="w-10 h-10 rounded-full bg-teal-600 text-white flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                  <i data-lucide="play" class="w-5 h-5 fill-white ml-0.5"></i>
+                </div>
+                <span class="text-[10px] text-white font-extrabold tracking-widest bg-slate-900/80 px-2.5 py-1 rounded-full shadow-lg backdrop-blur-xs">실험실 실행하기</span>
+              </div>
+            </div>
+            <div class="px-4 pb-4 pt-1 flex gap-3 relative z-10 pointer-events-none">
+              <div class="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center shrink-0 font-bold text-slate-700 text-xs font-mono shadow-xs mt-1">
+                A
+              </div>
+              <div class="flex-1 min-w-0 flex flex-col gap-0.5">
+                <h4 class="font-extrabold text-slate-900 text-xs group-hover:text-teal-700 transition-colors truncate leading-tight">볼록렌즈와 오목렌즈 시뮬레이션</h4>
+                <p class="text-[11px] text-slate-500 font-semibold truncate flex items-center gap-1"><span>All Science 물리 랩</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. 렌츠의 법칙 -->
+          <div onclick="app.selectProgram('6')" class="group flex flex-col gap-3 bg-white rounded-2xl border border-slate-200/70 overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer relative">
+            <a href="./렌츠의법칙시뮬레이션/index.html" class="absolute inset-0 z-0" aria-label="렌츠의 법칙 시뮬레이션"></a>
+            <div class="aspect-video w-full bg-slate-100 border-b border-slate-100 overflow-hidden relative">
+              <div class="w-full h-full relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                <img src="lenz_thumbnail.png" alt="렌츠의 법칙 시뮬레이션" class="w-full h-full object-fill" />
+              </div>
+              <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                <div class="w-10 h-10 rounded-full bg-teal-600 text-white flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                  <i data-lucide="play" class="w-5 h-5 fill-white ml-0.5"></i>
+                </div>
+                <span class="text-[10px] text-white font-extrabold tracking-widest bg-slate-900/80 px-2.5 py-1 rounded-full shadow-lg backdrop-blur-xs">실험실 실행하기</span>
+              </div>
+            </div>
+            <div class="px-4 pb-4 pt-1 flex gap-3 relative z-10 pointer-events-none">
+              <div class="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center shrink-0 font-bold text-slate-700 text-xs font-mono shadow-xs mt-1">
+                A
+              </div>
+              <div class="flex-1 min-w-0 flex flex-col gap-0.5">
+                <h4 class="font-extrabold text-slate-900 text-xs group-hover:text-teal-700 transition-colors truncate leading-tight">렌츠의 법칙 시뮬레이션</h4>
+                <p class="text-[11px] text-slate-500 font-semibold truncate flex items-center gap-1"><span>All Science 물리 랩</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. 원소 주기율표 -->
+          <div onclick="app.selectProgram('7')" class="group flex flex-col gap-3 bg-white rounded-2xl border border-slate-200/70 overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer relative">
+            <a href="./원소주기율표시뮬레이션/index.html" class="absolute inset-0 z-0" aria-label="원소 주기율표 시뮬레이션"></a>
+            <div class="aspect-video w-full bg-slate-100 border-b border-slate-100 overflow-hidden relative">
+              <div class="w-full h-full relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                <img src="periodictable_thumbnail.jpg" alt="원소 주기율표 시뮬레이션" class="w-full h-full object-fill" />
+              </div>
+              <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                <div class="w-10 h-10 rounded-full bg-teal-600 text-white flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                  <i data-lucide="play" class="w-5 h-5 fill-white ml-0.5"></i>
+                </div>
+                <span class="text-[10px] text-white font-extrabold tracking-widest bg-slate-900/80 px-2.5 py-1 rounded-full shadow-lg backdrop-blur-xs">실험실 실행하기</span>
+              </div>
+            </div>
+            <div class="px-4 pb-4 pt-1 flex gap-3 relative z-10 pointer-events-none">
+              <div class="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center shrink-0 font-bold text-slate-700 text-xs font-mono shadow-xs mt-1">
+                A
+              </div>
+              <div class="flex-1 min-w-0 flex flex-col gap-0.5">
+                <h4 class="font-extrabold text-slate-900 text-xs group-hover:text-teal-700 transition-colors truncate leading-tight">원소 주기율표 시뮬레이션</h4>
+                <p class="text-[11px] text-slate-500 font-semibold truncate flex items-center gap-1"><span>All Science 화학 랩</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 8. 별의 H-R도표 -->
+          <div onclick="app.selectProgram('8')" class="group flex flex-col gap-3 bg-white rounded-2xl border border-slate-200/70 overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer relative">
+            <a href="./별의HR도표시뮬레이션/index.html" class="absolute inset-0 z-0" aria-label="별의 H-R도표 시뮬레이션"></a>
+            <div class="aspect-video w-full bg-slate-100 border-b border-slate-100 overflow-hidden relative">
+              <div class="w-full h-full relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                <img src="hrdiagram_thumbnail.jpg" alt="별의 H-R도표 시뮬레이션" class="w-full h-full object-fill" />
+              </div>
+              <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                <div class="w-10 h-10 rounded-full bg-teal-600 text-white flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                  <i data-lucide="play" class="w-5 h-5 fill-white ml-0.5"></i>
+                </div>
+                <span class="text-[10px] text-white font-extrabold tracking-widest bg-slate-900/80 px-2.5 py-1 rounded-full shadow-lg backdrop-blur-xs">실험실 실행하기</span>
+              </div>
+            </div>
+            <div class="px-4 pb-4 pt-1 flex gap-3 relative z-10 pointer-events-none">
+              <div class="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center shrink-0 font-bold text-slate-700 text-xs font-mono shadow-xs mt-1">
+                A
+              </div>
+              <div class="flex-1 min-w-0 flex flex-col gap-0.5">
+                <h4 class="font-extrabold text-slate-900 text-xs group-hover:text-teal-700 transition-colors truncate leading-tight">별의 H-R도표 시뮬레이션</h4>
+                <p class="text-[11px] text-slate-500 font-semibold truncate flex items-center gap-1"><span>All Science 지구과학 랩</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9. 별과 흑체 복사 -->
+          <div onclick="app.selectProgram('9')" class="group flex flex-col gap-3 bg-white rounded-2xl border border-slate-200/70 overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer relative">
+            <a href="./흑체복사시뮬레이션/index.html" class="absolute inset-0 z-0" aria-label="별과 흑체 복사 시뮬레이션"></a>
+            <div class="aspect-video w-full bg-slate-100 border-b border-slate-100 overflow-hidden relative">
+              <div class="w-full h-full relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                <img src="blackbody_thumbnail.jpg" alt="별과 흑체 복사 시뮬레이션" class="w-full h-full object-fill" />
+              </div>
+              <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                <div class="w-10 h-10 rounded-full bg-teal-600 text-white flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                  <i data-lucide="play" class="w-5 h-5 fill-white ml-0.5"></i>
+                </div>
+                <span class="text-[10px] text-white font-extrabold tracking-widest bg-slate-900/80 px-2.5 py-1 rounded-full shadow-lg backdrop-blur-xs">실험실 실행하기</span>
+              </div>
+            </div>
+            <div class="px-4 pb-4 pt-1 flex gap-3 relative z-10 pointer-events-none">
+              <div class="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center shrink-0 font-bold text-slate-700 text-xs font-mono shadow-xs mt-1">
+                A
+              </div>
+              <div class="flex-1 min-w-0 flex flex-col gap-0.5">
+                <h4 class="font-extrabold text-slate-900 text-xs group-hover:text-teal-700 transition-colors truncate leading-tight">별과 흑체 복사 시뮬레이션</h4>
+                <p class="text-[11px] text-slate-500 font-semibold truncate flex items-center gap-1"><span>All Science 지구과학 랩</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10. 부력과 아르키메데스 원리 -->
+          <div onclick="app.selectProgram('10')" class="group flex flex-col gap-3 bg-white rounded-2xl border border-slate-200/70 overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer relative">
+            <a href="./부력과아르키메데스원리시뮬레이션/index.html" class="absolute inset-0 z-0" aria-label="부력과 아르키메데스 원리 시뮬레이션"></a>
+            <div class="aspect-video w-full bg-slate-100 border-b border-slate-100 overflow-hidden relative">
+              <div class="w-full h-full relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                <img src="buoyancy_thumbnail.jpg" alt="부력과 아르키메데스 원리 시뮬레이션" class="w-full h-full object-fill" />
+              </div>
+              <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                <div class="w-10 h-10 rounded-full bg-teal-600 text-white flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                  <i data-lucide="play" class="w-5 h-5 fill-white ml-0.5"></i>
+                </div>
+                <span class="text-[10px] text-white font-extrabold tracking-widest bg-slate-900/80 px-2.5 py-1 rounded-full shadow-lg backdrop-blur-xs">실험실 실행하기</span>
+              </div>
+            </div>
+            <div class="px-4 pb-4 pt-1 flex gap-3 relative z-10 pointer-events-none">
+              <div class="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center shrink-0 font-bold text-slate-700 text-xs font-mono shadow-xs mt-1">
+                A
+              </div>
+              <div class="flex-1 min-w-0 flex flex-col gap-0.5">
+                <h4 class="font-extrabold text-slate-900 text-xs group-hover:text-teal-700 transition-colors truncate leading-tight">부력과 아르키메데스 원리 시뮬레이션</h4>
+                <p class="text-[11px] text-slate-500 font-semibold truncate flex items-center gap-1"><span>All Science 물리 랩</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 11. 돌림힘과 강체의 역학적 평형 -->
+          <div onclick="app.selectProgram('11')" class="group flex flex-col gap-3 bg-white rounded-2xl border border-slate-200/70 overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer relative">
+            <a href="./돌림힘과역학적평형시뮬레이션/index.html" class="absolute inset-0 z-0" aria-label="돌림힘과 강체의 역학적 평형 시뮬레이션"></a>
+            <div class="aspect-video w-full bg-slate-100 border-b border-slate-100 overflow-hidden relative">
+              <div class="w-full h-full relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                <img src="torque_thumbnail.png" alt="돌림힘과 강체의 역학적 평형 시뮬레이션" class="w-full h-full object-fill" />
+              </div>
+              <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                <div class="w-10 h-10 rounded-full bg-teal-600 text-white flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                  <i data-lucide="play" class="w-5 h-5 fill-white ml-0.5"></i>
+                </div>
+                <span class="text-[10px] text-white font-extrabold tracking-widest bg-slate-900/80 px-2.5 py-1 rounded-full shadow-lg backdrop-blur-xs">실험실 실행하기</span>
+              </div>
+            </div>
+            <div class="px-4 pb-4 pt-1 flex gap-3 relative z-10 pointer-events-none">
+              <div class="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center shrink-0 font-bold text-slate-700 text-xs font-mono shadow-xs mt-1">
+                A
+              </div>
+              <div class="flex-1 min-w-0 flex flex-col gap-0.5">
+                <h4 class="font-extrabold text-slate-900 text-xs group-hover:text-teal-700 transition-colors truncate leading-tight">돌림힘과 강체의 역학적 평형 시뮬레이션</h4>
+                <p class="text-[11px] text-slate-500 font-semibold truncate flex items-center gap-1"><span>All Science 물리 랩</span></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
 
@@ -422,7 +699,7 @@
   </main>
 
   <!-- Googlebot Indexing Semantic Content Block (Visually 100% untouched) -->
-  <article class="sr-only" aria-hidden="true" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">
+  <article class="sr-only" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">
     <h2>All Science - 중등·고등 가상 과학 실험 시뮬레이션 및 온라인 가상 실험실</h2>
     <p>본 포털은 물리, 화학, 지구과학 교과 과정에서 다루는 주요 실험과 개념을 인터랙티브 가상 시뮬레이터로 제공합니다.</p>
     
